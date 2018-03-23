@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Action Man";
+    src: url("Action_Man.ttf") format("truetype");       
+   }
+@font-face {
+    font-family: "Aguafina Script";
+    src:  url("AguafinaScript-Regular.ttf") format("truetype");       
+}
+p {
+    font-family: "Action Man";
+}
+.fontChange{
+    font-family: "Aguafina Script";
+}

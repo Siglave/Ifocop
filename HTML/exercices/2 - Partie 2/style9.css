@@ -1,0 +1,36 @@
+.title-blue {
+    color: blue;
+}
+
+.title-back-red {
+    background-color: red;
+}
+
+#idColorBackGreen {
+    background-color: green;
+}
+
+#idColorTitleYellow {
+    color: yellow;
+}
+
+p.title-blue {
+    background-color: teal;
+}
+
+p.color-class cite {
+    color: tomato;
+}
+
+strong {
+    color: blue;
+}
+
+p>strong {
+    color: green;
+}
+
+p>cite>strong {
+    color:red;
+}
+

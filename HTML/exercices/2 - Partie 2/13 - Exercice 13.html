@@ -1,0 +1,47 @@
+<!--
+La création d'un lien vers une page externe se fait au moyen de la balise inline suivante :
+<a href="adresse">Élément mis en lien</a>
+-->
+
+<!--
+	1 - Créez un document contenant trois div.
+	2 - Chaque div contient deux paragraphes avec du texte.
+	3 - Dans la première div, faites un lien sur un mot du texte.
+	4 - Dans la seconde div, faites un lien pour un paragraphe
+	5 - Sur la troisième div, faites un lien pour toute la div.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<div>
+		<p>Du
+			<a href="http://google.com">linktexte</a>texte</p>
+		<p>Du texte</p>
+	</div>
+
+	<div>
+		<a href="http://google.com">
+			<p>Du texte azezaezaezaeaze</p>
+		</a>
+		<p>Du texte</p>
+	</div>
+	<a href="http://google.com">
+		<div>
+			<p>Du texte</p>
+			<p>Du texte</p>
+		</div>
+	</a>
+
+
+</body>
+
+</html>

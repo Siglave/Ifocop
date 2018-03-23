@@ -1,0 +1,43 @@
+<!--
+  La seconde valeur de position est relative. Celle-ci permet, notamment, de fixer un nouveau référentiel. Ainsi, les éléments en absolute se positionneront par rapport au parent le plus proche en relative et non la page elle-même.
+  
+  Il est possible de fixer de placer les éléments comme des calques superposés. Pour ce faire, il faut utiliser la propriété z-index. Si mon élément est en absolute avec z-index: 2; il se placera au-dessus des autres éléments de la page.
+  Bien entendu, plusieurs z-index peuvent être combinés pour superposer les éléments selon le rendu souhaité.
+-->
+
+<!--
+	Sans toucher à la structure html, reproduisez la capture d'écran Exercice 54.jpg.
+  Au survol de la voiture, le feu passe du rouge au vert.
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Exercice 54</title>
+		<link rel="stylesheet" href="styles-54.css" type="text/css"/>
+	</head>
+	<body>
+		<div id="page">
+      <header>
+        <h1>Titre</h1>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="">Accueil</a></li>
+          <li><a href="">Actualité</a></li>
+          <li><a href="">Informations</a></li>
+          <li><a href="">Contact</a></li>
+        </ul>
+      </nav>
+      <section>
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.</p>
+        <div id="fond">
+          <img src="voiture.png"/>
+          <div id="vert"></div>
+          <div id="rouge"></div>
+        </div>
+      </section>
+		</div>
+	</body>
+</html>

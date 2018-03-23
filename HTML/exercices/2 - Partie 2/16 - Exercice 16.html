@@ -1,0 +1,27 @@
+<!--
+La balise a possède de nombreuses possibilités. Ce sont des attributs qui permettent d'ajouter des caractéristiques particulières à la balise.
+Parmi celles-ci, on trouve les attributs :
+	_ title : ajout d'une infobulle au survol du lien (<a href="adresse" title="ma description">Lien</a>).
+	_ target : gère précisément l'ouverture du lien (voir  la documentation en ligne, https://developer.mozilla.org/fr/docs/Web/HTML/Element/a).
+-->
+
+<!--
+	1 - Créez un document contenant deux liens.
+	2 - Les deux liens possèdent une infobulle. 
+	3 - Le premier lien s'ouvre dans la même fenêtre.
+	4 - Le second lien s'ouvre dans une nouvelle fenêtre.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<a title="infobulle" href="http://google.com">Un lien</a>
+	<a title="infobulle" href="http://google.com" target="_blank">Un lien</a>
+</body>
+</html>

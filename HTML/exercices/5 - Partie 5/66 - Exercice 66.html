@@ -1,0 +1,26 @@
+<!--
+	Aujourd'hui, un site web doit être consultable depuis l'ordinateur de bureau jusqu'au mobile.
+  Pour ce faire, il faut utiliser les Media queries (https://developer.mozilla.org/fr/docs/Web/CSS/Media_queries) et la balise meta viewport (https://developer.mozilla.org/fr/docs/Mozilla/Mobile/Balise_meta_viewport).
+  
+  Les Media queries permettent d'appliquer des propriétés CSS de façon conditionnelle (taille de la fenêtre, support, orientation de l'écran …).
+  Ici, si nous sommes sur un affichage écran et une largeur maximale de 640px, les paragraphes auront une taille de police de 0.9em :
+  @media screen and (max-width: 640px){
+    p{
+      font-size: 0.9em;
+    }
+  }
+  Ici, si la page est imprimée, les h1 seront de couleur noire :
+  @media print{
+    h1{
+      color: black;
+    }
+  }
+  
+  La balise viewport permet de préciser le niveau de zoom pour l'affichage de la page par rapport au contenu. Ainsi, il est possible de demander au navigateur sur le mobile d'occuper la largeur de l'écran en affichage vertical ou horizontale grâce à la balise suivante (dans le <head>) :
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  Il existe d'autres possibilités (cf. documentation sur la MDN), mais celle-ci est une bonne base pour un affichage optimisé sur mobile.
+-->
+
+<!--
+	Créez une page s'adaptant en fonction de la largeur en suivant la maquette Exercice 66.pdf. L'affichage supérieur à 1024px est la mise en page de base.
+-->
