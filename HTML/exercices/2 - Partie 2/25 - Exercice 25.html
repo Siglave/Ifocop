@@ -18,3 +18,35 @@ et des listes numérotées :
 	2 - Vous y insérez une liste à puce et une liste numérotée.
 	3 - Dans chaque liste, faites alterner les couleurs entre les éléments impairs et les éléments pairs.
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		li:nth-child(2n+1){
+			color: dodgerblue;
+		}
+		li:nth-child(2n+2){
+			color:firebrick;
+		}
+
+	
+	</style>
+</head>
+<body>
+	<ul>
+		<li>Élément 1</li>
+		<li>Élément 2</li>
+		<li>Élément 3</li>
+	</ul>
+	<ol>
+		<li>Élément 1</li>
+		<li>Élément 2</li>
+		<li>Élément 3</li>
+	</ol>
+</body>
+</html>

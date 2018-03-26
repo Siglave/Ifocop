@@ -9,3 +9,40 @@ Dans une liste non ordonnée ou ordonnée, on peut modifier l'apparence des li a
 	4 - Changez le type de puce de cette dernière liste.
 	5 - Masquez la puce de la cinquième entrée de la liste.
 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+	li>ul {
+		color:blue;
+		list-style-type: georgian;
+	}
+	li:nth-child(0n+5){
+		list-style-type: none;
+	}
+	</style>
+</head>
+
+<body>
+	<ul>
+		<li>Élément 1</li>
+		<li>Élément 2</li>
+		<li>
+			<ul>
+				<li>Élément 1</li>
+				<li>Élément 2</li>
+				<li>Élément 3</li>
+			</ul>
+		</li>
+		<li>Élément 4</li>
+		<li>Élément 5</li>
+	</ul>
+
+</body>
+
+</html>

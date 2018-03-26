@@ -19,3 +19,30 @@ _ background-repeat :  spécifie la façon dont l'image d'arrière-plan doit êt
 	3 - Mettez une image d'arrière plan sur le paragraphe. L'image sera moins grande que la largeur de la page. Faites répéter cette image. 
 	4 - Mettez une image d'arrière plan sur le body. À l'aide de background-size, remplissez la page sans déformer l'image.
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		h1{
+			background-image: url("panda.jpg");
+			background-size: 10px;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		p{
+			background-image: url("panda.jpg");
+			background-size: 80%;
+		}
+	</style>
+</head>
+<body>
+	<h1>Un texte</h1>
+	<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo rem vitae, maxime suscipit tempore voluptatem enim quasi voluptatibus reiciendis ad voluptate nesciunt tempora voluptatum nisi quos blanditiis accusantium quia aut.</p>
+	
+</body>
+</html>

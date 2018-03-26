@@ -26,4 +26,41 @@ Les quatre valeurs sont déclarées dans le sens horaire en partant du haut.
 	5 - Donnez à la troisième div du padding.
 	6 - Quelle différence voyez-vous entre la marge et le padding ?
 	7 - Que remarquez vous sur l'espace entre la première et la seconde div ? Comment expliquez-vous cela ?
+	pas de cumul
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+		div {
+		  width: 200px;
+		  height: 200px;	
+		}
+		div:nth-child(1){
+			margin:20px;
+		}
+		div:nth-child(2){
+			margin:15px;
+			padding:30px;
+		}
+		div:nth-child(3){
+			padding: 40px;
+		}
+
+	</style>
+</head>
+<body>
+	<div style="background-color:blue"></div>
+	<div style="background-color:red"></div>
+	<div style="background-color:green"></div>
+</body>
+</html>
