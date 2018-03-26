@@ -11,3 +11,26 @@
 	2 - Les images en sont pas visibles.
 	3 - Au survol d'un paragraphe, l'image correspondante apparait.
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+	img{
+		display: none;
+	}
+	p:hover > img{
+		display: block;
+	}
+	</style>
+</head>
+<body>
+	<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate laborum, nobis earum sequi, asperiores vel nostrum enim nemo aliquam doloribus dolor, velit ab maxime harum quos! Voluptatum necessitatibus exercitationem tempora! <img src="panda.jpg" alt="panda"> </p>
+
+	<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate laborum, nobis earum sequi, asperiores vel nostrum enim nemo aliquam doloribus dolor, velit ab maxime harum quos! Voluptatum necessitatibus exercitationem tempora! <img src="panda.jpg" alt="panda"> </p>
+</body>
+</html>
