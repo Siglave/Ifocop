@@ -6,3 +6,102 @@
 	Reproduisez la capture d'écran Exercice 52a.jpg. Au survol d'une flèche (code html : &rarr;), l'entrée du menu s'affiche ainsi : Exercice 52b.jpg.
   Astuce : mettez la flèche dans un span pour faire un espace avec le texte.
 -->
+
+<!--
+	La propriété position permet de gérer finement le placement des éléments par rapport au flux.
+  Position peut prendre quatre valeurs:
+  _ absolute
+  _ relative
+  _ fixed
+  _ statique
+  
+  La valeur absolute permet de sortir l'élément du flux. On précise ensuite sa position. Ainsi, si l'on souhaite placer un bloc en haut et à gauche, on écrira :
+    #bloc{
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    On peux utiliser les propriétés top, bottom, left et right.
+-->
+
+<!--
+	Reproduisez la capture d'écran Exercice 51.jpg. Utilisez seulement la propriété position avec la valeur absolute pour le positionnement de la navigation.
+  Utilisez également cette propriété pour le titre du menu qui doit être contenu dans la balise nav.
+  Que remarquez vous lorsque vous placez cet texte ?
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <link rel="stylesheet" href="corrections/styles-52.css"> -->
+  <link rel="stylesheet" href="style52.css">
+  <title>Document</title>
+</head>
+
+<body id="ensemble">
+  <div id="idPage">
+    <h1 id="titlePage">Titre</h1>
+    <nav>
+      <ul>
+        <li id="accueil">
+          <a href="">Accueil</a>
+          <span>&rarr;</span>
+        </li>
+        <li id="actu">
+          <a href="">Actualité</a>
+          <span>&rarr;</span>
+        </li>
+        <li id="infos">
+          <a href="">Informations</a>
+          <span>&rarr;</span>
+        </li>
+        <li id="contact">
+          <a href="">Contact</a>
+          <span>&rarr;</span>
+        </li>
+      </ul>
+    </nav>
+
+    <section>
+      <article>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam illo delectus culpa, praesentium dolores animi hic
+          quas aliquam repudiandae facilis harum corrupti tempore incidunt aspernatur. Doloribus vero quasi voluptates nesciunt!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, placeat velit culpa quis illo porro temporibus.
+          Earum, eligendi? Consectetur fuga eveniet enim iure in perspiciatis quaerat recusandae? Ad, quos optio?Lorem ipsum
+          dolor sit amet consectetur adipisicing elit. Ipsam illo delectus culpa, praesentium dolores animi hic quas aliquam
+          repudiandae facilis harum corrupti tempore incidunt aspernatur. Doloribus vero quasi voluptates nesciunt! Lorem
+          ipsum dolor sit amet consectetur adipisicing elit. Corrupti, placeat velit culpa quis illo porro temporibus. Earum,
+          eligendi? Consectetur fuga eveniet enim iure in perspiciatis quaerat recusandae? Ad, quos optio?Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Ipsam illo delectus culpa, praesentium dolores</br> animi hic quas aliquam
+          repudiandae facilis harum corrupti tempore incidunt aspernatur. Doloribus vero quasi voluptates nesciunt! Lorem
+          ipsum dolor sit amet consectetur adipisicing elit. Corrupti, placeat velit culpa quis illo porro temporibus. Earum,
+          eligendi? Consectetur fuga eveniet enim iure in perspiciatis quaerat recusandae? Ad, quos optio?Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Ipsam illo delectus culpa, praesentium dolores animi hic quas aliquam repudiandae
+          facilis harum corrupti tempore incidunt aspernatur. Doloribus vero quasi voluptates nesciunt! Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Corrupti, placeat velit culpa quis illo porro temporibus. Earum, eligendi?
+          Consectetur fuga eveniet enim iure in perspiciatis quaerat recusandae? Ad, quos optio?Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Ipsam illo delectus</br> culpa, praesentium dolores animi hic quas aliquam repudiandae
+          facilis harum corrupti tempore incidunt aspernatur. Doloribus vero quasi voluptates nesciunt! Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Corrupti, placeat velit culpa quis illo porro temporibus. Earum, eligendi?
+          Consectetur fuga eveniet enim iure in perspiciatis quaerat recusandae? Ad, quos optio?Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Ipsam illo delectus culpa, praesentium dolores animi hic quas aliquam repudiandae
+          facilis harum corrupti tempore incidunt aspernatur. Doloribus vero quasi voluptates nesciunt! Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Corrupti, placeat velit culpa quis illo porro</br> temporibus. Earum, eligendi?
+          Consectetur fuga eveniet enim iure in perspiciatis quaerat recusandae? Ad, quos optio?Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Ipsam illo delectus culpa, praesentium dolores animi hic quas aliquam repudiandae
+          facilis harum corrupti tempore incidunt aspernatur. Doloribus vero quasi voluptates nesciunt! Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Corrupti, placeat velit culpa quis illo porro temporibus. Earum, eligendi?
+          Consectetur fuga eveniet enim iure in perspiciatis quaerat recusandae? Ad, quos optio?Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Ipsam illo delectus culpa, praesentium dolores animi hic quas aliquam repudiandae
+          facilis harum corrupti tempore incidunt aspernatur. Doloribus vero quasi voluptates nesciunt! Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Corrupti, placeat velit culpa quis illo porro temporibus. Earum, eligendi?
+          Consectetur fuga eveniet enim iure in perspiciatis quaerat recusandae? Ad, quos optio?</p>
+      </article>
+    </section>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(41, 144, 170);
+}
+
+#idPage {
+    margin-top: 6%;
+}
+
+#titlePage {
+    color: rgb(235, 196, 91);
+    background-color: rgb(28, 115, 187);
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    margin-top: 10px;
+    top: 0;
+    left: 0;
+    font-size: 3em;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+nav {
+    background-color: rgb(28, 115, 187);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    position: absolute;
+    width: 50px;
+    height: 150px;
+    top: 20%;
+    color: rgb(235, 196, 91);
+}
+
+a {
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+section {
+    margin-left: 25%;
+    margin-right: 5%;
+    background-color: rgb(221, 203, 154);
+    text-align: justify;
+    padding: 2% 1% 3%;
+}
+
+span {
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+nav li {
+    position: absolute;
+    background-color: rgb(28, 115, 187);
+    font-size: 12px;
+    list-style-type: none;
+}
+
+nav ul {
+    padding: 0;
+}
+
+#accueil {
+    top: 10px;
+    left: -98px;
+}
+
+#actu {
+    top: 40px;
+    left: -122px;
+}
+
+#infos {
+    top: 70px;
+    left: -158px;
+}
+
+#contact {
+    top: 100px;
+    left: -101px;
+}
+
+#ensemble nav li:hover {
+    left: 40px;
+}
+
+
+/* 
+  nav {
+    position: absolute;
+    width: 50px;
+    background-color: #205B73;
+    border-radius: 0 20px 20px 0;
+    font-family: Arial, Helvetica;
+    font-size: 1.5em;
+    top: 160px;
+    height: 200px;
+  }
+
+  nav ul {
+    padding: 0;
+  }
+
+  nav li {
+    list-style-type: none;
+    position: absolute;
+  }
+
+  #accueil {
+    top: 17px;
+    left: -106px;
+  }
+
+  #actu {
+    top: 63px;
+    left: -134px;
+  }
+
+  #infos {
+    top: 109px;
+    left: -186px;
+  }
+
+  #contact {
+    top: 155px;
+    left: -119px;
+  }
+
+  nav span {
+    color: #F2B077;
+    margin-left: 10px;
+  }
+
+  nav span {
+    color: #F2B077;
+    margin-left: 10px;
+  }
+
+  #ensemble nav li:hover {
+    left: 10px;
+  }
+
+  nav li {
+    background-color: #205B73;
+    padding: 5px 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+  }
+
+  nav a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #F2B077;
+  } */

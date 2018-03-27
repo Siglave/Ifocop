@@ -12,3 +12,52 @@
    _ la première est agrandie d'un facteur 1,3
    _ la seconde se déplace en abscisse et ordonnée.
 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .imgTransform:hover{
+      animation: bounce 20s both;
+    }
+    .imgTransform {
+      transform-origin: top left;
+      transform: rotate(10deg);
+    }
+
+    @keyframes bounce {
+      from {
+        transform: rotate(10deg);
+      }
+      10%{
+        transform: rotate(80deg);
+      }
+      20%{
+        transform: rotate(20deg);
+      }
+      40%{
+        transform: rotate(70deg);
+      }
+      70%{
+        transform: rotate(30deg);
+      }
+      to {
+        transform: rotate(45deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Un texte</h1>
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum fugiat blanditiis adipisci? Non earum reprehenderit obcaecati
+    amet beatae, unde, assumenda ipsam quidem deleniti soluta voluptatibus harum, quae minima. Architecto, ab.</p>
+  <img src="panda.jpg" alt="">
+  <img class="imgTransform" src="panda.jpg" alt="">
+</body>
+
+</html>
