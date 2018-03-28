@@ -1,0 +1,11 @@
+$primary-color : rgb(192, 45, 45);
+$border-elem : 1px $primary-color solid;
+$padding-all : 10px ;
+$font : Arial;
+
+p,h1{
+    color:$primary-color;
+    border : $border-elem;
+    padding :$padding-all;
+    font-family: $font;
+}

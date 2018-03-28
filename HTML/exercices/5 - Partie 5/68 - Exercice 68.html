@@ -21,10 +21,14 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
+    p{
+      color: blue;
+    }
     .imgTransform:hover{
-      animation: bounce 20s both;
+      animation: bounce 10s both;
     }
     .imgTransform {
+      animation: bounce 10s both;
       transform-origin: top left;
       transform: rotate(10deg);
     }
@@ -45,19 +49,31 @@
       70%{
         transform: rotate(30deg);
       }
+      90%{
+        transform: rotate(45deg) 
+      }
       to {
-        transform: rotate(45deg);
+        transform: translateY(700px);
+        
       }
     }
   </style>
 </head>
 
 <body>
-  <h1>Un texte</h1>
+  <h1>Un texte</h1> 
   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum fugiat blanditiis adipisci? Non earum reprehenderit obcaecati
     amet beatae, unde, assumenda ipsam quidem deleniti soluta voluptatibus harum, quae minima. Architecto, ab.</p>
   <img src="panda.jpg" alt="">
   <img class="imgTransform" src="panda.jpg" alt="">
 </body>
+<script>
+  var a, b, rest;
+({a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40});
+console.log(a); // 10
+console.log(b); // 20
+console.log(rest); //{c: 30, d: 40}
 
+
+</script>
 </html>

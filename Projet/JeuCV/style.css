@@ -1,0 +1,7 @@
+h1{
+    color:navy;
+}
+#gameCanvas{
+    /* background-color: black; */
+    border: 1px solid black;
+}
