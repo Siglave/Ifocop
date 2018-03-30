@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 21 - prompt 4</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réalisez le programme (algorithme) suivant :
+        Quand je clique sur un paragraphe, j'affiche une boîte de dialogue avec un champ de saisie à l'utilisateur.
+        Tant que l'utilisateur clique sur Annuler ou clique OK sans rien saisir, j'affiche une boîte de dialogue avec un champ de saisie.
+
+        Lorsque l'utilisateur saisi un texte, j'affiche une nouvelle boîte de dialogue avec un champ de saisie à l'utilisateur.
+        Tant que l'utilisateur clique sur Annuler ou clique OK sans rien saisir, j'affiche une boîte de dialogue avec un champ de saisie.
+
+        L'utilisateur devra donc saisir deux informations. Je concatène (avec +) ces deux informations. J'affiche le résultat de la concaténation dans un boîte de dialogue
+
+        Quel résultat s'affiche si l'utilisateur saisit 2 chiffres ? À votre avis pourquoi ?
+
+        Utilisez l'attribut d'évènement onclick, la fonction prompt(), la fonction alert() et la boucle while.
+      */
+
+      var deuxQuestions = function() {
+        var reponse = '';
+        while(reponse == '' ||  reponse == null) {
+          reponse = prompt('Donnez un texte ou un nombre');
+        }
+        var reponse2 = '';
+        while(reponse2 == '' ||  reponse2 == null) {
+          reponse2 = prompt('Donnez un second texte ou un nombre');
+        }
+        alert(reponse + reponse2);
+      };
+      /*
+       La fonction prompt retourne toujours du text (type string) ou null. Donc même si l'utilisateur ne saisit que des chiffres, ces valeurs sont traitées comme du texte
+      */
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 21 - prompt 4</h1>
+    <p onclick="deuxQuestions();">Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

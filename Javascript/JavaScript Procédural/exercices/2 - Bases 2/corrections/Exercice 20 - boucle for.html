@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 20 - boucle for</title>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        Nous avons vu dans l'exercice précédent la possibilité d'introduire un compteur dans une boucle while comme suit:
+      */
+      var compteur = 0;
+      while (compteur < 5) {
+        // code à exécuter.
+        compteur++;
+      }
+
+      /*
+        Il existe en JavaScript un autre type de boucle qui permet d'utiliser un compteur. La voici :
+      */
+      for (var i = 0; i < 5; i++) {
+        // code à exécuter
+      }
+      /*
+        Les trois indications nécessaires pour la boucle (valeur de départ, valeur maximale et incrémentation) sont regroupées au même endroit.
+        Notez l'usage du i pour le compteur proprement dit. C'est une convention habituelle en JavaScript
+      */
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Reprenez le code de l'exercice précédent au point 1 en utilisant une boucle for au lieu d'un while.
+      */
+      var chargement = function() {
+        for (var i = 1; i < 4; i++) {
+          alert(i);
+        }
+      };
+      /*
+      ** 2 **
+        Reprenez le code de l'exercice précédent au point 2 en utilisant une boucle for au lieu d'un while.
+      */
+
+      var troisTextes = function() {
+        var tableau = ['Premier', 'Deuxième', 'Troisième'];
+        for (var i = 0; i < 3; i++) {
+          alert(tableau[i]);
+        }
+      };
+
+    </script>
+  </head>
+  <body onload=" chargement(); troisTextes();">
+    <h1>JavaScript : Exercice 20 - boucle for</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 38 - arguments 2</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réécrivez l'exercice précédent en utilisant une boucle for (avec tableau['length']);
+      */
+
+        (function() {
+          'use strict';
+
+          var moyenne = function() {
+            var somme = 0;
+
+            for (var i = 0; i < arguments['length']; i++) {
+              somme += arguments[i];
+            }
+            return somme / i;
+          }
+          alert('Moyenne : ' + moyenne(1, 2, 3, 4, 5, 6));
+
+        })(); // IIFE
+
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 38 - arguments 2</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

@@ -24,11 +24,14 @@
     p{
       color: blue;
     }
-    .imgTransform:hover{
+    .imgT{
+      transform-origin: top left;
+    }
+    .imgT:hover{
       animation: bounce 10s both;
     }
     .imgTransform {
-      animation: bounce 10s both;
+      animation: bounce 5s both;
       transform-origin: top left;
       transform: rotate(10deg);
     }
@@ -46,11 +49,8 @@
       40%{
         transform: rotate(70deg);
       }
-      70%{
+      60%{
         transform: rotate(30deg);
-      }
-      90%{
-        transform: rotate(45deg) 
       }
       to {
         transform: translateY(700px);
@@ -64,7 +64,7 @@
   <h1>Un texte</h1> 
   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum fugiat blanditiis adipisci? Non earum reprehenderit obcaecati
     amet beatae, unde, assumenda ipsam quidem deleniti soluta voluptatibus harum, quae minima. Architecto, ab.</p>
-  <img src="panda.jpg" alt="">
+  <img class="imgT" src="panda.jpg" alt="">
   <img class="imgTransform" src="panda.jpg" alt="">
 </body>
 <script>

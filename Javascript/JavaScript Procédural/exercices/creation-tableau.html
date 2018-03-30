@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice XX</title>
+    <script type="text/javascript">
+      // création d'un tableau avec prompt et boucle for avec un nombre prédéfini d'entrées.
+      var nbElements= null;
+      while (nbElements == null || nbElements == '') {
+        nbElements = prompt('nbElements d\'entrées au tableau');
+      }
+      var tableau = [];
+      for (var i = 0; i < nbElements; i++) {
+        var saisie = null;
+        while(saisie == null || saisie == '') {
+          saisie = prompt('Entrée numéro ' + i + ' du tableau');
+        }
+        tableau[i] = saisie;
+      }
+      for (var j = 0; j < tableau[j]; j++) {
+        alert(tableau[j]);
+      }
+
+      // création d'un tableau avec prompt et boucle for sans définir à l'avance le nombre d'entrées du tableau
+      var autreTableau = [];
+      var reponse = true;
+      var i = 0;
+      while (reponse) {
+        var saisie = null;
+        while (saisie === null || saisie === '') {
+          saisie = prompt('Entrée indice ' + i + ' du tableau');
+        }
+        autreTableau[i] = saisie;
+        reponse = confirm('Voulez-vous ajouter un indice ?');
+        console.log(reponse);
+        i++;
+      }
+      for (var j = 0; autreTableau[j]; j++) {
+        alert(autreTableau[j]);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Mon nouveau document</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+alert('Du code JavaScript exécuté depuis un fichier externe.');

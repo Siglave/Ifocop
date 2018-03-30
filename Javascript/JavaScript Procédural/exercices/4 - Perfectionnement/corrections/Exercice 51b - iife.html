@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 11d - IIFE</title>
+    <script src="exercice11b-addition.js"></script>
+    <script src="exercice11b-multiplication.js"></script>
+    <script>
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        Isolation des variables : comment éviter les collisions de noms ?
+
+        En JavaScript on utilise souvent des bibliothèques de code écrites par d'autres développeurs. Afin d'éviter les collisions de noms, on isole les variables du contexte global en les déclarant toujours dans des fonctions.
+        - Une variable déclarée dans une fonction n'est pas visible en dehors de cette fonction : une fonction crée toujours un nouveau contexte d'exécution.
+        - Une variable déclarée en dehors de toute fonction sera accessible à toutes les fonctions : ces variables sont dites "globales".
+        De plus, toujours afin d'éviter les collitions de noms, on utilisera autant que possible des fonctions anonymes.
+
+        Une fonction anonyme, exécutée immédiatement dans le but d'isoler ses variables du reste du code, est un "design pattern" appellé IIFE (Immediately-Invoked Function Expression), c'est-à-dire une "Expression de fonction invoquée immédiatement".
+        cf. http://benalman.com/news/2010/11/immediately-invoked-function-expression/
+
+        Syntaxe typique d'une IIFE :
+      */
+      (function() {
+        // Code à exécuter
+      })();
+
+      /*
+        Exemple :
+      */
+      var uneVariableGlobale = 'Coucou les globales!'; // cette variable est "globale" : on peut l'afficher directement dans la console
+
+      (function() {
+        var variableInvisibleDeLExterieur = 'Cherchez-moi dans la console !';
+        var maFonction = function() {
+          console.log('Exécution au sein d\'une IIFE');
+        }
+        maFonction(); // Cet appel ne fonctionnera pas en dehors de l'IIFE
+      })(); // Fin de l'IIFE
+
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Isolation des variables
+
+        Reprenez l'exercice précédent en créant les deux fonctions dans des IIFE.
+        Exécutez chaque fonction au sein de.
+      */
+
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 11d - IIFE</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 33 - open 5</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réalisez le programme (algorithme) suivant :
+        Créer un tableau JavaScript contenant 5 urls.
+        Tant que l'ensemble du tableau n'a pas été parcouru, utilisez l'url contenue dans la case du tableau sur laquelle vous vous trouvez pour ouvrir une nouvelle fenêtre.
+        Utilisez une boucle while... avec un compteur de tours.
+      */
+      var url = [
+        'https://developer.mozilla.org/fr/',
+        'https://www.youtube.com/watch?v=99Zacm7SsWQ',
+        'https://stackoverflow.com/',
+        'http://www.piedpiper.com/',
+        'https://daneden.github.io/animate.css/'
+      ];
+      var compteur = 0;
+      while (compteur < 5) {
+        open(url[compteur], url[compteur]);
+        compteur++;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 33 - open 5</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

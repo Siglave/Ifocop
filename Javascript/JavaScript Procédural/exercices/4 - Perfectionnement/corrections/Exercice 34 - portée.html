@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 34 - portée</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réalisez le programme (algorithme) suivant :
+        - Dans la balise script, affichez une boîte de dialogue avec un champ de saisie à l'utilisateur.
+        - Tant que l'utilisateur clique sur Annuler ou clique OK sans rien saisir, affichez une boîte de dialogue avec un champ de saisie.
+        - Enregistrez la saisie utilisateur dans une variable.
+
+        Après cette première boîte de dialogue, créez une fonction qui affiche une seconde boîte de dialogue avec un champ de saisie à l'utilisateur.
+        Tant que l'utilisateur clique sur Annuler ou clique OK sans rien saisir, affichez une boîte de dialogue avec un champ de saisie.
+
+        Les deux saisies successives sont stockées dans la même variable.
+        Affichez le contenu de cette variable dans une boîte de dialogue
+        Que se passe-t-il si je fais précéder, dans la fonction, le nom de la variable par le mot-clé var ? Pourquoi ?
+      */
+
+      var reponse = '';
+      while (reponse === '' || reponse === null) {
+        reponse = prompt('Veuillez saisir du texte');
+      }
+
+      var question = function() {
+        reponse = ''; // Nouvelle assignation de valeur à la variable "reponse" déclarée dans le contexte supérieur (en l'occurence le contexte global).
+        // var reponse = ''; // Déclaration d'une variable locale : sa valeur ne remplacera pas celle de la variable "reponse" déclarée en dehors de la fonction
+        while (reponse === '' || reponse === null) {
+          reponse = prompt('Veuillez saisir un autre texte');
+        }
+      }
+
+      question();
+      alert(reponse);
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 34 - portée</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

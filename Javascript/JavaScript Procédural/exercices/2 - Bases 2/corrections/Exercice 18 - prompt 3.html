@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 18 - prompt 3</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réalisez le programme (algorithme) suivant :
+        Quand je CLIQUE sur un paragraphe, j'affiche une boîte de dialogue avec un champ de saisie à l'utilisateur.
+        Tant que l'utilisateur clique sur Annuler ou clique sur OK sans rien saisir, j'affiche une boîte de dialogue avec un champ de saisie.
+        Puis, j'affiche la saisie de l'utilisateur dans une boîte de dialogue
+
+        Utilisez l'attribut d'évènement onclick, la fonction prompt(), la fonction alert() et une boucle while.
+      */
+
+      var maFonction = function() {
+        var userInput = prompt('Veuillez saisir votre nom');
+        if (userInput == null || userInput == '') {
+          maFonction();
+        } else {
+          alert(userInput);
+        }
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 18 - prompt 3</h1>
+    <p onclick="maFonction()">Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

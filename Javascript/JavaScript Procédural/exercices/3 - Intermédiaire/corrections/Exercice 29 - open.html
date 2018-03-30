@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 29 - open</title>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        La fonction open() permet d'ouvrir une nouvelle fenêtre de navigation en y chargeant les ressources référencées.
+
+        La fonction open à besoin de 3 ARGUMENTS :
+          _ l'url de la fenêtre à ouvrir
+          _ un identifiant unique pour la fenêtre
+          _ des options.
+        Ces trois arguments sont des chaînes de caractères.
+
+        La chaîne de caractères des options comporte les options suivantes séparées par des virgules sans espace :
+
+        option :          description :
+        directories = yes/no    Affiche ou non les boutons de navigation
+        location = yes/no      Affiche ou non la barre d'adresse
+        menubar = yes/no      Affiche ou non la barre de menu (fichier, édition, ...)
+        resizable = yes/no      Définit si la taille de la fenêtre est modifiable ou non
+        scrollbars = yes/no      Affiche ou non les ascenseurs (barres de défilement)
+        status = yes/no        Affiche ou non la barre d'état
+        toolbar = yes/no      Affiche ou non la barre d'outils
+        width = largeur       (en pixels)  Définit la largeur
+        height = hauteur       (en pixels)  Définit la hauteur
+
+        Par exemple : open('http://www.google.com', 'Google', 'directories=no,menubar=no');
+      */
+
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réalisez les programmes (algorithmes) suivants :
+        - Quand l'utilisateur clique sur le titre, ouvrez une fenêtre vers Google.
+        - Quand il clique sur le premier paragraphe ouvrez une fenêtre vers Bing.
+        - Quand il survole sur le troisième paragraphe ouvrez une fenêtre vers DuckDuckGo.
+      */
+
+      var openGoogle = function() {
+        open('https://www.google.com', 'Google', 'directories=no,menubar=no');
+      };
+
+      var openDuckDuckGo = function() {
+        open('https://duckduckgo.com/', 'DuckDuckGoExalead', 'directories=no,menubar=no');
+      };
+
+    </script>
+  </head>
+  <body>
+    <h1 onclick="openGoogle();">JavaScript : Exercice 29 - open</h1>
+    <p onclick="open('https://www.bing.com', 'Bing', 'directories=no,menubar=no');">Premier paragraphe</p>
+    <p onmouseover="openDuckDuckGo();">Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

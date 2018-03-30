@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 9 - fonction</title>
+    <script type="text/javascript" src="Exercice-09.js"></script>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        Dans la programmation en JavaScript, on prend l'habitude de déclarer une function dans l'en-tête ainsi :
+      */
+/*
+      var maFonction = function() {
+        alert('La fonction alert est déclenchée dans la fonction contenue dans la variable maFonction');
+      };
+*/
+      /*
+        Cette fonction est, désormais, stockée en mémoire vive et, de ce fait, disponible dans l'emplacement (la variable) maFonction. À partir de la ligne de la déclaration, maFonction peut être utilisée partout dans le document dans les emplacements réservés aux scripts JavaScript.
+
+        Cette fonction peut être utilisée de façon directe (appel de la fonction) ou par l'entremise d'un attribut d'évènement tels onclick, onload …
+        Par exemple :
+        onclick="nomDeLaFonction();"
+        Cet attribut d'évènement est écrit dans une balise html.
+      */
+
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Exécutez la fonction maFonction ici (c'est à dire après ce commentaire).
+      */
+      maFonction();
+      /*
+      ** 2 **
+        Exécutez la fonction maFonction AU moment où l'utilisateur clique sur le premier paragraphe. Il faut utiliser l'attribut d'évènement onclick.
+      */
+
+      /*
+      ** 3 **
+        Exécutez la fonction maFonction APRÈS le chargement du document. Il faut utiliser l'attribut d'évènement onload.
+      */
+
+      /*
+        4. Exécuter la fonction maFonction APRÈS que le navigateur ait chargé et affiché le premier paragraphe et AVANT qu'il ait chargé et affiché le second paragraphe.
+      */
+
+      /*
+        5. Créez un fichier externe. Copiez-y la déclaration de la fonction maFonction. Supprimez cette fonction de ce bloc de scripts. Indiquez au navigateur qu'il doit télécharger le fichier externe créé. Toutes les exécutions de la fonction maFonction (de la 1 à la 4) doivent fonctionner.
+      */
+    </script>
+  </head>
+  <body onload="maFonction();">
+    <h1>JavaScript : Exercice 9 - fonction</h1>
+    <p onclick="maFonction();">Premier paragraphe</p>
+    <script type="text/javascript">
+      maFonction();
+    </script>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

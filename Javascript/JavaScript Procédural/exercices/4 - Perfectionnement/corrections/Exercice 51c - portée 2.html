@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 11c - portée 2</title>
+    <script src="exercice11c.js"></script>
+    <script>
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Création d'une fonction qui effectue un calcul complexe et qui affiche le résultat.
+
+        Comme dans l'exercice précédent, créez ici une fonction dans une variable nommée "operation".
+        Cette fonction accepte 3 arguments et effectue les opérations suivantes :
+        - multiplie les 2 premiers,
+        - puis divise la somme obtenue par le troisième argument.
+        La fonction ne retourne pas de valeur mais affiche le résultat dans une boîte de dialogue (alert).
+        Exécutez cette fonction, en lui passant les valeurs 3, 5 et 7.
+        Vous devriez voir s'afficher le nombre 2,142857142857143 dans la boîte de dialogue.
+
+      ** 2 **
+        Exécution d'une fonction déclarée dans un fichier séparé.
+
+        Déplacez la fonction "operation" dans un fichier externe nommé "exercice11c.js" et chargez ce fichier dans le document courant.
+        Exécutez à présent la fonction dans le document HTML actuel, en lui passant les valeurs 3, 5 et 7.
+        Vous devriez obtenir le même résultat.
+
+      ** 3 **
+        Chargez maintenant dans le document courant le fichier JavaScript créé dans l'exercice précédent (nommé "exercice11b.js"), après le fichier créé au point **2**
+        Exécutez à nouveau la fonction "operation" dans le document HTML actuel, en lui passant les valeurs 3, 5 et 7.
+        Que constatez-vous ? À votre avis, que s'est-il passé ?
+      */
+      operation(3, 5, 7);
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 11c - portée 2</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

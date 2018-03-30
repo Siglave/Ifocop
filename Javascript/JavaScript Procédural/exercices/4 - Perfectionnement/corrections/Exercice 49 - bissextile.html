@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 49 - bissextile</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Une année est bissextile dans 2 cas :
+
+        -  Elle est divisible par 4 mais pas par 100
+        Ou
+        -  Elle est divisible par 400
+
+        Vous devez réaliser une fonction qui teste si une année donnée par l’utilisateur est bissextile.
+        - 1900 : n’est pas bissextile => divisible par 100 donc condition 1 fausse, et pas divisible par 400 donc condition 2 fausse
+        - 2000 : est bissextile => divisible par 400 donc condition 2 vraie (par contre condition 1 fausse mais pour le OU il suffit qu’une des deux soit vraie)
+        - 1904 : est bissextile => condition 1 vraie
+        - 2003 : n’est pas bissextile => conditions 1 et 2 fausses
+
+        Il est possible de faire des tests successifs, ou bien de créer des conditions complexes pour ne faire qu’un seul test.
+
+        L'opérateur % (modulo) permet de calculer le reste des divisions successive du premier opérande par le second (ex: 10 % 2 donne 0, 10 % 3 donne 1)
+      */
+      var bissextile = function(){
+        var annee;
+        while(isNaN(annee)){
+          annee = parseInt(prompt('Saisissez une année !'));
+        };
+        if((annee%4 == 0 && annee%100 != 0) || (annee%400 == 0 )){
+          alert('Cette année est bissextile');
+        }else{
+          alert('Cette année n\'est pas bissextile');
+        };
+      };
+
+      bissextile();
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 49 - bissextile</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

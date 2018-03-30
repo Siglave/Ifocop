@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 32 - open 4</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réalisez le programme (algorithme) suivant :
+
+        Quand l'utilisateur clique sur le premier paragraphe une boîte de dialogue lui demande si je souhaite aller sur Google :
+        - s'il clique sur oui, ouvrez une fenêtre vers Google.
+        - sinon, affichez une boîte de dialogue avec un champ de saisie avec le texte : « Veuillez saisir une autre URL ». Si l'utilisateur saisi un texte, ce texte est utilisé comme url pour ouvrir une nouvelle fenêtre.
+        - sinon un message s'affiche dans une boîte de dialogue avec le texte : « Tant pis ! » et vous faites revenir l'utilisateur au premier cas.
+
+        En bref, il s'agit de créer une boucle qui OBLIGE l'utilisateur à ouvrir une nouvelle fenêtre vers Google ou un site alternatif de son choix.
+      */
+      var lien = function() {
+        var reponse = false;
+        while (!reponse) {
+          reponse = confirm('Voulez-vous aller sur Google');
+          if (reponse) {
+            open('https://www.google.fr','Google');
+          } else {
+            reponse = prompt('Veuillez saisir une autre URL');
+            if (reponse == '' || reponse == null) {
+              alert('Tant pis !');
+            } else{
+              open('http://' + reponse,reponse);
+            }
+          }
+        }
+      };
+    </script>
+  </head>
+  <body onload="lien();">
+    <h1>JavaScript : Exercice 32 - open 4</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

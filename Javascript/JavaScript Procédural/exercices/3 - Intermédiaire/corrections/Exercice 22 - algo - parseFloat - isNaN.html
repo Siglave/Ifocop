@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 22 - algo - parseFloat - isNaN</title>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        La fonction parseFloat() est une fonction qui prend en entrée une information :
+        - si cette information est un nombre, elle retourne le nombre correspondant.
+        - sinon elle retourne un code d'erreur : NaN (Not A Number).
+        Cette fonction est fréquemment utilisée pour transformer des valeurs exprimées en px, em, % ou autres en nombres manipulables (arithmétiquement).
+
+        La fonction isNaN() est une fonction qui prend entrée une variable :
+        - Si cette variable n'est pas un nombre, la fonction retourne true.
+        - Sinon elle retourne false.
+      */
+
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Réalisez le programme (algorithme) suivant :
+        Au chargement du document, affichez une boîte de dialogue avec un champ de saisie à l'utilisateur.
+        Puis, utilisez la fonction parseFloat() pour transformer la saisie utilisateur obtenue.
+        Affichez le résultat de la transformation dans une boîte de dialogue.
+
+        Utilisez l'attribut d'évènement onload(), la fonction prompt(), la fonction alert() et la fonction parseFloat().
+      */
+
+      var saisieUtilisateur = function() {
+        /*var saisie = prompt('Une saisie ?');
+        alert(parseFloat(saisie));*/
+      };
+
+      /*
+      ** 2 **
+        Améliorez le programme (algorithme) précédent :
+        Au CHARGEMENT du document, affichez une boîte de dialogue avec un champ de saisie à l'utilisateur.
+        Puis utilisez la fonction parseFloat pour transformer la saisie utilisateur obtenue.
+        Ensuite, utilisez la fonction isNaN() avec le résultat de cette transformation pour obtenir une valeur de vérification.
+        Affichez le résultat de cette valeur de vérification dans une boîte de Dialogue
+
+        Utilisez l'attribut d'évènement onload(), la fonction prompt(), la fonction alert(), la fonction parseFloat() et la fonction isNaN().
+      */
+
+      var saisieUtilisateur2 = function() {
+        /*var saisie = parseFloat(prompt('Une saisie ?'));
+        alert(isNaN(saisie));*/
+      };
+
+      /*
+      ** 3 **
+        Réalisez le programme (algorithme) suivant :
+        Quand l'utilisateur clique sur le premier paragraphe, demandez-lui de saisir un nombre.
+        S'il n'a pas saisi un nombre, affichez le message « Vous devez saisir un nombre ».
+        Sinon, affichez le message « Merci d'avoir saisi un nombre ».
+
+        Utilisez l'attribut d'évènement onclick, la fonction prompt(), la fonction alert(), la fonction parseFloat(), la fonction isNaN() et un bloc conditionnel if/else.
+      */
+      var question = function() {
+        var saisie = prompt('Veuillez saisir un nombre');
+        var saisieNombre = parseFloat(saisie);
+        if (isNaN(saisieNombre)) {
+          alert('Vous devez saisir un nombre');
+        } else {
+          alert('Merci d\'avoir saisi un nombre');
+        }
+      };
+
+      // version plus concise
+      var question2 = function() {
+        var saisie = parseFloat(prompt('Veuillez saisir un nombre'));
+        if (isNaN(saisie)) {
+          alert('Vous devez saisir un nombre');
+        } else {
+          alert('Merci d\'avoir saisi un nombre');
+        }
+      };
+
+      // version encore plus concise
+      var question3 = function() {
+        if (isNaN(parseFloat(prompt('Veuillez saisir un nombre')))) {
+          alert('Vous devez saisir un nombre');
+        } else {
+          alert('Merci d\'avoir saisi un nombre');
+        }
+      };
+    </script>
+  </head>
+  <body onload="saisieUtilisateur(); saisieUtilisateur2();">
+    <h1>JavaScript : Exercice 22 - algo -parseFloat - isNaN</h1>
+    <p onclick="question();">Premier paragraphe</p>
+    <p onclick="question3();">Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 25 - algo 4</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Dans l'exercice précédent, deux blocs de code se ressemblent beaucoup. Ce sont les parties du programme qui permettent d'obliger l'utilisateur à saisir un nombre.
+        On pourrait donc créer une fonction qui évite d'avoir à écrire à deux reprises des instructions quasi identiques.
+        Écrivez cette fonction.
+
+        Veillez aux trois points suivants pour l'écriture de cette fonction :
+        - La fonction ne peut pas ne se terminer tant que l'utilisateur n'a pas saisi de nombre.
+        - La fonction prend en argument le message qui s'affichera à l'utilisateur lors de la saisie.
+        - La fonction retourne le nombre saisi par l'utilisateur.
+      */
+      var demande = function(message) {
+        var saisie;
+        while (isNaN(saisie)) {
+          saisie = parseFloat(prompt(message));
+        }
+        return saisie;
+      };
+
+      var deuxQuestions = function() {
+        alert(demande('Veuillez saisir un premier nombre') + demande('Veuillez saisir un second nombre'));
+      };
+    </script>
+  </head>
+  <body onload = "deuxQuestions();">
+    <h1>JavaScript : Exercice 25 - algo 4</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

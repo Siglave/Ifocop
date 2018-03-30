@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 35</title>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        Une fonction peut retourner une fonction. Ainsi :
+        var enAttente = function(nombre) {
+          return function(message) {
+            alert(message + nombre);
+          }
+        };
+
+        var stock = enAttente(5);
+        stock('Le nombre saisi est ');
+
+        La boîte de dialogue affiche : Le nombre saisi est 5
+        On appel ce mécanisme une fermeture (closure en anglais). Les fermetures utilisent des variables libres; c'est à dire que la fonction contenue dans la fonction se souvient de l'environnement dans lequel elle est définie.
+
+        /*********************************
+        ************ EXERCICE ************
+        **********************************
+        Réalisez le programme (algorithme) suivant :
+        En vous inspirant du mécanisme des fermetures, balayez le tableau ci-dessous pour afficher dans une boîte de dialogue la phrase :
+        « Il est 8 h, je me lève. Il est 13 h, je déjeûne. Il est 23 h, je vais dormir. »
+        Utilisez une boucle while avec compteur.
+      */
+      var mots = [8, 'je me lève', 13, 'je déjeûne', 23, 'je vais dormir'];
+
+      var affichage = function(heure) {
+        heure = 'Il est ' + heure + ' h, ';
+        return function(finMessage) {
+          return heure + finMessage + '. ';
+        }
+      }
+
+      var phrase = '';
+
+      var i = 0;
+      while(mots[i]) {
+        var debut = affichage(mots[i]);
+        phrase += debut(mots[i + 1]);
+        i = i + 2;
+      }
+
+      /*
+      // Avec une boucle for
+      for( var i = 0; mots[i + 1]; i = i + 2) {
+         var debut = affichage(mots[i]);
+         phrase += debut(mots[i + 1]);
+      }
+      */
+      alert(phrase);
+    </script>
+  </head>
+  <body>
+    <h1>Mon nouveau document</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 13 - confirm</title>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        La fonction confirm() permet d'afficher une boîte de dialogue à l'utilisateur avec les boutons OK et Annuler. Contrairement à alert(), cette fonction retourne la réponse de l'utilisateur, sous la forme d'une valeur booléenne (true pour OK ou false pour Annuler).
+      */
+
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Au clic de l'utilisateur sur le premier paragraphe, une fonction, que vous avez déclarée dans l'en-tête du document, s'exécute.
+        Celle-ci doit elle-même déclencher une fonction qui affichera une boîte de dialogue contenant le texte « Ceci est un choix » et les boutons OK et Annuler.
+
+        Utilisez la fonction confirm()
+      */
+      var action = function() {
+        confirm('Ceci est un choix');
+      };
+
+      /*
+      ** 2 **
+        Au clic sur le second paragraphe s'exécute une autre fonction que vous avez également déclarée dans l'en-tête du document.
+        Celle-ci doit elle-même déclencher une fonction qui affichera une boîte de dialogue contenant le texte « Ceci est un choix » ainsi que les boutons OK et Annuler.
+        Sauvegardez ce qui est retourné par la fonction confirm(). Affichez ce que vous avez sauvegardé dans une nouvelle boîte de dialogue.
+
+        Utilisez la fonction confirm() puis la fonction alert().
+      */
+      var actionDeux = function() {
+        var reponse = confirm('Ceci est un choix');
+        alert(reponse);
+      };
+
+      /*
+        Quelle information nous retourne la fonction confirm() si l'utilisateur clique sur le choix OK ? Sur Annuler ?
+      */
+
+      /*
+      ** 3 **
+        Réalisez le programme (algorithme) suivant :
+        Au chargement du document, j'affiche une boîte de dialogue contenant le message « Voulez-vous continuer ? ». Si l'utilisateur clique sur OK, j'affiche un message « Vous avez cliqué sur OK »; sinon rien ne s'affiche.
+
+        Utilisez l'attribut d'évènement onload, la fonction confirm(), la fonction alert() et un bloc conditionnel if.
+      */
+      var actionTrois = function() {
+        var reponse = confirm('Voulez-vous continuer ?');
+        if (reponse) {
+          alert('Vous avez cliqué sur OK');
+        }
+      };
+    </script>
+  </head>
+  <body onload="actionTrois();">
+    <h1>JavaScript : Exercice 13 - confirm</h1>
+    <p onclick="action();">Premier paragraphe</p>
+    <p onclick="actionDeux();">Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 37 - arguments</title>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        Dans toute fonction, on peut appeler la variable arguments. Il s'agit d'un tableau contenant l'ensemble des arguments passés à la fonction.
+
+        Cela permet, notamment, de créer une fonction acceptant un nombre variable d'arguments en entrée.
+        Ainsi:
+        function exemple(){
+          alert(arguments[1]);
+        }
+
+        exemple(1,'bidule',3); //affiche bidule
+
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réalisez le programme (algorithme) suivant :
+        Créez une fonction acceptant un nombre variable d'arguments en entrée. Cette fonction calcule la moyenne des valeurs passées en entrée au moyen d'une boucle while et retourne cette valeur.
+        Affichez dans une boîte de dialogue la moyenne d'au-moins quatre nombre entiers.
+      */
+        (function() {
+          'use strict';
+
+          var moyenne = function() {
+            var somme = 0;
+            var i = 0;
+            while (arguments[i]) {
+              somme += arguments[i];
+              i++;
+            }
+            return somme / i;
+          }
+          alert('Moyenne : ' + moyenne(1, 2, 3, 4, 5, 6));
+
+        })(); // IIFE
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 37 - arguments</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

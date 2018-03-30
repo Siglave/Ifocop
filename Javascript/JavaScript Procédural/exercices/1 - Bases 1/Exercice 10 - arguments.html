@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 10 - arguments</title>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        Fort heureusement, les fonctions ne sont pas fermées. On peut introduire un ou plusieurs argument en entrée.
+        1 - Un argument
+      */
+        var fonctionAvecUnArgument = function(argument) {
+          alert(argument);
+        };
+      /*
+        fonctionAvecUnArgument('Bonjour');
+        affichera « Bonjour ».
+
+        2 - Deux arguments
+      */
+        var fonctionAvecDeuxArguments = function(argumentUn, argumentDeux) {
+          alert(argumentUn + argumentDeux);
+        };
+      /*
+        fonctionAvecDeuxArguments(45,16);
+        affichera 61;
+
+        Bien entendu, on peut introduire plus d'arguements si nécessaire.
+      */
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Créez une fonction avec un argument en entrée affichant un message dans une boîte de dialogue.
+        Exécutez cette fonction avec une chaîne de caractères.
+      */
+
+      /*
+      ** 2 **
+        Créez une seconde fonction avec deux arguments en entrée. Les deux arguments sont concaténés et affichés dans une boîte de dialogue.
+        Exécutez cette fonction avec deux chaînes de caractères.
+      */
+
+      /*
+      ** 3 **
+        Reprenez la fonction précédente. Réécrivez-la de telle façon à utiliser un seul argument en entrée tout en gardant la concaténation. Vous utiliserez donc un tableau comme argument.
+        Exécutez cette fonction avec un tableau contenant deux chaînes de caractères.
+      */
+
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript : Exercice 10 - arguments</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

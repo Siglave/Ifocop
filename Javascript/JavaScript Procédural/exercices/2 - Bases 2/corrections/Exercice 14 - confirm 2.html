@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 14 - confirm 2</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Réalisez le programme (algorithme) suivant :
+        Au chargement du document, j'affiche une boîte de dialogue contenant le message « Voulez-vous continuer ? ».
+        Si l'utilisateur clique sur OK, j'affiche une boîte de dialogue avec le message « Vous avez cliqué sur OK ! », sinon j'affiche une boîte de dialogue avec le message « Vous avez choisi d'annuler ».
+
+        Utilisez l'attribut d'évènement onload, la fonction confirm(), la fonction alert() et un bloc conditionnel if/else.
+      */
+
+      var chargement = function() {
+        var reponseUtilisateur = confirm('Voulez-vous continuer ?');
+        if (reponseUtilisateur) {
+          alert('Vous avez  cliqué sur OK !');
+        } else {
+          alert('Vous avez choisi d\'annuler');
+        }
+      };
+
+      /*
+      ** 2 **
+        Réalisez le programme (algorithme) suivant :
+        Quand l'utilisateur clique sur le premier paragraphe, j'affiche une boîte de dialogue contenant le message « Voulez-vous continuer ? ».
+        Si l'utilisateur clique sur OK, j'affiche une boîte de dialogue avec le message « Vous avez cliqué sur OK ! » sinon j'affiche une boîte de dialogue avec le message « Vous avez choisi d'annuler ».
+
+        Utilisez l'attribut d'évènement onclick, la fonction confirm(), la fonction alert() et un bloc conditionnel if/else
+      */
+
+      /*
+      ** 3 **
+        Réalisez le programme (algorithme) suivant :
+        Quand l'utilisateur survole le premier titre, j'affiche une boîte de dialogue contenant le message « Voulez-vous continuer ? ».
+        Si l'utilisateur clique sur OK, j'affiche une boîte de dialogue avec le message « Vous avez cliqué sur OK ! » sinon j'affiche une boîte de dialogue avec le message « Vous avez choisi d'annuler ».
+
+        Utilisez l'attribut d'évènement onmouseover, la fonction confirm(), la fonction alert() et un bloc conditionnel if/else.
+      */
+    </script>
+  </head>
+  <body onload="chargement();">
+    <h1>JavaScript : Exercice 14 - confirm 2</h1>
+    <p onclick="chargement();">Premier paragraphe</p>
+    <p onmouseover="chargement();">Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

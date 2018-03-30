@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 19 - while 2</title>
+    <script type="text/javascript">
+      /*********************************
+      ********** PRÉSENTATION **********
+      **********************************
+        Il est possible d'améliorer la boucle while en introduisant un compteur. Celui-ci permettra de fixer précisément le nombre de fois où le code, dans la boucle while, sera exécuté.
+        Habituellement, on utilise la boucle while avec un compteur, cela se présente comme suit :
+      */
+
+      var compteur = 0;
+      while (compteur < 5) {
+        // code à exécuter.
+        compteur = compteur + 1;
+      }
+
+      /*
+        Ici, le code s'exécutera cinq fois.
+        Parmi les bonnes habitudes pour écrire le code, on utilise une forme plus courte pour l'incrémentation du compteur comme ceci :
+      */
+
+      var compteur = 0;
+      while (compteur < 5) {
+        // code à exécuter.
+        compteur++;
+      }
+
+      /*
+        Ainsi :
+      */
+      compteur++;
+
+      /*
+        équivaut à
+      */
+      compteur = compteur + 1;
+
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+      ** 1 **
+        Réalisez le programme (algorithme) suivant :
+        Au chargement, exécutez une fonction. Celle-ci affiche successivement dans une boîte de dialogue les trois valeurs du compteur de la boucle (valeurs de 1 à 3).
+
+        Utilisez la boucle while avec un compteur ainsi que la fonction alert().
+      */
+
+      var chargement = function() {
+        var nombre = 1;
+        while (nombre < 4) {
+          alert(nombre);
+          nombre++;
+        }
+      };
+
+      /*
+      ** 2 **
+        Réalisez le programme (algorithme) suivant :
+        Au chargement, exécutez une fonction. Celle-ci crée d'abord un tableau qui contient trois chaînes de caractères. Ensuite, affichez successivement dans une boîte de dialogue chaque élément du tableau.
+
+        Utilisez la boucle while avec un compteur ainsi que la fonction alert().
+      */
+
+      var troisTextes = function() {
+        var tableau = ['Premier', 'Deuxième', 'Troisième'];
+        var indice = 0;
+        while (indice < 3) {
+          alert(tableau[indice]);
+          indice++;
+        }
+      };
+
+    </script>
+  </head>
+  <body onload="chargement(); troisTextes();">
+    <h1>JavaScript : Exercice 19 - while 2</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

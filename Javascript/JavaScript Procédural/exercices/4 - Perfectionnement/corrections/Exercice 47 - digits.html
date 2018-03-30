@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 47 - digits</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Créez une fonction qui renvoie le nombre de digits d’un nombre entier passé en argument.
+
+        Un « digit » est un des chiffres qui composent le nombre.
+
+        Exemple : pour 101, les digits sont 1, 0, 1, il y a donc 3 digits.
+      */
+
+      var compterChiffres = function () {
+        var nombre = '';
+        while(isNaN(nombre) || nombre === '') {
+          nombre = prompt('Veuillez saisir un nombre');
+        }
+
+        var nbDigits = 1;
+        var facteur = 10;
+        var absValue = nombre;
+        if (nombre < 0) {
+          absValue = absValue * -1; // si le nombre est négatif on utilise la valeur absolue
+        }
+        console.log('absValue : ' + absValue);
+
+        for (var i = facteur; absValue > i; i = i * facteur ) {
+          console.log('compteur : ' + i);
+          nbDigits++;
+        }
+
+        var message = 'Le nombre ' + nombre + ' comporte ' + nbDigits + ' chiffre';
+        if (nbDigits > 1) {
+          message = message + 's';
+        }
+        alert(message + '.');
+      };
+    </script>
+  </head>
+  <body>
+    <h1 onclick="compterChiffres();">JavaScript : Exercice 47 - digits</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JavaScript : Exercice 23 - algo 2</title>
+    <script type="text/javascript">
+      /*********************************
+      ************ EXERCICE ************
+      **********************************
+        Réalisez le programme (algorithme) suivant :
+        Au chargement du document, demandez à l'utilisateur de saisir un nombre.
+        Tant que l'utilisateur n'a pas saisi un nombre, demandez-lui de saisir un nombre.
+
+        Utilisez l'attribut d'évènement onload, la fonction prompt(), la fonction parseFloat(), la fonction isNaN() et une boucle while.
+      */
+      var question = function() {
+        var saisie;
+        while (isNaN(saisie)) {
+          saisie = parseFloat(prompt('Veuillez saisir un nombre'));
+        }
+      };
+    </script>
+  </head>
+  <body onload="question();">
+    <h1>JavaScript : Exercice 23 - algo 2</h1>
+    <p>Premier paragraphe</p>
+    <p>Deuxième paragraphe</p>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>
