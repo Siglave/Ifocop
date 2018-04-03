@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8"/>
-    <title>JavaScript : Exercice 48 - sort</title>
-    <script type="text/javascript">
+
+<head>
+	<meta charset="utf-8" />
+	<title>JavaScript : Exercice 48 - sort</title>
+	<script type="text/javascript">
       /*********************************
       ************ EXERCICE ************
       **********************************
@@ -20,14 +21,31 @@
 
         Indice : il faut utiliser 2 boucles imbriquées
       */
-    </script>
-  </head>
-  <body>
-    <h1>JavaScript : Exercice 48 - sort</h1>
-    <p>Premier paragraphe</p>
-    <p>Deuxième paragraphe</p>
-    <noscript>
-      <p>Veuillez activer JavaScript</p>
-    </noscript>
-  </body>
+	var sortArray = function (arrayToSort) {
+		for (let i = 0; i < arrayToSort.length; i++) {
+			for (let y = 0; y < arrayToSort.length; y++) {
+				if(arrayToSort[i] <= arrayToSort[y]){
+					var numberSwitch = arrayToSort[i];
+					arrayToSort[i] = arrayToSort[y];
+					arrayToSort[y] = numberSwitch;
+				}
+			}
+		}
+		return arrayToSort;
+	}
+	var arraySort = [5 , 8, 13, 2,50,37];
+	console.log(sortArray(arraySort));
+
+	</script>
+</head>
+
+<body>
+	<h1>JavaScript : Exercice 48 - sort</h1>
+	<p>Premier paragraphe</p>
+	<p>Deuxième paragraphe</p>
+	<noscript>
+		<p>Veuillez activer JavaScript</p>
+	</noscript>
+</body>
+
 </html>

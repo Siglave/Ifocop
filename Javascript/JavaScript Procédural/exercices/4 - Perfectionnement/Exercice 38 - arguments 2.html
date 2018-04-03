@@ -9,7 +9,15 @@
       **********************************
         Réécrivez l'exercice précédent en utilisant une boucle for (avec tableau['length']);
       */
-
+    	function calcMoyenne() {
+			var index = 0;
+			var totalNumber = 0;
+      for(index ; index < arguments.length; index++){
+				totalNumber = totalNumber + arguments[index];
+			}
+			return totalNumber / arguments.length;
+		}
+		alert(calcMoyenne(32, 40, 11, 56));
     </script>
   </head>
   <body>

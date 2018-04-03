@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
             block.setX(block.getX() - 2);
             //ctx.fillRect(block.getX(), block.getY(), block.size, block.size);
             block.draw(ctx);
-            if (block.getX() < 0) {
+            if (block.getX()+block.size < 0) {
                 var index = arrayBlocks.indexOf(block);
                 arrayBlocks.splice(index, 1);
                 var sizeSquare = 10 + (Math.random() * 50);

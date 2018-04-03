@@ -1,58 +1,81 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8"/>
-    <title>JavaScript : Exercice 40 - setTimeout</title>
-    <script type="text/javascript">
-      /*********************************
-      ********** PRÉSENTATION **********
-      **********************************
-        ****** setTimeout() ******
-        la fonction setTimeout() permet d'exécuter un morceau de code ou une fonction après un intervalle de temps.
 
-        Cette fonction prend en arguments :
-          - une fonction
-          - un nombre (de millisecondes).
-        Elle exécute la fonction en argument à la fin du compte à rebours. La fonction setTimeout() retourne :
-          - un identifiant unique pour ce compte à rebours.
+<head>
+	<meta charset="utf-8" />
+	<title>JavaScript : Exercice 40 - setTimeout</title>
+	<script type="text/javascript">
+		/*********************************
+		********** PRÉSENTATION **********
+		**********************************
+		  ****** setTimeout() ******
+		  la fonction setTimeout() permet d'exécuter un morceau de code ou une fonction après un intervalle de temps.
+  
+		  Cette fonction prend en arguments :
+			- une fonction
+			- un nombre (de millisecondes).
+		  Elle exécute la fonction en argument à la fin du compte à rebours. La fonction setTimeout() retourne :
+			- un identifiant unique pour ce compte à rebours.
+  
+		  ex : setTimeout(function(){}, 3000);
+  
+		  On notera que setTimeout() prend en argument une fonction et pas le résultat de l'exécution d'une fonction.
+  
+		  ****** setInterval() ******
+		  La fonction setInterval permet d'exécuter un morceau de code à intervalle régulier. La fonction setInterval() prend les même arguments que setTimeout() et retourne aussi un identifiant unique pour un intervalle.
+  
+		  ****** clearInterval() ******
+		  La fonction setInterval() retourne un nombre qui est un identifiant unique. la fonction clearInterval(?) prend en argument cet identifiant et produit l'arrêt de la fonction setInterval(?) correspondant.
+		*/
 
-        ex : setTimeout(function(){}, 3000);
+		/*********************************
+		************ EXERCICE ************
+		**********************************
+		** 1 **
+		  Affichez un message dans une boîte de dialogue au bout de 5 sec.
+		*/
 
-        On notera que setTimeout() prend en argument une fonction et pas le résultat de l'exécution d'une fonction.
+		/*
+		** 2 **
+		  Que fait la fonction setInterval() ? Pour ce faire, testez la fonction en adaptant la fonction précédente.
+		*/
 
-        ****** setInterval() ******
-        La fonction setInterval permet d'exécuter un morceau de code à intervalle régulier. La fonction setInterval() prend les même arguments que setTimeout() et retourne aussi un identifiant unique pour un intervalle.
+		/*
+		** 3 **
+		  Quand l'utilisateur clique sur un paragraphe, démarrez une fonction setInterval() qui déclenche l'apparition d'une boîte de dialogue au bout de 5 sec.
+		  Quand l'utilisateur clique sur un autre paragraphe, arrêtez l'apparition de la boîte de dialogue au bout de 5 sec.
+		*/
+		let idToStop = 0;
+		var funcSetTimeout = function () {
+			 return setTimeout(()=>{
+				alert("setTimeout msg apres 5 sec");
+			 }, 5000);
+		}
+		var funcSetInterval = function () {
+			return setInterval(()=>{
+				alert("setInterval apres 5 sec");
+			}, 5000);
+		}
+		var startSetInterval = function(){
+			idToStop = funcSetInterval();
+		}
+		var stopSetInterval = function(){
+			setTimeout(()=>{
+				clearInterval(idToStop);
+			},5000);		
+		}
+		console.log("C'est Bon");
+		
+	</script>
+</head>
 
-        ****** clearInterval() ******
-        La fonction setInterval() retourne un nombre qui est un identifiant unique. la fonction clearInterval(?) prend en argument cet identifiant et produit l'arrêt de la fonction setInterval(?) correspondant.
-      */
+<body>
+	<h1>JavaScript : Exercice 40 - setTimeout</h1>
+	<p onclick="startSetInterval()">Premier paragraphe</p>
+	<p onclick="stopSetInterval()">Deuxième paragraphe</p>
+	<noscript>
+		<p>Veuillez activer JavaScript</p>
+	</noscript>
+</body>
 
-      /*********************************
-      ************ EXERCICE ************
-      **********************************
-      ** 1 **
-        Affichez un message dans une boîte de dialogue au bout de 5 sec.
-      */
-
-      /*
-      ** 2 **
-        Que fait la fonction setInterval() ? Pour ce faire, testez la fonction en adaptant la fonction précédente.
-      */
-
-      /*
-      ** 3 **
-        Quand l'utilisateur clique sur un paragraphe, démarrez une fonction setInterval() qui déclenche l'apparition d'une boîte de dialogue au bout de 5 sec.
-        Quand l'utilisateur clique sur un autre paragraphe, arrêtez l'apparition de la boîte de dialogue au bout de 5 sec.
-      */
-
-    </script>
-  </head>
-  <body>
-    <h1>JavaScript : Exercice 40 - setTimeout</h1>
-    <p>Premier paragraphe</p>
-    <p>Deuxième paragraphe</p>
-    <noscript>
-      <p>Veuillez activer JavaScript</p>
-    </noscript>
-  </body>
 </html>

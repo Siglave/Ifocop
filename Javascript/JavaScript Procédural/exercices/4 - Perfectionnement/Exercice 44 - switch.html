@@ -34,6 +34,41 @@
       **********************************
         Reprenez l'exercice précédent en remplaçant les instructions if/else par un switch.
       */
+      var askDayOfWeek = () => {
+			var resPrompt = prompt("Entre le nbr du jour de la semaine entre 1 et 7");
+			var resPrompt = parseInt(resPrompt)
+			if (resPrompt || resPrompt == 0) {
+				if (resPrompt > 0 && resPrompt <= 7) {
+          switch (resPrompt) {
+            case 1 :
+              console.log(resPrompt);              
+              break;
+            case 2 || 3 || 4:
+              console.log(resPrompt);
+              break;
+            case 5:
+              console.log(resPrompt);
+              break;
+            case 6 || 7:
+              console.log(resPrompt);
+              break;         
+          }
+				} else {
+					alert("nbr incorrect");
+					askDayOfWeek();
+				}
+			} else {
+				alert("Pas de string");
+				askDayOfWeek();
+			}
+
+		}
+
+		window.onload = () => {
+			console.log("salut");
+			askDayOfWeek();
+		}
+
     </script>
   </head>
   <body>
