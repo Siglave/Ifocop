@@ -48,7 +48,7 @@ class Character {
             //console.log(this.isJumping);
             // console.log(this.stateJump);
             if (this.stateJump == "up") {
-                this.setCoordinates(this.getCoordinate().getX(), this.getCoordinate().getY() - 3);
+                  this.setCoordinates(this.getCoordinate().getX(), this.getCoordinate().getY() - 3);
                 if (this.getCoordinate().getY() < this.posStartJump.getY() - this.hightJump) {
                     this.stateJump = "down";
                 }
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var sizeSquare = 10 + (Math.random() * 50);
         arrayBlocks.push(new Block(sizeSquare, Math.random() * 700, Math.random() * 300));
     }
-    setTimeout(draw, 1000);
+    setTimeout(draw, 17);
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);

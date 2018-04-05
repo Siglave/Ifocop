@@ -26,12 +26,14 @@
         - ne saisit rien et clique sur OK ?
         - saisit un texte et clique sur OK ?
       */
-     console.log(prompt("yoyo"));
+     function clickOnPrompt() {
+      alert(prompt("entre un truc"));
+     }
     </script>
   </head>
   <body>
     <h1>Mon nouveau document</h1>
-    <p>Premier paragraphe</p>
+    <p onclick="clickOnPrompt()">Premier paragraphe</p>
     <p>Deuxième paragraphe</p>
     <noscript>
       <p>Veuillez activer JavaScript</p>

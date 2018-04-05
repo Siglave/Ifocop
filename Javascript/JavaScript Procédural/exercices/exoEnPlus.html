@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var chooseOperation = function (type) {
+                var res = 0;
+                if (type == "addition") {
+                    return function (arrayCalc) {
+                        arrayCalc.forEach(element => {
+                            res += element;
+                        });
+                        return res;
+                    }
+                }
+                if (type == "multiplication") {
+                    return function (arrayCalc) {
+                        res = 1;
+                        arrayCalc.forEach(element => {
+                            res = res * element;
+                        });
+                        return res;
+                    }
+                }
+                if (type == "reduce") {
+                    return function (arrayCalc) {
+                        res = arrayCalc.reduce((a, b) => { a + b });
+                        return res;
+                    }
+                }
+            };
+            var testCalc = chooseOperation("addition");
+            console.log(testCalc([0, 1, 2, 3]));
+            var testCalc2 = chooseOperation("multiplication");
+            console.log(testCalc2([1, 5, 2, 3]));
+           /*  var testCalc3 = chooseOperation("reduce");
+            console.log(testCalc3([1, 5, 2, 3])); */
+            //console.log([0, 1, 2, 3].reduce((a, b)=> a + b,0));
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
