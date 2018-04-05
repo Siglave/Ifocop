@@ -4,4 +4,5 @@ h1{
 #gameCanvas{
     /* background-color: black; */
     border: 1px solid black;
+    background:url(img/Backgrounds/blue.png);
 }

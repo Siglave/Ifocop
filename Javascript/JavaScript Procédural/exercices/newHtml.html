@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="script.js"></script>
+    <script>
+
+    var myvar = 50;
+    testConsole();
+    function modifGlob(){
+        myvar++;
+    }
+    function modifLoc(a) {
+        var myvar = myvar + a;
+        return myvar;
+    }
+    modifGlob(50)
+    console.log(myvar);
+    console.log(modifLoc(50));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
