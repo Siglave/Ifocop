@@ -26,7 +26,10 @@ class PlayerShip extends Coordinate {
 		var createImg = new Image();
 		createImg.src = "img/PNG/playerShip1_blue.png";
 		this.img = createImg;
-		this.speed = 10;
+		this.width = 100;
+		this.height = 75;
+		this.speed = 8;
+		this.isCollision = false;
 		this.arrowMove = [
 			{ keyCode: 38, keyIsUp: false }, //up
 			{ keyCode: 40, keyIsUp: false }, //down
@@ -35,11 +38,45 @@ class PlayerShip extends Coordinate {
 		];
 		this.lasers = [];
 		setInterval(() => {
-			this.lasers.push(new Laser(this.getX() - 3, this.getY()));
+			this.lasers.push(new Laser(this.getX() - 2, this.getY()));
 			this.lasers.push(
-				new Laser(this.getX() + this.img.width - 10, this.getY())
+				new Laser(this.getX() + this.width - 10, this.getY())
 			);
 		}, 500);
+	}
+
+	setIsCollision(val) {
+		this.isCollision = val;
+	}
+	effectCollision(collision) {
+		
+		switch (collision.type) {
+			case "canvas":
+				//check witch border
+				if (!this.isCollision) {
+					this.setIsCollision(true);
+				}
+				switch (collision.direction) {
+					case "up":
+						this.setY(this.getY() + 1);
+						break;
+					case "down":
+						this.setY(this.getY() - 1);
+						break;
+					case "left":
+						this.setX(this.getX() + 1);
+						break;
+					case "right":
+						this.setX(this.getX() - 1);
+						break;
+				}
+				break;
+			case "asteroid":
+				console.log("percute un asteroide");
+				break;
+			default:
+				break;
+		}
 	}
 	move() {
 		this.arrowMove.map(item => {
@@ -66,6 +103,7 @@ class PlayerShip extends Coordinate {
 	drawLasers(context) {
 		this.lasers.map(laser => {
 			if (laser.getY() < 0 - laser.size) {
+				// 0 equal limit of canvas
 				setTimeout(() => {
 					var index = this.lasers.indexOf(laser);
 					this.lasers.splice(index, 1);
@@ -76,8 +114,16 @@ class PlayerShip extends Coordinate {
 		});
 	}
 	draw(context) {
-		this.move();
-		context.drawImage(this.img, this.getX(), this.getY());
+		if (!this.isCollision) {
+			this.move();
+		}
+		context.drawImage(
+			this.img,
+			this.getX(),
+			this.getY(),
+			this.width,
+			this.height
+		);
 		this.drawLasers(context);
 	}
 }
@@ -87,7 +133,7 @@ class Laser extends Coordinate {
 		var createImg = new Image();
 		createImg.src = "img/PNG/Lasers/laserBlue01.png";
 		this.img = createImg;
-		this.speed = 8;
+		this.speed = 12;
 		this.size = 60;
 	}
 	move() {
@@ -112,21 +158,83 @@ class Asteroid extends Coordinate {
 		var number = Math.floor(Math.random() * 4) + 1;
 		createImg.src = "img/PNG/Meteors/meteorBrown_big" + number + ".png";
 		this.img = createImg;
-		this.size = sidePx;
-		this.speed = 3;
+		this.width = sidePx;
+		this.height = sidePx;
+		this.speed = 10;
 	}
 	move() {
 		this.setY(this.getY() + this.speed);
 	}
 	draw(context) {
 		this.move();
+/* 		context.fillRect(this.getX(),
+		this.getY(),
+		this.width,
+		this.height);  */
 		context.drawImage(
 			this.img,
 			this.getX(),
 			this.getY(),
-			this.size,
-			this.size
+			this.width,
+			this.height
 		);
+	}
+}
+
+class CollisionDetector {
+	constructor(canvasWidth, canvasHeight) {
+		this.canvasWidth = canvasWidth;
+		this.canvasHeight = canvasHeight;
+	}
+	isCollision(xObj1, yObj1, wObj1, hObj1, xObj2, yObj2, wObj2, hObj2) {
+		if (
+			xObj1 < xObj2 + wObj2 &&
+			xObj1 + wObj1 > xObj2 &&
+			yObj1 < yObj2 + hObj2 &&
+			hObj1 + yObj1 > yObj2
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	isOutCanvas(elem) {
+		elem.setIsCollision(false);
+		if (elem.getY() <= 0) {
+			//Check up
+			elem.effectCollision({ type: "canvas", direction: "up" });
+		}
+		if (elem.getY() + elem.height >= this.canvasHeight) {
+			//Check down
+			elem.effectCollision({ type: "canvas", direction: "down" });
+		}
+		if (elem.getX() <= 0) {
+			//Check left
+			elem.effectCollision({ type: "canvas", direction: "left" });
+		}
+		if (elem.getX() + elem.width >= this.canvasWidth) {
+			//Check right
+			elem.effectCollision({ type: "canvas", direction: "right" });
+		}
+	}
+	testCollision(playerShip, arrayAsteroid) {
+		this.isOutCanvas(playerShip);
+		arrayAsteroid.map(asteroid => {
+			if (
+				this.isCollision(
+					playerShip.getX(),
+					playerShip.getY(),
+					playerShip.width,
+					playerShip.height,
+					asteroid.getX(),
+					asteroid.getY(),
+					asteroid.width,
+					asteroid.height
+				)
+			) {
+				playerShip.effectCollision({ type: "asteroid" });
+			}
+		});
 	}
 }
 
@@ -137,6 +245,7 @@ function randomNumber(min, max) {
 document.addEventListener("DOMContentLoaded", function() {
 	var canvas = document.getElementById("gameCanvas");
 	var ctx = canvas.getContext("2d");
+	var collisionDetector = new CollisionDetector(canvas.width, canvas.height);
 	const player = new PlayerShip(300, 250);
 	var arrayAsteroid = [];
 	for (let i = 0; i < 10; i++) {
@@ -179,10 +288,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		true
 	);
 
-	setTimeout(draw, 17);
-	//window.requestAnimationFrame(draw);
+	window.requestAnimationFrame(draw);
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		collisionDetector.testCollision(player, arrayAsteroid);
+
 		arrayAsteroid.map(asteroid => {
 			asteroid.draw(ctx);
 			if (asteroid.getY() > canvas.height) {
@@ -202,7 +312,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 		});
 		player.draw(ctx);
-		setTimeout(draw, 17);
-		//window.requestAnimationFrame(draw);
+		window.requestAnimationFrame(draw);
 	}
 });
