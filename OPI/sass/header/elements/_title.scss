@@ -1,0 +1,12 @@
+h1,
+h2 {
+    @extend .style-titles;
+    background-color: limegreen;
+}
+
+
+h1 {
+    @extend %padding-top-2px;
+    @include border-radius(6px,6px,4px,4px);
+    color: $color_h1;
+}

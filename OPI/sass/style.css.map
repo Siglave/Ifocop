@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "mappings": "AIAA,AAAA,aAAa,EGAb,AHAA,EGAE;AACF,AHDA,EGCE,CHDY;EACV,UAAU,EAAE,MAAM;EAClB,cAAc,EAAE,SAAS;CAC5B;;AGHD,AHAA,EGAE,CHIe;EACb,WAAW,EAAE,GAAG;CACnB;;AEND,AACI,MADE,CACF,EAAE,CAAC;EACC,OAAO,EAAE,YAAY;EACrB,eAAe,EAAE,IAAI;CACxB;;AAEL,AAAA,CAAC,CAAA;EHLG,KAAK,EGMe,GAAG;EHLvB,eAAe,EAAE,IAAI;CGMxB;;AAFD,AHHI,CGGH,AHHG,MAAO,CAAC;EACJ,KAAK,EGGe,IAAI;CHF3B;;AILL,AAAA,EAAE;AACF,AAAA,EAAE,CAAC;EAEC,gBAAgB,EAAE,SAAS;CAC9B;;AAGD,AAAA,EAAE,CAAC;EJEC,aAAa,EIAU,GAAG,CAAC,GAAG,CAAK,GAAG,CAAP,GAAG;EAClC,KAAK,ELVG,IAAI;CKWf",
+    "sources": [
+        "style.scss",
+        "global/_global.scss",
+        "global/elements/_variables.scss",
+        "global/elements/_mixins.scss",
+        "global/elements/_class.scss",
+        "header/_header.scss",
+        "header/elements/_nav.scss",
+        "header/elements/_title.scss"
+    ],
+    "names": [],
+    "file": "style.css"
+}

@@ -52,24 +52,7 @@ class PlayerShip extends Coordinate {
 		
 		switch (collision.type) {
 			case "canvas":
-				//check witch border
-				if (!this.isCollision) {
-					this.setIsCollision(true);
-				}
-				switch (collision.direction) {
-					case "up":
-						this.setY(this.getY() + 1);
-						break;
-					case "down":
-						this.setY(this.getY() - 1);
-						break;
-					case "left":
-						this.setX(this.getX() + 1);
-						break;
-					case "right":
-						this.setX(this.getX() - 1);
-						break;
-				}
+				//Handle in move()
 				break;
 			case "asteroid":
 				console.log("percute un asteroide");
@@ -78,21 +61,37 @@ class PlayerShip extends Coordinate {
 				break;
 		}
 	}
-	move() {
+	move(canvasWidth,canvasHeight) {
 		this.arrowMove.map(item => {
 			if (item.keyIsUp) {
 				switch (item.keyCode) {
 					case 38: //up
-						this.setY(this.getY() - this.speed);
+						if (this.getY() > 0) {
+							this.setY(this.getY() - this.speed);			
+						}else{
+							this.setY(0);
+						}
 						break;
 					case 40: //down
-						this.setY(this.getY() + this.speed);
+						if (this.getY() + this.height < canvasHeight) {
+							this.setY(this.getY() + this.speed);
+						}else{
+							this.setY(canvasHeight - this.height);
+						}
 						break;
 					case 37: //left
-						this.setX(this.getX() - this.speed);
+						if (this.getX() > 0) {
+							this.setX(this.getX() - this.speed);
+						}else{
+							this.setX(0);
+						}
 						break;
 					case 39: //right
-						this.setX(this.getX() + this.speed);
+						if (this.getX() + this.width < canvasWidth) {
+							this.setX(this.getX() + this.speed);
+						}else{
+							this.setX(canvasWidth - this.width);
+						}
 						break;
 					default:
 						return;
@@ -113,9 +112,9 @@ class PlayerShip extends Coordinate {
 			}
 		});
 	}
-	draw(context) {
+	draw(context,canvasWidth,canvasHeight) {		
 		if (!this.isCollision) {
-			this.move();
+			this.move(canvasWidth,canvasHeight);
 		}
 		context.drawImage(
 			this.img,
@@ -125,6 +124,7 @@ class PlayerShip extends Coordinate {
 			this.height
 		);
 		this.drawLasers(context);
+		this.isCollision = false;
 	}
 }
 class Laser extends Coordinate {
@@ -160,7 +160,7 @@ class Asteroid extends Coordinate {
 		this.img = createImg;
 		this.width = sidePx;
 		this.height = sidePx;
-		this.speed = 10;
+		this.speed = 5;
 	}
 	move() {
 		this.setY(this.getY() + this.speed);
@@ -218,7 +218,7 @@ class CollisionDetector {
 		}
 	}
 	testCollision(playerShip, arrayAsteroid) {
-		this.isOutCanvas(playerShip);
+		//this.isOutCanvas(playerShip);
 		arrayAsteroid.map(asteroid => {
 			if (
 				this.isCollision(
@@ -292,7 +292,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		collisionDetector.testCollision(player, arrayAsteroid);
-
 		arrayAsteroid.map(asteroid => {
 			asteroid.draw(ctx);
 			if (asteroid.getY() > canvas.height) {
@@ -311,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				}, 0);
 			}
 		});
-		player.draw(ctx);
+		player.draw(ctx,canvas.width,canvas.height);
 		window.requestAnimationFrame(draw);
 	}
 });

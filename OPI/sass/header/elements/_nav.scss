@@ -1,0 +1,9 @@
+header {
+    li {
+        display: inline-block;
+        list-style-type: none;
+    }
+}
+a{
+    @include style-link(red,navy);
+}
