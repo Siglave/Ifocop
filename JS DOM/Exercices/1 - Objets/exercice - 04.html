@@ -14,6 +14,13 @@
         - Son prénom est une chaîne de caractères;
         - Sa discipline enseignée est une chaîne de caractères.
       */
+      var enseignant = {
+        age : 30,
+        presence : true,
+        nom : "unNom",
+        prenom : "prenom",
+        discipline : "discipline",
+      }
 
       /*
         2. Créez 1 objet JSON. Cet objet représente une classe.
@@ -22,6 +29,11 @@
         - Sa spécialité est une chaîne de caractères;
         - Son enseignant est un objet.
       */
+     var classe = {
+       numero : 2,
+       specialite : "specialite",
+       enseigant : enseignant
+     }
       
       /*
         3. Créez 3 objets JSON. Ces objets représentent des élèves.
@@ -31,20 +43,51 @@
         - Son nom est une chaîne de caractères;
         - Son prénom est une chaîne de caractères.
       */
+     var enfant1 = {
+       age : 10,
+       presence : true,
+       nom :"nom",
+       prenom : "prenom"
+     }
+     var enfant2 = {
+       age : 13,
+       presence : true,
+       nom :"nom2",
+       prenom : "prenom2"
+     }
+     var enfant3 = {
+       age : 12,
+       presence : true,
+       nom :"nom3",
+       prenom : "prenom4"
+     }
 
       /*
         4. Ajoutez une nouvelle propriété dans l'objet représentant la classe. Cette propriété sera les élèves. Elle devra contenir les 3 références vers les 3 objets représentant chacun des 3 élèves.
         - Les élèves est un tableau.
       */
-      
+      classe.tabEleves = [enfant1,enfant2,enfant3];
       /*
         5. Changez la propriété de présence du 2ème élève de la liste d'élèves de la classe.
       */
+     classe.tabEleves[1].presence = false;
       
       /*
         6. Réalisez l'algorithme suivant :
         POUR CHAQUE élève dans la classe, AFFICHEZ dans un boite de dialogue le message (où X et Y sont les prénoms et noms de l'élève considéré): 'Je suis X Y et je suis présent'. 
       */
+     classe.displayEleves = function () {
+       this.tabEleves.map(function(eleve){
+         var stringAlert = "Je suis "+eleve.prenom+" "+eleve.nom;
+         if (eleve.presence) {
+           stringAlert += " Je suis present";
+          }else{
+            stringAlert += " Je suis absent";
+         }
+         alert(stringAlert);
+       });
+     }
+     classe.displayEleves();
       
       /*
         7. Assurez vous que les booléens de présence des élèves ne sont pas tous les mêmes. Réalisez l'algorithme suivant : 
