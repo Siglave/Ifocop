@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Les Objets - Exercice 8</title>
+    <script>
+      //Énoncé :
+      /*
+        1. Créez 1 objet JSON qui représente une maison. Cet objet contient une propriété adresse qui contient l'adresse de la maison et une propriété chambre qui ne contient rien (null)
+      */
+      
+      /*
+        2. Créez 1 objet JSON qui représente une chambre. Cet objet contient une propriété lit qui contient la chaîne de caractère matelas et une méthode quelEstMonAdresse qui ne contient pas d'instructions pour l'instant.
+      */
+      
+      /*
+        3. Mettez la référence à l'objet JSON qui représente la chambre dans la propriété chambre de l'objet JSON qui représente la maison.
+      */
+      
+      /*
+        4. Affichez dans une boite de dialogue le contenu de la propriété lit de l'objet représentant la chambre en partant de l'objet représentant la maison.
+      */
+      
+      /*
+        5. Je souhaite exécuter la méthode quelEstMonAdresse de l'objet représentant la chambre pour afficher l'adresse de la maison contenu dans la propriété adresse de l'objet représentant la maison. En d'autres termes, comment puis-je faire pour accéder à la propriété de la maison (objet parent) à partir d'un méthode de la chambre (objet enfant) ?
+        - Vous savez que vos objets sont uniques en mémoire. Vous ne manipulez que des références.
+        - Vous savez que vos objets peuvent contenir n'importe quelle valeur dans leurs propriétés.
+        - Vous savez que le mot clé this fait référence à l'objet dans lequel le mot clé est employé.
+        => Indice : vous devez créer une nouvelle propriété dans l'objet chambre dans laquelle vous mettrez une référence à l'objet maison.
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <h2><span>1</span>. Titre de la première section</h2>
+      <p><span>1.1</span>. Premier paragraphe de la première section.</p>
+      <p><span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>2</span>. Titre de la deuxième section</h2>
+      <p><span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+      <p><span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>3</span>. Titre de la troisième section</h2>
+      <p><span>3.1</span>. Premier paragraphe de la troisième section.</p>
+      <p><span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+    </div>
+  </body>
+</html>

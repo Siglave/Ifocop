@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Les Objets - Exercice 1</title>
+    <script>
+      //Énoncé :
+      /*
+        1. La déclaration JSON qui suit ne doit à aucun moment être modifiée.
+      */
+      var schmilblick = {
+        taille:'grand',
+        dimensions:{
+          largeur:2.5,
+          longueur:3,
+          hauteur:0.02
+        },
+        couleurs:['rouge','jaune','or','bleu'],
+        peutVoler:false,
+        matiere:'laine',
+        queSuisJe:function(){
+          alert('A votre avis que suis-je ?');
+        }
+      };
+
+      //VOUS NE DEVEZ PAS MODIFIER CETTE DECLARATION EN REPONDANT AUX QUESTIONS QUI SUIVENT.
+      
+      /*
+        2. Quelle est la taille du schmilblick ? Affichez dans une boite de dialogue la taille du schmilblick
+      */
+      alert(schmilblick.taille)
+      
+      /*
+        3. Quelle est la matière dont est composé le schmilblick ? Affichez dans une boite de dialogue la matière du schmilblik
+      */
+      alert(schmilblick.matiere)
+
+      /*
+        4. Quelle est la superficie du schmilblick ? Affichez dans une boite de dialogue la superficie du schmilblik (largeur x longeur)
+      */
+      alert(schmilblick.dimensions.largeur * schmilblick.dimensions.longueur);
+
+      /*
+        5. De quel couleur est le schmilblick ? Affichez successivement dans des boites de dialogue les couleurs du schmilblick.
+      */ 
+     schmilblick.couleurs.map(function(color){
+       alert(color);
+     })
+ 
+      /*
+        6. Le schmilblick peut voler ! Changez la valeur de la propriété peutVoler du schmilblick (sans modifier la déclaration).
+      */ 
+      schmilblick.peutVoler = true;    
+      /*
+        7. Le schmilblick est magique ! Ajoutez une propriété estMagique au schmilblick avec comme valeur true (sans modifier la déclaration).
+      */
+      schmilblick.estMagique = true;
+      /*
+        8. Exécutez la méthode queSuisJe du schmilblick.
+      */
+     schmilblick.queSuisJe();
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <h2><span>1</span>. Titre de la première section</h2>
+      <p><span>1.1</span>. Premier paragraphe de la première section.</p>
+      <p><span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>2</span>. Titre de la deuxième section</h2>
+      <p><span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+      <p><span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>3</span>. Titre de la troisième section</h2>
+      <p><span>3.1</span>. Premier paragraphe de la troisième section.</p>
+      <p><span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+    </div>
+  </body>
+</html>

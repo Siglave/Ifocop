@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Les Objets - Exercice 3</title>
+    <script>
+      //Énoncé :
+      /*
+      1. Dans les exercices de JavaScript "procédural" vous avez créé plusieurs fonctions. Vous devez regrouper toutes ces fonctions (au moins 5 d’entre-elles) dans un objet en JSON. Déclarez un objet dans lequel chaque propriété contiendra une fonction parmi celles créées précédemment.
+      */
+      var objExo = {
+        add: function(a, b){
+          alert(a+b);
+        },
+        multiplier : function(a, b){
+          alert(a*b);
+        },
+        showMessage : function(message){
+          alert(message);
+        },
+        sayHello : function(){
+          alert("hello world");
+        },
+        sub :function(a, b){
+          alert(a-b);
+        }
+      }
+      
+      /*
+      2. Exécutez chacune des méthodes créés dans cet objet pour les tester.
+      */
+     objExo.add(2,4);
+     objExo.multiplier(3,3);
+     objExo.showMessage("salut");
+     objExo.sayHello();
+     objExo.sub(10,4);
+
+      /*
+      3. Déclarez 1 objet JSON qui contient :
+      -> 1 propriété qui contient une méthode (fonction dans une propriété) :
+        - qui prend en argument 1 nombre.
+        - qui affiche ce nombre dans une une boîte de dialogue.
+        - qui RETOURNE ce nombre multiplié par 100.
+      -> Exécutez cette méthode et AFFICHEZ la VALEUR DE RETOUR dans une boîte de dialogue.
+
+      -> 1 propriété qui contient une méthode :
+        - qui prend en argument 1 texte.
+        - qui affiche ce texte dans une boîte de dialogue.
+        - qui RETOURNE ce texte concaténé avec la chaîne de caractère 'hello !'.
+      -> Exécutez cette méthode et AFFICHEZ la VALEUR DE RETOUR dans une boîte de dialogue.
+
+      -> 1 propriété qui contient une méthode :
+        - qui prend en argument un tableau de 3 index.
+        - qui affiche le contenu à l'index 1
+        - qui remplace ce que contient l'index 1 par ce qui est contenu dans l'index 2.
+        - qui RETOURNE ce tableau de 3 index modifié.
+      -> Exécutez cette méthode et AFFICHEZ la valeur du 2ème index de la VALEUR DE RETOUR dans une boîte de dialogue.
+
+      -> 1 propriété qui contient une méthode :
+        - qui prend en argument un objet de 5 propriétés qui contiennent chacune un nombre.
+        - qui met dans la 4ème propriété la somme de chacun des nombre de chacune des propriétés.
+        - qui RETOURNE 1 objet de 5 propriétés.
+      -> Exécutez cette méthode et AFFICHEZ la valeur de la 4ème propriété de la VALEUR DE RETOUR dans une boîte de dialogue.
+      */
+
+      var objExoTwo = {
+        mult100 : function(a){
+          alert(a*100);
+        },
+        concatHello : function(text){
+          alert(text+" hello !");
+        },
+        tabMethod : function(){
+          
+        }
+
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <h2><span>1</span>. Titre de la première section</h2>
+      <p><span>1.1</span>. Premier paragraphe de la première section.</p>
+      <p><span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>2</span>. Titre de la deuxième section</h2>
+      <p><span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+      <p><span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>3</span>. Titre de la troisième section</h2>
+      <p><span>3.1</span>. Premier paragraphe de la troisième section.</p>
+      <p><span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+    </div>
+  </body>
+</html>

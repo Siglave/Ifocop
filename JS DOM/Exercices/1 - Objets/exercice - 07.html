@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Les Objets - Exercice 7</title>
+    <script>
+      //Énoncé :
+      /*
+        1. La déclaration JSON qui suit ne doit à aucun moment être modifiée.
+      */
+      var monObjet = {
+        e:function(){
+          alert(this.t);
+        },
+        r:true,
+        t:'Ceci est un texte dans un objet'
+      };
+
+      var monAutreObjet = {
+        e:[function(){
+          alert('Vous êtes ici !');
+        },true],
+        r:false,
+        t:function(){
+          this.y = {
+            e:function(){
+              alert('Ou suis je ? Qui suis je ?');
+            }
+          };
+          alert('Desormais ma propriété y contient un objet');
+        }
+      };
+
+      //VOUS NE DEVEZ PAS MODIFIER CETTE DECLARATION EN REPONDANT AUX QUESTIONS QUI SUIVENT.  
+
+      /*
+        1. Affichez dans une boite de dialogue le contenu de la propriété r de l'objet référencé dans la variable monObjet.
+      */
+
+      /*
+        2. Affichez dans une boite de dialogue le contenu de la propriété r de l'objet référencé dans la variable monAutreObjet.
+      */
+
+      /*
+        3. Déclenchez la méthode située en première position dans le tableau dans la propriété e de l'objet référencé dans la variable monAutreObjet (si vous réussissez le texte 'Vous êtes ici !' devrez s'afficher).
+      */
+
+      /*
+        4. Mettez l'objet référencé dans la variable monAutreObjet dans une propriété y de l'objet référencé dans la variable monObjet (Vous allez donc mettre un objet dans une - nouvelle - propriété d'un autre objet)
+      */
+
+      /*
+        5. Déclenchez la méthode situé dans la propriété t dans l'objet référencé dans la propriété y contenue dans l'objet référencé dans la variable monObjet. Si vous réussissez, le message 'Désormais ma propriété y contient un objet' devrait s'afficher.
+      */
+
+      /*
+        6. Déclenchez la méthode situé dans la propriété e de l'objet nouvellement référencé dans la propriété y lors de l'exécution de la précédente méthode. Si vous réussissez, vous devriez voir s'afficher successivement les textes  : 'Ou suis je ? Qui suis je ?'.
+      */
+      
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <h2><span>1</span>. Titre de la première section</h2>
+      <p><span>1.1</span>. Premier paragraphe de la première section.</p>
+      <p><span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>2</span>. Titre de la deuxième section</h2>
+      <p><span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+      <p><span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>3</span>. Titre de la troisième section</h2>
+      <p><span>3.1</span>. Premier paragraphe de la troisième section.</p>
+      <p><span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+    </div>
+  </body>
+</html>

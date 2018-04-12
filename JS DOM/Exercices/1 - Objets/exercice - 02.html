@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Les Objets - Exercice 2</title>
+    <script>
+      //Énoncé :
+      /*
+        1. La déclaration JSON qui suit ne doit à aucun moment être modifiée.
+      */
+      var blender = {
+        mixerDesNombres: function(a, b, c){
+          if(typeof a == 'number' && typeof b == 'number' && typeof c == 'number'){
+            var d = (a * b) + c;
+            alert(d);
+            return d;
+          }else{
+            alert('Les types de données fournis sont incorrects !');
+          };
+        },
+        mixerDesChaines: function(i, j){
+          if(typeof i == 'string' && typeof j == 'string'){
+            var k = 'Bonjour ' + i + j + '!';
+            alert(k);
+            return k;
+          }else{
+            alert('Les types de données fournis sont incorrects !');
+          };
+        },
+        mixerDesBooleens: function(x, y, z){
+          if(typeof x == 'boolean' && typeof y == 'boolean' && typeof z == 'boolean'){
+            var message = '';
+            if(x && y && z){
+              message = 'Tout est vrai !';
+            }else{
+              message = 'Au moins un argument n\'est pas vrai !';
+            };
+            alert(message);
+            return message;
+          }else{
+            alert('Les types de données fournis sont incorrects !');
+          };
+        },
+        mixerDesTableaux: function(g, z){
+          if(typeof g == 'object' && typeof z == 'object'){
+            var t = g[2] + z[1];
+            var u = g[1] + z[2];
+            var v = t * u;
+            alert('Si ceci : ' + v + ' est un nombre vous avez réussi !');
+            return v;
+          }else{
+            alert('Les types de données fournis sont incorrects !');
+          };
+        },
+        mixerDesObjets: function(o, t){
+          if(typeof o == 'object' && typeof t == 'object'){
+             var p = (o.a * o.b) / (t.x * t.y);
+             alert('Si ceci : ' + p + ' est un nombre vous avez réussi !');
+             return p;
+          }else{
+            alert('Les types de données fournis sont incorrects !');
+          };
+        },
+        mixerDesFonctions: function(z, w){
+          if(typeof z == 'function' && typeof w == 'function'){
+            z();
+            w();
+            alert('Bravo ! Les types de données fournis sont corrects .');
+          }else{
+            alert('Les types de données fournis sont incorrects !');
+          };
+        },
+        mixerDeTout: function(k, l, m, n){
+          if(typeof k == 'string' && typeof l == 'object' && typeof m == 'function' && typeof n == 'number'){
+            alert('Voici un message : ' + k);
+            alert('Voici un message trouvé dans un objet : ' + l.message);
+            m();
+            alert('Mais ceci est un nombre : ' + n);
+            return n;
+          }else{
+            alert('Les types de données fournis sont incorrects !');
+          };
+        }
+      };
+
+      //VOUS NE DEVEZ PAS MODIFIER CETTE DECLARATION EN REPONDANT AUX QUESTIONS QUI SUIVENT.
+      
+      /*
+        2. L'objet fourni ci-dessus contient plusieurs méthodes. Ces méthodes prennent en argument des valeurs et retournent d'autres valeurs. Exécutez chacune de ces méthodes en fournissant les bons types de données à l'exécution. 
+      */
+     blender.mixerDesNombres(2,4,2);
+     blender.mixerDesChaines("Une Chaine"," et la suite");
+     blender.mixerDesBooleens(true,true,true);
+     blender.mixerDesTableaux([1,2,3],[4,2,8]);
+     blender.mixerDesObjets({a:3,b:5},{x:9,y:5});
+     blender.mixerDesFonctions(
+       function(){alert("funct1")},
+       function(){alert("funct2")}
+      );
+     blender.mixerDeTout(
+       "une chaine",
+       {message:"c'est l'objet"},
+       function(){alert("une fonction")},
+       12
+      );
+
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <h2><span>1</span>. Titre de la première section</h2>
+      <p><span>1.1</span>. Premier paragraphe de la première section.</p>
+      <p><span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>2</span>. Titre de la deuxième section</h2>
+      <p><span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+      <p><span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>3</span>. Titre de la troisième section</h2>
+      <p><span>3.1</span>. Premier paragraphe de la troisième section.</p>
+      <p><span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+    </div>
+  </body>
+</html>

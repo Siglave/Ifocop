@@ -1,3 +1,4 @@
+"use strict";
 class Coordinate {
 	constructor(x = 0, y = 0) {
 		this.x = x;
@@ -239,11 +240,11 @@ class CollisionDetector {
 }
 
 class Game {
-	constructor(canvasWidth,canvasHeight){
+	constructor(canvasWidth, canvasHeight) {
 		this.canvasWidth = canvasWidth;
 		this.canvasHeight = canvasHeight;
-		this.collisionDetector = new CollisionDetector(canvasWidth,canvasHeight);
-		this.player = new PlayerShip(300,250);
+		this.collisionDetector = new CollisionDetector(canvasWidth, canvasHeight);
+		this.player = new PlayerShip(300, 250);
 		this.arrayAsteroid = [];
 		for (let i = 0; i < 10; i++) {
 			this.arrayAsteroid.push(
@@ -253,9 +254,9 @@ class Game {
 					randomNumber(0, -canvasHeight)
 				)
 			);
-		}	
+		}
 	}
-	init(){
+	init() {
 		window.addEventListener(
 			"keydown",
 			function (event) {
@@ -288,7 +289,7 @@ class Game {
 			true
 		);
 	}
-	draw(ctx){
+	draw(ctx) {
 		ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 		this.collisionDetector.testCollision(this.player, this.arrayAsteroid);
 		this.arrayAsteroid.map(asteroid => {
@@ -310,7 +311,7 @@ class Game {
 			}
 		});
 		this.player.draw(ctx, this.canvasWidth, this.canvasHeight);
-		
+
 	}
 }
 
@@ -320,8 +321,8 @@ function randomNumber(min, max) {
 
 document.addEventListener("DOMContentLoaded", function () {
 	var canvas = document.getElementById("gameCanvas");
-	var ctx = canvas.getContext("2d");	
-	var game = new Game(canvas.width,canvas.height);
+	var ctx = canvas.getContext("2d");
+	var game = new Game(canvas.width, canvas.height);
 	game.init();
 	window.requestAnimationFrame(loop);
 	function loop() {
