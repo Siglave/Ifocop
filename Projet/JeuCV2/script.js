@@ -50,10 +50,9 @@ class PlayerShip extends Coordinate {
 		this.isCollision = val;
 	}
 	effectCollision(collision) {
-
 		switch (collision.type) {
 			case "canvas":
-				//Handle in move()
+				//Handle in function move()
 				break;
 			case "asteroid":
 				console.log("percute un asteroide");

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript & DOM : Le prototypage - Exercice 2</title>
+	<script>
+		//Énoncé :
+		/*
+		  Dans cet exercice, vous ne devez utiliser que des fonctions constructeur. 
+		*/
+
+		/*
+		  1. Écrivez une fonction constructeur qui permet de construire des objets représentant des mammouths. Les mammouths avaient plusieurs caractéristiques :
+		  - Leur âge qui est un nombre;
+		  - Leur poids qui est un nombre;
+		  - Leur espèce qui est une chaîne de caractères;
+		  - Le fait qu'ils aient une fourrure, qui est un booléen;
+		  - Leur genre (mâle ou femelle) qui est une chaîne de caractères;
+		  - L'action de barrir qui est une méthode.
+		*/
+		var Mammouth = function (age, poid, espece, gender) {
+			this.age = age;
+			this.poid = poid;
+			this.espece = espece;
+			this.hasFur = true;
+			this.gender = gender;
+			this.barrir = function () {
+				console.log("Bruit du Mammouth");
+			}
+		}
+
+      /*
+        2. Les éléphants contemporains héritent probablement des caractéristiques d'un mammouth qui est leur prototype. Écrivez une fonction constructeur qui permet de construire des objets représentant des éléphants. Les éléphants ont deux caractéristiques qui différent des mammouths :
+        - Leur poids qui est un nombre;
+        - Leur espèce qui est une chaîne de caractère;
+        - Le fait qu'ils n'aient pas de fourrure, qui est un booléen;
+        - L'action de manger des cacahuètes qui est une méthode.
+      */
+	 var Elephant = function(){
+		 this.hasFur = false;
+		 this.mangerCacahuetes = function(){
+			 console.log("mange des cacahuete"); 
+		 }
+	 }
+	 Elephant.prototype  = new Mammouth(10,2000,"espece","male");
+
+      /*
+        3. Créez 2 éléphants. Vous devez pouvoir exécuter la méthode qui leur permet de barrir et qui provient de leur prototype et, exécuter la méthode qui leur permet de manger des cacahuètes et qui leur est propre.
+      */
+	var elephant1 = new Elephant();
+	var elephant2 = new Elephant();
+	elephant1.mangerCacahuetes();
+	elephant1.barrir();
+	console.log(elephant1);
+	
+	</script>
+</head>
+
+<body>
+	<h1>Titre principal</h1>
+	<ul>
+		<li>Premier point</li>
+		<li>Deuxième point</li>
+		<li>Troisième point</li>
+	</ul>
+	<div>
+		<h2>
+			<span>1</span>. Titre de la première section</h2>
+		<p>
+			<span>1.1</span>. Premier paragraphe de la première section.</p>
+		<p>
+			<span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+	</div>
+	<div>
+		<h2>
+			<span>2</span>. Titre de la deuxième section</h2>
+		<p>
+			<span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+		<p>
+			<span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+	</div>
+	<div>
+		<h2>
+			<span>3</span>. Titre de la troisième section</h2>
+		<p>
+			<span>3.1</span>. Premier paragraphe de la troisième section.</p>
+		<p>
+			<span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+	</div>
+</body>
+
+</html>

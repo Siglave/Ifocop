@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript & DOM : Le prototypage - Exercice 1</title>
+	<script>
+		//Énoncé :
+		/*
+		  1. Créez un objet JSON qui représente un avion Concorde. Cet objet est doté de plusieurs propriétés :
+		  - Son modèle qui est une chaîne de caractères au choix.
+		  - Sa capacité qui est un nombre au choix.
+		  - Son prix qui est un nombre au choix.
+		  - Ses passagers qui est un tableau vide initialement : []
+		  - Son réservoir qui est un nombre : 100.
+		  - Sa couleur qui est un tableau : ['blanc']
+		*/
+		var avionConcorde = {
+			model: "X-WING",
+			capacity: 2,
+			price: 100,
+			passenger: [],
+			reservoir: 100,
+			color: ["white"]
+		}
+
+      /*
+        2. Cet objet est l'avion de base tel qu'il est livré. Chaque compagnie aérienne qui achète un avion le personnalise. Utilisez l'objet fondamental Object pour créer un nouvel avion Airbus à partir du prototype. Ce nouvel avion est vendu à Air France. Vous ajouterez une propriété compagnie qui contiendra le nom de la compagnie sous la forme d'une chaîne de caractères.
+      */
+	 var avionAirFrance = Object.create(avionConcorde);
+
+	 avionConcorde.compaginie = "Air france";
+	 console.log(avionAirFrance);
+	 
+
+
+      /*
+		3. Effectuez la même opération mais pour un avion destiné à British Airways.
+      */
+	 var avionBritishAir = Object.create(avionConcorde);
+	 avionBritishAir.compaginie = "British Airways"
+
+	</script>
+</head>
+
+<body>
+	<h1>Titre principal</h1>
+	<ul>
+		<li>Premier point</li>
+		<li>Deuxième point</li>
+		<li>Troisième point</li>
+	</ul>
+	<div>
+		<h2>
+			<span>1</span>. Titre de la première section</h2>
+		<p>
+			<span>1.1</span>. Premier paragraphe de la première section.</p>
+		<p>
+			<span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+	</div>
+	<div>
+		<h2>
+			<span>2</span>. Titre de la deuxième section</h2>
+		<p>
+			<span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+		<p>
+			<span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+	</div>
+	<div>
+		<h2>
+			<span>3</span>. Titre de la troisième section</h2>
+		<p>
+			<span>3.1</span>. Premier paragraphe de la troisième section.</p>
+		<p>
+			<span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+	</div>
+</body>
+
+</html>
