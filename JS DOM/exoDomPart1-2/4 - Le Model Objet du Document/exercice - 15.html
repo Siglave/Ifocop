@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 15</title>
+    <script>
+      //Énoncé :
+      /*
+        En JavaScript, on a accès à des objets qui contiennent les informations relatives au navigateurs Internet : le DOM. L'objet qui permet d'accéder au DOM est l'objet window. Cet objet est l'objet de plus haut niveau en JavaScript. L'objet window contient des sous objets que nous allons exploiter.
+        
+        On peut se passer des attributs d'évènements en HTML pour gérer les évènements exclusivement à partir du modèle objet du document. On a la possibilité d'affecter des fonctions aux propriétés qui correspondent aux attributs d'événements dans les objets du DOM. Ces fonctions seront exécutées par le navigateur Internet en réaction aux événements.
+        
+        Plusieurs éléments HTML de ce document Web portent des attributs d'évènements. Ces attributs d'évènement vont être lus et chargés en mémoire par le navigateur dans le DOM. Ainsi, lorsque les évènements surviendront, le navigateur Internet exécutera les instructions associées.
+      */
+      
+      /*
+        1. Vous devez gérer tous ces évènement à partir du DOM. L'évènement onload par exemple est une méthode (fonction dans une propriété) de l'objet window. En revanche, les autres évènements sont des méthodes des objets correspondant aux éléments HTML. Supprimez les attributs d'évènements du document Web et faites en sorte de définir les instructions qui doivent être exécutées en réaction à ces évènements directement en JavaScript en renseignant correctement le DOM.
+      */
+    </script>
+  </head>
+  <body onload="window.alert('Ce message est affiché au chargement du document !')">
+    <h1>Titre principal</h1>
+    <ul>
+      <li onmouseover="window.alert('Ce message est affiché lorsqu\'on survole ce point.');">Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <div>
+        <h2><span>1</span>. Titre de la première section</h2>
+        <p><span>1.1</span>. Premier paragraphe de la première section et un <a href="#">lien</a>.</p>
+        <p><span onmouseout="window.alert('Ce message est affiché lorsqu\'on ne survole plus cet élément.')">1.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>2</span>. Titre de la deuxième section</h2>
+        <p><span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+        <p><span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+      </div>
+      <div>
+        <h2><span>3</span>. Titre de la troisième section</h2>
+        <p><span>3.1</span>. Premier paragraphe de la troisième section.</p>
+        <p><span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+      </div>
+      <form method="http://www.google.com" action="GET">
+        <input name="q" type="text" value="" onfocus="window.alert('Vous avez séléctionné le champ de saisie!');" />
+      </form>
+    </div>
+  </body>
+</html>

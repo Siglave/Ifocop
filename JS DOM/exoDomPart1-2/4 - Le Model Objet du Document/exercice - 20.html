@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 20</title>
+    <script>
+      //Énoncé :
+
+      /*L'Ascenseur*/
+
+      /*
+        L'objectif de cet exercice est de créer une div qui bouge en fonction du scroll de la souris. Vous devez impérativement réaliser l'exercice sur FireFox pour commencer.
+      */
+ 
+      /*
+        1. Créez une <div> qui aura pour identifiant ascenseur. Doter cette <div> de styles CSS de telle sorte qu'elle soit visible par l'utilisateur (carré rouge par exemple). Cette <div> doit être positionnée en absolute.
+      */
+ 
+      /*
+        Lorsqu'on confie une fonction au gestionnaire d'évènement du navigateur Internet, celui-ci l'exécute toujours en lui transmettant en paramètre un objet contenant les caractéristiques de l'évènement survenu. C'est pourquoi on peut écrire :
+      */
+
+      window.onload = function(unObjetFourni){
+        unObjetFourni; //ceci est la variable contenant l'objet fourni par le gestionnaire d'évènement à la fonction déclenchée par le navigateur lorsqu'il à fini de charger le document en mémoire.
+      };
+      /*ou bien encore (et de préférence)*/
+      window.addEventListener('load',function(unObjetFourni){
+        unObjetFourni;
+      }, false);
+
+      /*
+        2. Au Chargement du document, attachez une fonction à l'évènement DOMMouseScroll en utilisant la méthode .addEventListener(). Cette fonction doit déclencher l'affichage d'une boite de dialogue avec le texte : 'This is a magic scroll'.
+      */
+
+      /*
+        3. Modifiez cette fonctans uion pour afficher dne boite de dialogue la propriété .detail contenue dans l'objet d'évènement fourni à chaque fois qu'on scroll. Cette propriété contient le décalage de la molette.
+      */
+
+      /*
+        4. Modifiez cette fonction pour la <div> se décale en fonction de la valeur de la propriété .detail 
+      */
+
+      //Compatibilité Inter Navigateur
+      /*
+        - L'évènement concernant le scroll de souris s'appelle 'DOMMouseScroll' sur FF.
+        - L'évènement concernant le scroll de souris s'appelle 'mousewheel' sur IE9, Chrome, Safari, Opera.
+        - La méthode .addEventListener() n'existe pas sur IE 6/7/8 et l'évènement concernant le scroll de souris s'appelle 'onmousewheel' sur ces navigateurs.
+
+        - L'information concernant le décalage de la molette qu'on trouve dans l'objet fourni par le gestionnaire d'évènement sur IE s'appelle .wheelDelta (la propriété .detail n'existe pas)
+
+        5. Tenez compte des informations précédentes pour modifier votre script de telle sorte qu'il fonctionne sur IE 8,9,10; FF, Chrome, ...
+
+        Astuce : vous pouvez tester l'existence d'une propriété effectuant une comparaison avec undefined.
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <div>
+        <h2><span>1</span>. Titre de la première section</h2>
+        <p><span>1.1</span>. Premier paragraphe de la première section et un <a href="#">lien</a>.</p>
+        <p><span>1.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>2</span>. Titre de la deuxième section</h2>
+        <p><span>2.1</span>. Premier paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+        <p><span>2.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>3</span>. Titre de la troisième section</h2>
+        <p><span>3.1</span>. Premier paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+        <p><span>3.2</span>. Deuxième paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 4</title>
+    <script>
+      //Énoncé :
+      /*
+        En JavaScript, on a accès à des objets qui contiennent les informations relatives au navigateurs Internet : le DOM. L'objet qui permet d'accéder au DOM est l'objet window. Cet objet est l'objet de plus haut niveau en JavaScript. L'objet window contient des sous objets que nous allons exploiter.
+        
+        L'objet window contient de propriété qui contiennent des informations relatives au document Web chargé en mémoire. Si on modifie ces informations en mémoire, l'affichage change en conséquence. Nous allons nous intéresser à la propriété document de l'objet window. Cette propriété contient un objet qui sert de point d'entrée au modèle objet du document affiché. Ce sous objet est documenté ici dans le MDN : https://developer.mozilla.org/fr/docs/Web/API/Document
+      */
+      
+      /*
+      1. La propriété body du sous objet document de l'objet window contient l'objet correspondant à la balise body du document Web affiché. Affichez le contenu de la propriété body à l'aide de la méthode .log() du sous objet console.
+      */
+      
+      /*
+      2. Vous avez pu constater que cette propriété contient null. En effet, lorsque votre script est exécuté, le navigateur n'A PAS ENCORE LU ET CHARGE la suite du document. A partir de maintenant vous avez 2 possibilités :
+        - Soit vous programmez dans une balise script que vous positionnerez juste avant la balise body fermante
+        - Soit vous créez une fonction dans laquelle vous programmerez et vous exécuterez cette fonction AU CHARGEMENT du document à l'aide de l'attribut d'évènement onload sur la balise body.
+      */
+      
+      /*
+      3. Affichez à nouveau la propriété body à l'aide de la méthode .log() du sous objet console en respectant les consignes proposées précédemment.
+      */
+      
+      /*
+      4. La propriété body contient donc un objet de type HTMLBodyElement. Affectez la chaîne de caractère 'lime' à la propriété bgColor de l'objet référencé dans la propriété body.
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <h2><span>1</span>. Titre de la première section</h2>
+      <p><span>1.1</span>. Premier paragraphe de la première section.</p>
+      <p><span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>2</span>. Titre de la deuxième section</h2>
+      <p><span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+      <p><span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>3</span>. Titre de la troisième section</h2>
+      <p><span>3.1</span>. Premier paragraphe de la troisième section.</p>
+      <p><span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 19</title>
+    <script>
+      //Énoncé :
+      /*
+        En JavaScript, on a accès à des objets qui contiennent les informations relatives au navigateurs Internet : le DOM. L'objet qui permet d'accéder au DOM est l'objet window. Cet objet est l'objet de plus haut niveau en JavaScript. L'objet window contient des sous objets que nous allons exploiter.
+        
+        La méthode .addEventListener() est disponible sur tous les objets du DOM. Elle prend en argument 2 à 3 informations (on s'intéresse aux deux premières) :
+          - le type d'évènement ('click','load','mouseover','mouseout',...)
+          - une fonction à déclencher en réaction à cette évènement
+        Elle présente l'avantage de pouvoir associer le déclenchement de plusieurs fonctions à un évènement survenu sur le navigateur Internet ou sur un élément HTML.
+        ex : 
+          window.addEventListener('load',function(){alert('chargé');});
+        Cette méthode est document sur le MDN ici : https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener
+      */
+      
+      /*
+      1. Dans les exercices précédents vous avez associé des déclenchements de fonctions à des événements soit dans le code HTML soit dans le script sous la forme de méthodes copiées directement dans la propriété correspondant à l'attribut d'évènement. Modifier tous les programmes que vous avez réalisé jusqu'à présent pour utiliser la méthode .addEventListener(). A partir de maintenant vous n'avez PLUS LE DROIT d'utiliser d'attributs d'événements dans votre code HTML ou de copier directement des fonctions dans les propriétés du DOM correspondant aux différents événements.
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <div>
+        <h2><span>1</span>. Titre de la première section</h2>
+        <p><span>1.1</span>. Premier paragraphe de la première section et un <a href="#">lien</a>.</p>
+        <p><span>1.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>2</span>. Titre de la deuxième section</h2>
+        <p><span>2.1</span>. Premier paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+        <p><span>2.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>3</span>. Titre de la troisième section</h2>
+        <p><span>3.1</span>. Premier paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+        <p><span>3.2</span>. Deuxième paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+      </div>
+    </div>
+  </body>
+</html>

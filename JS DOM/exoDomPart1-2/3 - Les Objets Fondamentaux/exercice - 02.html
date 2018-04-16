@@ -17,14 +17,40 @@
       /*
       1. Obligez l'utilisateur à saisir une chaîne de caractères dans une boite de dialogue. Un fois la saisie validée. Affichez dans une boite de dialogue le nombre de caractères de la chaîne de caractères saisie (propriété .length). 
       */
-      
+      var showPrompt = true;
+      while (showPrompt) {
+        var res = prompt("Ecire string");
+        if(isNaN(res)){
+          alert(res.length);
+          showPrompt = false;
+        }
+      }
       /*
       2. Utilisez la méthode .substr() pour extraire et afficher dans une boite de dialogue tous les caractères de la chaîne saisie à l'exception du premier et du dernier.
       */
+      var showPrompt = true;
+      while (showPrompt) {
+        var res = prompt("Ecire string");
+        if(isNaN(res)){
+          alert(res.substr(1,4));
+          showPrompt = false;
+        }
+      }
       
       /*
       3. Utilisez la méthode .split() pour récupérer chacun des mot de la saisie utilisateur dans un tableau. Affichez séparément chaque mot dans une boîte de dialogue.
       */
+      var showPrompt = true;
+      while (showPrompt) {
+        var res = prompt("Ecire string");
+        if(isNaN(res)){
+          var tabString = res.split();
+          tabString.map(function(mot){
+            console.log(mot);
+          });
+          showPrompt = false;
+        }
+      }
     </script>
   </head>
   <body>

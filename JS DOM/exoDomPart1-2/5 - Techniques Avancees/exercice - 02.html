@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Techniques Avancées - Exercice 02</title>
+    <script>
+      /*Le Préchargement*/
+      /*
+        Le préchargement consiste à précharger un script, une image, une video, ou un son. Pour faciliter la compréhension, ces type de fichier seront appelés "ressources" dans les explications qui suivent. Pour précharger une ressource on procède comme suit :
+        1. On créé en mémoire l'objet de type élément HTML correspondant au type de ressource à précharger en utilisant la méthode .createElement() de document.
+        2. On affecte comme valeur de la propriété .src le lien vers la ressource. Le navigateur Internet envoi immédiatement une requête HTTP à l'url affectée pour demander le téléchargement de la ressource.
+        3. On affecte un gestionnaire d'évènement à l'évènement load de la balise. Au Chargement de la ressource, cette fonction sera donc déclenchée par le navigateur Internet.
+        4. Lorsque la ressource est chargée, on déclenche un programme qui va positionner la ressource dans le DOM du document Web affiché. On peut imaginer que initialement l'élément HTML dans lequel la ressource sera positionnée contient une image en .GIF animée qui affiche une animation d'attente qui sera supprimée au remplacement.
+      */
+
+      //Énoncé :
+      /*
+        1. Implémentez le préchargement d'un image de très grande taille (+ de 10 Mo). Pensez à désactiver le cache ou le vider entre chaque essai pour que l'exercice soit pertinent
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1> 
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <div>
+        <h2><span>1</span>. Titre de la première section</h2>
+        <p><span>1.1</span>. Premier paragraphe de la première section et un <a href="#">lien</a>.</p>
+        <p><span>1.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>2</span>. Titre de la deuxième section</h2>
+        <p><span>2.1</span>. Premier paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+        <p><span>2.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>3</span>. Titre de la troisième section</h2>
+        <p><span>3.1</span>. Premier paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+        <p><span>3.2</span>. Deuxième paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+      </div>
+    </div>
+  </body>
+</html>

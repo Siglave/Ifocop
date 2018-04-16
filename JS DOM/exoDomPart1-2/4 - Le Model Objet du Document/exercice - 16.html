@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 16</title>
+    <script>
+      //Énoncé :
+      /*
+        En JavaScript, on a accès à des objets qui contiennent les informations relatives au navigateurs Internet : le DOM. L'objet qui permet d'accéder au DOM est l'objet window. Cet objet est l'objet de plus haut niveau en JavaScript. L'objet window contient des sous objets que nous allons exploiter.
+        
+        Lorsque le navigateur Internet exécute la méthode correspondant à un évènement, il lui transmet en paramètre un objet d'événement, cet objet d'événement contient des informations relatives à l'évènement qui est survenu. Les objets d'évènements sont documentés ici dans le MDN : https://developer.mozilla.org/fr/docs/Web/API/Event
+      */
+      
+      /*
+        1. Que fait le code ci-dessous ? Au chargement du document, lorsqu'on presse une touche, on récupère le code correspondant à la touche. Selon ce code, on affiche une boite de dialogue. Essayez ce code.
+      */
+
+      window.onload = function(){
+        
+        window.onkeydown = function(event){
+
+          var code = event.keyCode;
+
+          switch(code){
+            case 37:
+              //*instructions*
+              alert('gauche');
+              
+            break;
+            case 38:
+              //instructions
+              alert('haut');
+              
+            break;
+            case 39:
+              //instructions
+              alert('droite');
+              
+            break;
+            case 40:
+              //instructions
+              alert('bas');
+              
+            break;
+          };
+
+        };
+
+      };
+      
+      /*
+        Ce document comporte une balise img dans une div. La div sert de masque pour le sprite chargé à l'aide de la balise img. Un sprite est une image qui présent les décompositions d'un mouvement.
+      */
+
+      /*
+        1. Cherchez un sprite sur Google. Chargez le sprite dans le document Web ci-contre. Paramétrez les styles de la div masque pour que une seule décomposition de mouvement du sprite soit visible (utilisez la propriété de style overflow:hidden). La div doit être en position absolute. L'img dans la div doit être en position absolute.
+      */
+
+      /*
+        2. En utilisant comme base le code fourni, lorsque je presse une direction, déclenchez du code Javascript (dans la zone avec le sigle *instructions*) qui va déplacer de 2px dans cette direction la div masque.
+      */
+
+      /*
+        3. En utilisant comme base le code fourni, lorsque je presse la même direction, déclenchez du code Javascript (dans la zone avec le sigle *instructions*) qui va déplacer l'img dans le masque dans la direction opposée au déplacement précédent pour afficher la décomposition suivante du mouvement.
+      */
+
+      /*
+        4. Reproduire cela pour les directions restantes.
+      */
+
+      /*
+        5. Trouvez le code numérique qui correspond à la touche "entrée". Dans le cas ou l'utilisateur appuie sur la touche entrée, affichez un "mouvement spécial" de votre sprite (coup d'épée, explosion, etc... ou autre). L'événement contraire de onkeydown est onkeyup. Inspirez vous du code fourni pour faire en sorte que lorsque l'utilisateur relâche la touche entrée, le sprite revienne à son état initial.
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Play !</h1>
+    <div>
+      <div id="container" class="masque" >
+        <img id="contenu" class="sprite"/>
+      </div>
+    </div>
+    <noscript>
+      <p>Veuillez activer JavaScript</p>
+    </noscript>
+  </body>
+</html>

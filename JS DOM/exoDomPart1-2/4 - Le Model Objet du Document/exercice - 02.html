@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 2</title>
+    <script>
+      //Énoncé :
+      /*
+        En JavaScript, on a accès à des objets qui contiennent les informations relatives au navigateurs Internet : le DOM. L'objet qui permet d'accéder au DOM est l'objet window. Cet objet est l'objet de plus haut niveau en JavaScript. L'objet window contient des sous objets que nous allons exploiter.
+        
+        Un des sous objets de l'objet window est l'objet navigator. On peut donc écrire window.navigator pour accéder à cet objet. Il contient un ensemble d'informations concernant le navigateur Internet qui exécute le programme. Ce sous objet est documenté ici dans le MDN : https://developer.mozilla.org/fr/docs/Web/API/Window/navigator
+      */
+
+      /*
+      1. Affichez dans une boite de dialogue le contenu de la propriété appName de l'objet dans window.navigator. Puis affichez le contenu de la propriété userAgent dans une boite de dialogue.
+
+      Qu'est-ce qui s'affiche sur IE, Mozilla, Chrome ?
+      */
+      
+      /*
+      2. Utilisez ces propriétés pour réaliser l'algorithme suivant : SI je démarre mon script sur IE, j'affiche une boite de dialogue avec le texte 'So Lame !' à l'intérieur et j'ouvre une PoPUp vers le site de Mozilla Firefox, SINON SI je démarre mon script sur Chrome j'affiche une boite de dialogue avec le texte 'Spy On Me !' et j'ouvre une PoPUp vers la page wikipédia de http://fr.wikipedia.org/wiki/Chromium_%28navigateur_web%29 SINON j'affiche une boite de dialogue avec le texte 'Freed from Desire'.
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1>
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <h2><span>1</span>. Titre de la première section</h2>
+      <p><span>1.1</span>. Premier paragraphe de la première section.</p>
+      <p><span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>2</span>. Titre de la deuxième section</h2>
+      <p><span>2.1</span>. Premier paragraphe de la deuxième section.</p>
+      <p><span>2.2</span>. Deuxième paragraphe de la deuxième section.</p>
+    </div>
+    <div>
+      <h2><span>3</span>. Titre de la troisième section</h2>
+      <p><span>3.1</span>. Premier paragraphe de la troisième section.</p>
+      <p><span>3.2</span>. Deuxième paragraphe de la troisième section.</p>
+    </div>
+  </body>
+</html>

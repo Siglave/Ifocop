@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Techniques Avancées - Exercice 04</title>
+    <script>
+      /*Gestion Asynchrone des modules (i.e librairies) JavaScript*/
+      /*
+        Nous allons traiter ici d'un mécanisme connu sous le nom d'AMD : Asynchronous Module Définition. Sous ce nom barbare, ce cache l'idée suivante. Il s'agit de charger une librairie et de n'utiliser ses objets qu'en cas de besoin. Cela permet de ne pas surcharger les document Web de ressources inutiles.
+      */
+
+      //Enoncé :
+      /*
+        1. Créez un fichier .js qui contient la déclaration JSON d'un objet représentant un fantôme. Cette objet à 2 caractéristique :
+        - Son nom qui est une chaîne de caractère;
+        - Son râle qui est une action qui affiche une boîte de dialogue avec un cri horrible !
+        NE CHARGEZ PAS ce fichier dans le document Web. Le fantôme n'existe pas ici.
+      */
+
+      /*
+        2. AU CLICK sur un élément HTML du document Web, crééz dans le DOM une balise script avec pour fichier source le fichier .js que vous avez créé. Vous donner la valeur true à la propriété .async de l'objet représentant la balise script. AU Chargement de votre balise script, exécutez une fonction que vous avez créé. Cette fonction exécute la méthode qui affiche le râle du fantôme.
+        La documentation de la balise script sur le MDN est accessible ici : https://developer.mozilla.org/fr/docs/Web/HTML/Element/script
+      */
+
+      /*
+      * Vous avez chargé votre script de façon asynchrone à la demande.
+      */
+
+      /*
+        3. Un peu de factorisation. Créez une fonction qui prend en argument le nom d'un fichier (sans le .js) ET une fonction. 
+        - La fonction à créer charge le fichier et exécute la fonction fournie.
+        - La fonction fournie est appelée dans le jargon des développeur un callback (littéralement, une fonction qui sera appelée plus tard).
+        - La fonction à créer est généralement appelée "require" ou "define".
+      */
+
+      /*
+      * Vous venez de créer une fonction pour AMD ! Vous pouvez utilisez la librairie http://requirejs.org/ pour bénéficier d'un boîte à outil pour les AMD qui prend en compte un la compatibilité inter navigateurs, un ensemble d'optimisation et de bonnes pratiques pour la gestion des AMD.
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1> 
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <div>
+        <h2><span>1</span>. Titre de la première section</h2>
+        <p><span>1.1</span>. Premier paragraphe de la première section et un <a href="#">lien</a>.</p>
+        <p><span>1.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>2</span>. Titre de la deuxième section</h2>
+        <p><span>2.1</span>. Premier paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+        <p><span>2.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>3</span>. Titre de la troisième section</h2>
+        <p><span>3.1</span>. Premier paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+        <p><span>3.2</span>. Deuxième paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+      </div>
+    </div>
+  </body>
+</html>

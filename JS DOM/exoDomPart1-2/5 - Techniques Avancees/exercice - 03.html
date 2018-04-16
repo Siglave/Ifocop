@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript & DOM : Techniques Avancées - Exercice 03</title>
+    <script>
+      /*Gestion des fonctionnalités natives des navigateurs*/
+      /*
+      * >> Par "Fonctionnalités natives des navigateurs" on entend les fonctions : Précédent, Suivant et Ajouter au favoris.
+      *
+      * Lorsqu'un ou plusieurs gestionnaires d'évènement qui modifient le DOM sont déclenchés par le navigateur Internet, l'affichage est modifié. 
+      * >> On appellera l'affichage initial du document Web : "état A".
+      * >> On appellera l'affichage modifié du document Web : "état B".
+      *
+      * On remarque alors que si on utilise le bouton :
+      * >> Précédent à partir de l'état B : on ne retrouve pas l'état A du document Web mais le document Web affiché précédemment.
+      * >> Suivant à partir de l'état A : on ne retrouve pas l'état B du document Web mais le document Web affiché ensuite.
+      * >> Ajouter aux favoris à partir de l'état B : on ne retrouve pas l'état B lorsqu'on accède au favori enregistré.
+      *
+      * Comment peut-on gérer les fonctionnalités natives des navigateurs Internet en JavaScript ?
+      *
+      * -> On utilise du JavaScript en conjonction avec le comportement natif du navigateur Internet concernant les ancres.
+      *
+      * Les ancres sont un mécanisme qui permet d'accéder à un emplacement d'un document Web en utilisant un lien (<a>) dans lequel on indiqué le nom (attribut name) ou l'identifiant (attribut id) d'une balise précédé d'un symbole #.
+      *
+      * Par exemple (dans un document Web de n lignes) :
+      * Ligne n : <a href="#/plus-bas-dans-le-document">Descendre plus bas dans le document</a>
+      * ...
+      * Ligne n + 100 : <div id="/plus-bas-dans-le-document">Ici nous sommes plus bas dans le document Web</div>
+
+      * Les exercices suivants ont pour objectif de vous apprendre à gérer les fonctionnalités natives du navigateur Internet, en JavaScript, en utilisant les ancres.
+      */
+
+      //Enoncé
+
+      /*
+      * 1. Crééz un document Web.
+      * - Ce document Web doit contenir plusieurs paragraphes et chaque paragraphe doit avoir un titre.
+      * - Ce document Web doit contenir suffisamment de lignes pour que son affichage sur votre navigateur Internet fasse apparaître l'ascenseur sur la droite.
+      * >> Vous pouvez utiliser le générateur de Lorem Ipsum ici : http://fr.lipsum.com/
+      */
+
+      /*
+      * 3. Créez une liste de liens qui sont des ancres vers le différents titres de votre document Web et testez vos ancres. Vous remarquez qu'à chaque fois que vous testez une ancre l'URL dans la barre d'adresse du navigateur Internet change.
+      * - Après avoir cliqué sur une ancre, utilisez la fonctionnalité Précédent du navigateur Internet. Que remarquez-vous (voir barre d'adresse) ?
+      * - Après avoir cliqué sur une ancre puis sur la fonctionnalité Précédent du navigateur Internet, cliquez sur la fonctionnalité Suivant du navigateur Internet. Que remarquez-vous (voir barre d'adresse) ?
+      * - Après avoir cliqué sur une ancre, cliquez sur la fonctionnalité Ajouter au favoris du navigateur Internet. Fermez le document. Ouvrez la favori créé. Que remarquez-vous (voir barre d'adresse) ?
+      */
+
+      /*
+      * 4. Ajoutez, sur chacun des liens, un gestionnaire d'évènement qui change la couleur du paragraphe sous le titre correspondant au lien et qui réinitialise la couleur de tous les autres paragraphes.
+      */
+
+      /*
+      - Désormais, à chaque fois que l'utilisateur clique sur un lien, l'ancre le positionne au niveau du paragraphe concerné et modifie la barre d'adresse (fonctionnalité native du navigateur) ET la couleur du paragraphe concerné change (fonctionnalité implémentée en JavaScript).
+      - On remarque que si on clique sur la fonctionnalité Précédent après avoir cliqué sur une ancre, le navigateur Internet modifie l'URL dans la barre d'adresse et positionne l'affichage sur l'emplacement précédent MAIS le script qui correspondant à l'emplacement précédent n'est pas exécuté.
+      >> Pour exécuter le script correspondant à l'emplacement précédent, nous allons utilisez le changement survenu dans l'URL de la barre d'adresse. 
+      */
+      
+      /*
+      * 5. Exécutez le gestionnaire d'évènement correspondant à un paragraphe en fonction de l'ancre dans l'URL. L'URL complète est dans window.location.href. 
+      * - Commencez par utiliser les méthodes de l'objet String pour extraire le "hash" de l'URL (partie de l'URL contenant le symbole #).
+      * - AU CHARGEMENT du document Sauvegarder ce "hash" dans une variable. C'est la VALEUR INITIALE du "hash" au chargement du document.
+      * - Utilisez la méthode .setInterval pour déclenchez toutes les 20ms la fonction suivante : 
+      * => Extraire le "hash" de l'URL (partie de l'URL contenant le symbole #) et le sauvegarder dans une variable. C'est la VALEUR ACTUELLE du "hash"
+      * => SI la VALEUR INITIALE du "hash" est différente de la VALEUR ACTUELLE du "hash" :
+      * ==> Utilisez la VALEUR ACTUELLE du "hash" pour exécuter le bon gestionnaire d'évènement.
+      * ==> Remplacez la VALEUR INITIALE du "hash" par la VALEUR ACTUELLE.
+      */
+      
+      /*
+        6. Si vous avez réussi, vous devriez pouvoir changer l'état de votre document Web en JavaScript et retrouver l'état Suivant, Précédent ou même à partir de vos favoris.
+      */
+    </script>
+  </head>
+  <body>
+    <h1>Titre principal</h1> 
+    <ul>
+      <li>Premier point</li>
+      <li>Deuxième point</li>
+      <li>Troisième point</li>
+    </ul>
+    <div>
+      <div>
+        <h2><span>1</span>. Titre de la première section</h2>
+        <p><span>1.1</span>. Premier paragraphe de la première section et un <a href="#">lien</a>.</p>
+        <p><span>1.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>2</span>. Titre de la deuxième section</h2>
+        <p><span>2.1</span>. Premier paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+        <p><span>2.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+      </div>
+      <div>
+        <h2><span>3</span>. Titre de la troisième section</h2>
+        <p><span>3.1</span>. Premier paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+        <p><span>3.2</span>. Deuxième paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+      </div>
+    </div>
+  </body>
+</html>
