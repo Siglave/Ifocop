@@ -19,18 +19,26 @@
       /*
       2. Vous savez désormais récupérer une référence à l'objet correspondant à une balise identifiée. Identifiez une autre balise du document Web (toujours en utilisant l'attribut id). Une fois la balise identifiée, écrivez l'algorithme suivant : AU CLIC sur le titre principal, récupérez une référence vers l'objet correspondant à la balise identifiée. Cette objet dispose de propriété et de méthode. Affectez à la propriété innerHTML de l'objet correspondant à la balise le texte : 'Ce texte est écrit dans cette balise par mon script'.
       */
+
+      function startP() {
+        console.log(document.getElementById("titreH1"));
+
+      }
+      function clickChangeText(){
+        document.getElementById("textToChange").innerHTML = "Je Change le texte";
+      }
     </script>
   </head>
-  <body>
-    <h1>Titre principal</h1>
+  <body onload="startP()">
+    <h1 id="titreH1">Titre principal</h1>
     <ul>
-      <li>Premier point</li>
+      <li onclick="clickChangeText()">Premier point</li>
       <li>Deuxième point</li>
       <li>Troisième point</li>
     </ul>
     <div>
       <h2><span>1</span>. Titre de la première section</h2>
-      <p><span>1.1</span>. Premier paragraphe de la première section.</p>
+      <p id="textToChange"><span>1.1</span>. Premier paragraphe de la première section.</p>
       <p><span>1.2</span>. Deuxième paragraphe de la deuxième section.</p>
     </div>
     <div>

@@ -1,0 +1,16 @@
+canvas {
+    position: absolute;
+    /* border: 1px solid black */
+}
+
+#gameBackGround {
+    z-index: 1;
+}
+
+#gameCanvas {
+    z-index: 2;
+}
+
+#gameUI {
+    z-index: 3;
+}

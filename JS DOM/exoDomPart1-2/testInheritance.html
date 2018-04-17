@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    /* function Vehicle(name, type) {
+        this.name = name;
+        this.type = type;
+    };
+    Vehicle.prototype.getName = function getName() {
+        return this.name;
+    };
+
+    function Maison(name, type) {
+        this.name = name;
+        this.type = type;
+        this.getName = function(){
+            return this.name;
+        }
+    };
+    var v = new Vehicle("testCar","car")
+    var m = new Maison("testMaison","maison")
+    console.log(v);
+    console.log(m);
+     */
+     /* 
+    function Vehicle(name, type) {
+        this.name = name;
+        this.type = type;
+    };
+
+    Vehicle.prototype.getName = function getName() {
+        return this.name;
+    };
+
+    Vehicle.prototype.getType = function getType() {
+        return this.type;
+    };
+    function Car(name) {
+        Vehicle.call(this, name, "car");
+    }
+    Car.prototype = Object.create(Vehicle.prototype);
+    Car.prototype.constructor = Car;
+    Car.parent = Vehicle.prototype;
+    Car.prototype.getName = function () {
+        return 'It is a car: ' + this.name;
+    };
+    var car = new Car('Tesla');
+    console.log(car.getName()); // It is a car: Tesla
+    console.log(car.getType()); // car */
+    var tab = [2,4,3];
+    var retValue = tab.map(function(elem,i){
+        console.log(elem);
+        console.log(i);
+        elem++;
+        return elem;
+    });
+    console.log(retValue);
+    console.log(tab);
+    
+
+    
+</script>
+
+<body>
+
+</body>
+
+</html>

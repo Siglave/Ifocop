@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 21</title>
+    <style>
+       #lechat{
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+
+      }
+    </style>
     <script>
       //Énoncé :
       
@@ -19,9 +28,17 @@
       /*
         2. Chercher sur la MDN ici : https://developer.mozilla.org/fr/docs/Web/API/MouseEvent quelles sont les propriétés disponible dans l'objet d'évènement fourni par le navigateur Internet que vous pouvez utiliser pour connaître la position de la souris. Utilisez les notions vues dans l'exercice précédent pour créer un code compatible IE6/7/8/9/10; FF, Chrome, ... qui donne vie au chat.
       */
+     window.addEventListener("load",function(){
+       window.addEventListener("mousemove",function(unElement){
+         document.getElementById("lechat").style.top = unElement.clientY+"px";
+         document.getElementById("lechat").style.left = unElement.clientX+"px";
+       });
+
+     });
     </script>
   </head>
   <body>
+    <div id="lechat"></div>
     <h1>Titre principal</h1>
     <ul>
       <li>Premier point</li>

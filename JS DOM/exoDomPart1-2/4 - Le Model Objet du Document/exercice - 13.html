@@ -12,9 +12,18 @@
       /*
         1. Faîtes la même chose que pour l'exercice précédent mais en faisant varier l'opacité du titre.
       */
+      function startP(){
+        document.querySelector("h1").style.opacity = 1 ;
+        setInterval(function() {
+          var numberOpacity =  document.querySelector("h1").style.opacity ;
+          var number = Number(numberOpacity) - 0.05 ;
+          document.querySelector("h1").style.opacity = number;
+        },200)
+
+      }
     </script>
   </head>
-  <body>
+  <body onload="startP()">
     <h1>Titre principal</h1>
     <ul>
       <li>Premier point</li>

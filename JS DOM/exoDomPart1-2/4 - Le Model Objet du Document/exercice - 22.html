@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 22</title>
+    <style>
+      form{
+        border: 1px solid black;
+      }
+    </style>
     <script>
       //Énoncé :
 
@@ -22,6 +27,22 @@
       /*
         Astuce : Si dans un gestionnaire d'évènement (fonction/méthode associée à l'événement), j'exécute la méthode .preventDefault() de l'objet d'évènement, le navigateur Internet ne poursuit pas le comportement par défaut associé à l'événement. Cette méthode est documentée sur le MDN ici : https://developer.mozilla.org/fr/docs/Web/API/Event/preventDefault
       */
+      window.addEventListener("load",function(){
+        var elementForm = document.querySelector("form");
+        elementForm.addEventListener("submit",function(e){          
+          if(!document.getElementById("inputVal").value){
+            e.preventDefault();
+            var p = document.createElement("p");
+            p.innerHTML = "Pb valeur";
+            document.querySelector("form").appendChild(p);
+            return false ;
+          }           
+        });
+
+ /*        document.getElementById("btnSub").addEventListener("click",function(e){
+          e.preventDefault();
+        }); */
+      });
     </script>
   </head>
   <body>
@@ -31,6 +52,11 @@
       <li>Deuxième point</li>
       <li>Troisième point</li>
     </ul>
+
+    <form action="http://www.google.com" method="get">
+      <input id="inputVal" type="text" name="fname"><br>
+      <input id="btnSub" type="submit" value="Submit">
+    </form>
     <div>
       <div>
         <h2><span>1</span>. Titre de la première section</h2>

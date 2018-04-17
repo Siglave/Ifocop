@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 20</title>
+    <style>
+      #redSquare{
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+
+      }
+    </style>
     <script>
       //Énoncé :
 
@@ -20,12 +29,23 @@
         Lorsqu'on confie une fonction au gestionnaire d'évènement du navigateur Internet, celui-ci l'exécute toujours en lui transmettant en paramètre un objet contenant les caractéristiques de l'évènement survenu. C'est pourquoi on peut écrire :
       */
 
-      window.onload = function(unObjetFourni){
+/*       window.onload = function(unObjetFourni){
+        console.log(window);
+        
         unObjetFourni; //ceci est la variable contenant l'objet fourni par le gestionnaire d'évènement à la fonction déclenchée par le navigateur lorsqu'il à fini de charger le document en mémoire.
-      };
+      }; */
       /*ou bien encore (et de préférence)*/
-      window.addEventListener('load',function(unObjetFourni){
-        unObjetFourni;
+
+      window.addEventListener('load',function(){    
+        window.addEventListener('DOMMouseScroll',function(monElem){
+          //console.log('This is a magic scroll');
+          var container = document.getElementById("redSquare");
+          var numberTop =  container.style.top ;
+          var tabStr = numberTop.split("px");
+          var number = Number(tabStr[0]) + monElem.detail ;          
+          container.style.top = number+"px"; 
+          console.log(monElem.detail);
+        });
       }, false);
 
       /*
@@ -55,6 +75,7 @@
     </script>
   </head>
   <body>
+    <div id="redSquare"></div>
     <h1>Titre principal</h1>
     <ul>
       <li>Premier point</li>
@@ -77,6 +98,15 @@
         <p><span>3.1</span>. Premier paragraphe de la troisième section et un <a href="#">lien</a>.</p>
         <p><span>3.2</span>. Deuxième paragraphe de la troisième section et un <a href="#">lien</a>.</p>
       </div>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
+      <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, repellendus, aliquam quis a cupiditate architecto ea officiis similique maiores, ex enim quibusdam fuga dolore. Provident inventore totam aliquam iure modi!</p>
     </div>
   </body>
 </html>

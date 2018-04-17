@@ -14,9 +14,17 @@
 
         Note : Pour ajouter 2px à 2px, vous devez d'abord transformer 2px en nombre, additionner le nombre obtenu et re-concaténer ce nombre avec le texte 'px'.
       */
+      function startP(){
+        document.querySelector("h1").onclick = function(){
+          var numberMargin = this.style.marginLeft ;
+          var tabStr = numberMargin.split("px");
+          var number = Number(tabStr[0]) + 2 ;
+          this.style.marginLeft = number+"px";
+        }
+      }
     </script>
   </head>
-  <body>
+  <body onload="startP()">
     <h1>Titre principal</h1>
     <ul>
       <li>Premier point</li>

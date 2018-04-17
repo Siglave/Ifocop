@@ -3,10 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <title>JavaScript & DOM : Le Modèle Objet du Document - Exercice 16</title>
+    <style>
+      #container{
+        overflow: hidden;
+        position: absolute;
+        width: 120px;
+        height: 120px;        
+      }
+      #contenu{
+        position: absolute;
+      }
+    </style>
     <script>
       //Énoncé :
       /*
-        En JavaScript, on a accès à des objets qui contiennent les informations relatives au navigateurs Internet : le DOM. L'objet qui permet d'accéder au DOM est l'objet window. Cet objet est l'objet de plus haut niveau en JavaScript. L'objet window contient des sous objets que nous allons exploiter.
+        En JavaScript, on a accès à des objets qui contiennent les informations absolutes au navigateurs Internet : le DOM. L'objet qui permet d'accéder au DOM est l'objet window. Cet objet est l'objet de plus haut niveau en JavaScript. L'objet window contient des sous objets que nous allons exploiter.
         
         Lorsque le navigateur Internet exécute la méthode correspondant à un évènement, il lui transmet en paramètre un objet d'événement, cet objet d'événement contient des informations relatives à l'évènement qui est survenu. Les objets d'évènements sont documentés ici dans le MDN : https://developer.mozilla.org/fr/docs/Web/API/Event
       */
@@ -20,26 +31,42 @@
         window.onkeydown = function(event){
 
           var code = event.keyCode;
+          var container = document.getElementById("contenu");
 
           switch(code){
             case 37:
+              var numberLeft =  container.style.left ;
+              var tabStr = numberLeft.split("px");
+              var number = Number(tabStr[0]) + 5 ;          
+              container.style.left = number+"px"; 
               //*instructions*
-              alert('gauche');
+              //alert('gauche');
               
             break;
             case 38:
               //instructions
-              alert('haut');
-              
+              //alert('haut');
+              var numberTop =  container.style.top ;
+              var tabStr = numberTop.split("px");
+              var number = Number(tabStr[0]) + 5 ;          
+              container.style.top = number+"px";  
             break;
             case 39:
               //instructions
-              alert('droite');
+              //alert('droite');
+              var numberLeft =  container.style.left ;
+              var tabStr = numberLeft.split("px");
+              var number = Number(tabStr[0]) - 5 ;          
+              container.style.left = number+"px"; 
               
             break;
             case 40:
               //instructions
-              alert('bas');
+              //alert('bas');
+              var numberTop = container.style.top ;
+              var tabStr = numberTop.split("px");
+              var number = Number(tabStr[0]) - 5 ;          
+              container.style.top = number+"px"; 
               
             break;
           };
@@ -77,7 +104,7 @@
     <h1>Play !</h1>
     <div>
       <div id="container" class="masque" >
-        <img id="contenu" class="sprite"/>
+        <img id="contenu" class="sprite" src="Morty.png"/>
       </div>
     </div>
     <noscript>

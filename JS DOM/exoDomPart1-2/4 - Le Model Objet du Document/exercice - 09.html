@@ -12,14 +12,29 @@
       /*
       1. Donnez une propriété de style (display:none) à chacune des <div> du document Web. A l'affichage du document, seul le titre <h1> est donc affiché.
       */
-      
+      function startP() {
+        var allDiv = document.querySelectorAll("div")
+        allDiv.forEach(function(uneDiv) {
+          uneDiv.style.display = "none";
+        });
       /*
       2. Écrivez l'algorithme suivant : AU SURVOL de la balise <h1>, changer la propriété de style de la <div> pour faire en sorte qu'elle s'affiche. Quand on NE SURVOLE PLUS la balise <h1>, changer la propriété de style de la <div> pour faire en sorte qu'elle ne s'affiche plus.
       */
+        document.getElementById('titleH1').onmouseover = function(){
+          allDiv.forEach(function(uneDiv) {
+            uneDiv.style.display = "block";
+          });
+        }
+        document.getElementById('titleH1').onmouseout = function(){
+          allDiv.forEach(function(uneDiv) {
+            uneDiv.style.display = "none";
+          });
+        }
+      }
     </script>
   </head>
-  <body>
-    <h1>Titre principal</h1>
+  <body onload="startP()">
+    <h1 id="titleH1">Titre principal</h1>
     <ul>
       <li>Premier point</li>
       <li>Deuxième point</li>

@@ -14,6 +14,14 @@
       /*
         1. AU CLIC sur le premier point, utilisez la méthode .createElement() pour créer un objet correspondant à une balise <a>. Utilisez la méthode .createTextNode() pour créer un objet de texte. Utiliser .appendChild() pour attacher l'objet de texte à l'objet correspondant à une balise <a> que vous avez créé. Utilisez la méthode .appendChild pour ajouter cette "branche" à l'arborescence d'objets correspondant au document HTML au niveau du <span> 3.2
       */
+    window.onload = function(){
+		 document.querySelector("li").onclick = function(){
+			var aElement = document.createElement("a");
+			var untext = document.createTextNode("un texte ");
+			aElement.appendChild(untext);
+			document.getElementById("span32").appendChild(aElement);
+		}
+    }
     </script>
   </head>
   <body>
@@ -37,7 +45,7 @@
       <div>
         <h2><span>3</span>. Titre de la troisième section</h2>
         <p><span>3.1</span>. Premier paragraphe de la troisième section et un <a href="#">lien</a>.</p>
-        <p><span>3.2</span>. Deuxième paragraphe de la troisième section et un <a href="#">lien</a>.</p>
+        <p><span id="span32">3.2</span>. Deuxième paragraphe de la troisième section et un <a href="#">lien</a>.</p>
       </div>
     </div>
   </body>

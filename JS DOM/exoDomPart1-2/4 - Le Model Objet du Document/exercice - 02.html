@@ -16,10 +16,14 @@
 
       Qu'est-ce qui s'affiche sur IE, Mozilla, Chrome ?
       */
+      console.log(window.navigator);
       
       /*
       2. Utilisez ces propriétés pour réaliser l'algorithme suivant : SI je démarre mon script sur IE, j'affiche une boite de dialogue avec le texte 'So Lame !' à l'intérieur et j'ouvre une PoPUp vers le site de Mozilla Firefox, SINON SI je démarre mon script sur Chrome j'affiche une boite de dialogue avec le texte 'Spy On Me !' et j'ouvre une PoPUp vers la page wikipédia de http://fr.wikipedia.org/wiki/Chromium_%28navigateur_web%29 SINON j'affiche une boite de dialogue avec le texte 'Freed from Desire'.
       */
+      if(window.navigator.appCodeName == "Mozilla"){
+        window.open("http://fr.wikipedia.org/wiki/Chromium_%28navigateur_web%29");
+      }
     </script>
   </head>
   <body>

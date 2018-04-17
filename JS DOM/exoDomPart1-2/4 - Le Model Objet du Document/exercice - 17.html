@@ -16,6 +16,18 @@
       /*
         1. AU CLIC sur le titre principal, utilisez la méthode .createElement() pour créer un objet correspondant à une balise image. Renseignez les propriétés title, alt et src de cet objet. Utilisez appendChild pour ajouter cette balise image dans le <span> 2.2
       */
+      window.onload = function(){
+		  console.log("yyooyo");
+		  
+        document.querySelector("h1").onclick = function(){
+			console.log("test");
+        	var imgCreate =  document.createElement("img");
+         	imgCreate.src = "Morty.png";
+         	imgCreate.width = "300";
+			imgCreate.height = "300";
+			document.getElementById("span22").appendChild(imgCreate);
+        }
+      }
     </script>
   </head>
   <body>
@@ -34,7 +46,7 @@
       <div>
         <h2><span>2</span>. Titre de la deuxième section</h2>
         <p><span>2.1</span>. Premier paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
-        <p><span>2.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
+        <p><span id="span22">2.2</span>. Deuxième paragraphe de la deuxième section et un <a href="#">lien</a>.</p>
       </div>
       <div>
         <h2><span>3</span>. Titre de la troisième section</h2>

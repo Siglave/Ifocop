@@ -12,10 +12,20 @@
       /*
         1. Faîtes la même chose que pour l'exercice précédent mais en faisant varier la position top du titre. Pensez également à passer le positionnement du titre en absolute.
       */
+      function startP(){
+        document.querySelector("h1").style.position = "absolute" ;
+        setInterval(function() {
+          var numberTop =  document.querySelector("h1").style.top ;
+          var tabStr = numberTop.split("px");
+          var number = Number(tabStr[0]) + 2 ;          
+          document.querySelector("h1").style.top = number+"px";
+        },200);
+
+      }
     </script>
   </head>
-  <body>
-    <h1>Titre principal</h1>
+  <body onload="startP()">
+    <h1 >Titre principal</h1>
     <ul>
       <li>Premier point</li>
       <li>Deuxième point</li>
