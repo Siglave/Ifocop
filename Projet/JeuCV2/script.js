@@ -310,7 +310,6 @@ class Game {
 			}
 		});
 		this.player.draw(ctx, this.canvasWidth, this.canvasHeight);
-
 	}
 }
 
