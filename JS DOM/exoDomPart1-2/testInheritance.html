@@ -53,7 +53,7 @@
     var car = new Car('Tesla');
     console.log(car.getName()); // It is a car: Tesla
     console.log(car.getType()); // car */
-    var tab = [2,4,3];
+    /* var tab = [2,4,3];
     var retValue = tab.map(function(elem,i){
         console.log(elem);
         console.log(i);
@@ -61,8 +61,22 @@
         return elem;
     });
     console.log(retValue);
-    console.log(tab);
+    console.log(tab); */
+
+    var Maison = function(nom){
+        this.nom = nom;
+        this.sayNom = function(){
+            console.log(this.nom);
+        }.bind(this);
+    }
     
+    var maison = new Maison("yo");
+
+    var uneFonc = param => {
+        
+    }
+
+    window.setTimeout(maison.sayNom,1000);
 
     
 </script>

@@ -14,6 +14,10 @@ class Sprite {
     }
 }
 
+function getPortalElement(img){
+    return new Sprite(img, 2483, 329, 670, 670);
+}
+
 function getAnimationCharacter(img) {
     // console.log(srcImg);
     var sWidth = 120;
@@ -31,7 +35,9 @@ function getAnimationCharacter(img) {
         left: tabSprite,
         right: tabSprite,
         frame: 0,
-        direction:"stayStill"
+        direction:"stayStill",
+        maxTime : 8,// set how much time the frame appear before next one 
+        actualTime : 0
     }
     return objAnimation;
 }

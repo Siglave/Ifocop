@@ -74,24 +74,30 @@ class Character extends Coordinate {
 	}
 	draw(ctx) {
 		this.move();
-		//console.log(this.arrowMove);
-		/* 		ctx.fillStyle = "red";
-				ctx.fillRect(this.x, this.y, this.width, this.height);
-				ctx.fillRect(this.x + 200, this.y, this.width, this.height);
-				ctx.fillRect(this.x + 400, this.y, this.width, this.height);
-				ctx.fillRect(this.x + 600, this.y, this.width, this.height);
-				ctx.fillRect(this.x + 800, this.y, this.width, this.height); */
 		switch (this.animation.direction) {
 			case "stayStill":
 				this.animation.stayStill.draw(ctx, this.x, this.y, this.width, this.height);
 				break;
 			case "left":
 				this.animation.left[this.animation.frame % 4].draw(ctx, this.x, this.y, this.width, this.height);
-				this.animation.frame++;
+				if (this.animation.actualTime < this.animation.maxTime) {
+					this.animation.actualTime++
+				} else {
+					this.animation.frame++;
+					this.animation.actualTime = 0;
+				}
 				break;
 			case "right":
-				this.animation.left[this.animation.frame % 4].draw(ctx, this.x, this.y, this.width, this.height);
-				this.animation.frame++;
+				ctx.save();
+				ctx.scale(-1, 1); // needed to flip the img
+				this.animation.left[this.animation.frame % 4].draw(ctx, (this.x + this.width) * -1, this.y, this.width, this.height);
+				if (this.animation.actualTime < this.animation.maxTime) {
+					this.animation.actualTime++
+				} else {
+					this.animation.frame++;
+					this.animation.actualTime = 0;
+				}
+				ctx.restore();
 				break;
 			default:
 				break;
@@ -109,15 +115,22 @@ document.addEventListener("DOMContentLoaded", function () {
 		var ctxGame = canvasGame.getContext("2d");
 		var ctxUI = canvasUI.getContext("2d");
 
-		var rick = new Character(tabAssets[0], 10, 20, 60, 79);
-		rick.draw(ctxGame);
-		var morty = new Character(tabAssets[1], 10, 200, 60, 79);
-		morty.draw(ctxGame);
+		var rick = new Character(tabAssets[0], 60, ((canvasGame.height / 3) * 2) - 80, 60, 79);
+		var morty = new Character(tabAssets[1], 0, ((canvasGame.height / 3) * 2) - 79, 60, 79);
 
+		var portal = getPortalElement(tabAssets[2]);
 		//BACKGROUND////////////
-		ctxBack.fillStyle = "black";
+		ctxBack.fillStyle = "white";
 		ctxBack.fillRect(0, 0, canvasBack.width, canvasBack.height);
 		///////////////////////
+		//Game/////////////////
+
+		var gradient = ctxGame.createLinearGradient(0, 0, canvasGame.width, 0);
+		gradient.addColorStop("0", "black");
+		gradient.addColorStop("0.5", "black");
+		gradient.addColorStop("0.60", "yellow");
+		gradient.addColorStop("1.0", "green");
+
 		window.addEventListener(
 			"keydown",
 			function (event) {
@@ -125,6 +138,11 @@ document.addEventListener("DOMContentLoaded", function () {
 					return;
 				}
 				rick.arrowMove.map(elem => {
+					if (elem.keyCode == event.keyCode) {
+						elem.keyIsUp = true;
+					}
+				});
+				morty.arrowMove.map(elem => {
 					if (elem.keyCode == event.keyCode) {
 						elem.keyIsUp = true;
 					}
@@ -146,22 +164,80 @@ document.addEventListener("DOMContentLoaded", function () {
 						elem.keyIsUp = false;
 					}
 				});
+				morty.arrowMove.map(elem => {
+					if (elem.keyCode == event.keyCode) {
+						morty.animation.frame = 0;
+						morty.animation.direction = "stayStill"
+						elem.keyIsUp = false;
+					}
+				});
 				event.preventDefault();
 			},
 			true
 		);
 
 		window.requestAnimationFrame(loop);
+		
+		ctxUI.font = "16px Arial";
+		ctxUI.fillText("Pierre Rouzaud", 30, 30);
+		ctxUI.fillText("Tél : 06 51 90 93 46", 30, 50);
+		ctxUI.fillText("Mail : pierrerouzaud18@gmail.com", 30, 70);
+		ctxUI.fillText("Age : 22 ans", 30, 90);
 
+		ctxUI.font = "bold 18px Arial";
+		ctxUI.fillText("Mes Atouts :", 30, 240);
+		ctxUI.font = "18px Arial";
+		ctxUI.fillText("Mes compétences professionnelles  dans le développement Web à la fois front-end", 30, 270);
+		ctxUI.fillText("et back-end associées à ma formation en Dut Informatique et ma capacité linguistique. ", 30, 290);
+	
+		ctxUI.font = "bold 24px Arial";
+		ctxUI.textAlign = "center";
+		ctxUI.fillText("Développeur Web Full Stack", canvasUI.width/2, 170);
+
+		ctxUI.font = "bold 18px Arial";
+		ctxUI.fillText("Compétences : ",900, 240);
+
+		var speedPortal = 0.3;
+		var posProtal = 300;
+		var maxHPortal = 330;
+		var dirPortal = true;
 		function loop() {
 			//gameDraw
 			ctxGame.clearRect(0, 0, canvasGame.width, canvasGame.height);
+
+			/* ctxGame.beginPath();
+			ctxGame.strokeStyle = gradient;
+			ctxGame.moveTo(0, (canvasGame.height / 3) * 2);
+			ctxGame.lineTo(canvasGame.width, (canvasGame.height / 3) * 2);
+			ctxGame.moveTo(0, ((canvasGame.height / 3) * 2) + 1);
+			ctxGame.lineTo(canvasGame.width, ((canvasGame.height / 3) * 2) - 1);
+			ctxGame.stroke();
+ */
+
+			ctxBack.fillStyle = gradient;
+			ctxBack.fillRect(0, ((canvasGame.height / 3) * 2)-7.5, canvasBack.width, 15);
+
 			rick.draw(ctxGame);
 			morty.draw(ctxGame);
+			ctxGame.save();
+			ctxGame.scale(-0.4, 1);
+			if(posProtal<maxHPortal && dirPortal){
+				posProtal += speedPortal;
+			}else{
+				if(posProtal > 300){
+					posProtal = posProtal - speedPortal;
+					dirPortal = false;
+				}else{
+					dirPortal = true;
+				}
+			}
+			portal.draw(ctxGame, -((canvasGame.width+175)*2), posProtal, 175, 175);
+			ctxGame.restore();
+
 			window.requestAnimationFrame(loop);
 		}
 	}
 
-	var tabSrc = ["assets/character/Rick.png", "assets/character/Morty.png"]
+	var tabSrc = ["assets/character/Rick.png", "assets/character/Morty.png", "assets/elements/element.png"]
 	loadAssets(tabSrc, initGame);
 });
