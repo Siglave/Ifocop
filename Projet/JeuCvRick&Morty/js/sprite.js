@@ -10,7 +10,6 @@ class Sprite {
     }
     draw(ctx, dx, dy, dWidth, dHeight) {
         ctx.drawImage(this.img, this.sX, this.sY, this.sWidth, this.sHeight, dx, dy, dWidth, dHeight);
-
     }
 }
 

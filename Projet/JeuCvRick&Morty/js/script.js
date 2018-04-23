@@ -105,6 +105,96 @@ class Character extends Coordinate {
 	}
 }
 
+class CollisionDetector {
+	constructor(canvasWidth, canvasHeight) {
+		this.canvasWidth = canvasWidth;
+		this.canvasHeight = canvasHeight;
+	}
+	isCollision(xObj1, yObj1, wObj1, hObj1, xObj2, yObj2, wObj2, hObj2) {
+		if (
+			xObj1 < xObj2 + wObj2 &&
+			xObj1 + wObj1 > xObj2 &&
+			yObj1 < yObj2 + hObj2 &&
+			hObj1 + yObj1 > yObj2
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	isOutCanvas(elem) {
+		elem.setIsCollision(false);
+		if (elem.getY() <= 0) {
+			//Check up
+			elem.effectCollision({
+				type: "canvas",
+				direction: "up"
+			});
+		}
+		if (elem.getY() + elem.height >= this.canvasHeight) {
+			//Check down
+			elem.effectCollision({
+				type: "canvas",
+				direction: "down"
+			});
+		}
+		if (elem.getX() <= 0) {
+			//Check left
+			elem.effectCollision({
+				type: "canvas",
+				direction: "left"
+			});
+		}
+		if (elem.getX() + elem.width >= this.canvasWidth) {
+			//Check right
+			elem.effectCollision({
+				type: "canvas",
+				direction: "right"
+			});
+		}
+	}
+	testCollision() {
+
+	}
+}
+
+class Game {
+	constructor(tabAssets, canvasWidth, canvasHeight, ctxs) {
+		this.ctxs = ctxs;// obj ctxs {ui:ctx,game:ctx,back:ctx}
+		this.canvasWidth = canvasWidth;
+		this.canvasHeight = canvasHeight;
+		this.characters = {
+			rick: new Character(tabAssets[0], 60, ((canvasHeight / 3) * 2) - 80, 60, 79),
+			morty: new Character(tabAssets[1], 0, ((canvasHeight / 3) * 2) - 79, 60, 79),
+		}
+		this.stages = this.createStages();
+	}
+	createStages() {
+		var stages = [];
+
+		stage1 = {
+			
+		};
+
+		stages.push(stage1);
+		return stages;
+	}
+}
+
+class Stage {
+	constructor() {
+	}
+	start() {
+		//load listeners
+	}
+	loop() {
+
+	}
+	end() {
+		//cancel listeners
+	}
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
 	function initGame(tabAssets) {
@@ -119,10 +209,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		var morty = new Character(tabAssets[1], 0, ((canvasGame.height / 3) * 2) - 79, 60, 79);
 
 		var portal = getPortalElement(tabAssets[2]);
+		console.log(tabAssets);
+
 		//BACKGROUND////////////
 		ctxBack.fillStyle = "white";
 		ctxBack.fillRect(0, 0, canvasBack.width, canvasBack.height);
-		///////////////////////
+		///////////////////////	
 		//Game/////////////////
 
 		var gradient = ctxGame.createLinearGradient(0, 0, canvasGame.width, 0);
@@ -177,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		);
 
 		window.requestAnimationFrame(loop);
-		
+
 		ctxUI.font = "16px Arial";
 		ctxUI.fillText("Pierre Rouzaud", 30, 30);
 		ctxUI.fillText("Tél : 06 51 90 93 46", 30, 50);
@@ -189,18 +281,19 @@ document.addEventListener("DOMContentLoaded", function () {
 		ctxUI.font = "18px Arial";
 		ctxUI.fillText("Mes compétences professionnelles  dans le développement Web à la fois front-end", 30, 270);
 		ctxUI.fillText("et back-end associées à ma formation en Dut Informatique et ma capacité linguistique. ", 30, 290);
-	
+
 		ctxUI.font = "bold 24px Arial";
 		ctxUI.textAlign = "center";
-		ctxUI.fillText("Développeur Web Full Stack", canvasUI.width/2, 170);
+		ctxUI.fillText("Développeur Web Full Stack", canvasUI.width / 2, 170);
 
 		ctxUI.font = "bold 18px Arial";
-		ctxUI.fillText("Compétences : ",900, 240);
+		ctxUI.fillText("Compétences : ", 900, 240);
 
 		var speedPortal = 0.3;
 		var posProtal = 300;
 		var maxHPortal = 330;
 		var dirPortal = true;
+
 		function loop() {
 			//gameDraw
 			ctxGame.clearRect(0, 0, canvasGame.width, canvasGame.height);
@@ -215,26 +308,32 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 
 			ctxBack.fillStyle = gradient;
-			ctxBack.fillRect(0, ((canvasGame.height / 3) * 2)-7.5, canvasBack.width, 15);
+			ctxBack.fillRect(0, ((canvasGame.height / 3) * 2), canvasBack.width, 1);
 
 			rick.draw(ctxGame);
 			morty.draw(ctxGame);
+
+			//blank block to make character disepear
+			ctxGame.fillStyle = "white";
+			ctxGame.fillRect(900, ((canvasGame.height / 3) * 2) - 108, canvasBack.width, 108);
+
 			ctxGame.save();
 			ctxGame.scale(-0.4, 1);
-			if(posProtal<maxHPortal && dirPortal){
+			if (posProtal < maxHPortal && dirPortal) {
 				posProtal += speedPortal;
-			}else{
-				if(posProtal > 300){
+			} else {
+				if (posProtal > 300) {
 					posProtal = posProtal - speedPortal;
 					dirPortal = false;
-				}else{
+				} else {
 					dirPortal = true;
 				}
 			}
-			portal.draw(ctxGame, -((canvasGame.width+175)*2), posProtal, 175, 175);
+			portal.draw(ctxGame, -((canvasGame.width + 175) * 2), posProtal, 175, 175);
 			ctxGame.restore();
 
 			window.requestAnimationFrame(loop);
+
 		}
 	}
 

@@ -317,6 +317,8 @@ function randomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
 	var canvas = document.getElementById("gameCanvas");
 	var ctx = canvas.getContext("2d");

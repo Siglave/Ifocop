@@ -63,7 +63,7 @@
     console.log(retValue);
     console.log(tab); */
 
-    var Maison = function(nom){
+   /*  var Maison = function(nom){
         this.nom = nom;
         this.sayNom = function(){
             console.log(this.nom);
@@ -76,8 +76,25 @@
         
     }
 
-    window.setTimeout(maison.sayNom,1000);
+    window.setTimeout(maison.sayNom,1000); */
+    class Maison {
+        constructor(nom){
+            this.nom = nom;
+        }
+        sayNom(){
+            console.log("Salut "+this.nom);
+            
+        }
+    }
+    var m = new Maison("lenom");
+    m.sayTruc = function(){
+        console.log("unTruc " +this.nom);
+    }
 
+
+    m.sayNom();
+    m.sayTruc();
+    console.log(m);
     
 </script>
 
