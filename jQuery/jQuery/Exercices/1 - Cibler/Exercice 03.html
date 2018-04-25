@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQuery : Exercice 03</title>
+		<link rel="stylesheet" href="../src/styles1.css" type="text/css"/>
+		<script type="text/javascript" src="../src/jquery.js"></script>
+		<script type="text/javascript">
+			/*********************************
+			***********PRESENTATION***********
+			**********************************
+				JQuery permet également de viser une id ou une class.
+				Par exemple :
+				$('#mon_Id");
+				$('.maclass");
+
+				La propriété css() permet de retourner la valeur d'une propriété de l'objet. Par exemple :
+				$('body').css('color');
+				$('body').css('textAlign');
+			*/
+
+			/**********************************
+			*************EXERCICES*************
+			***********************************
+			** 1 **
+			À la fin du chargement du document, affichez dans une boite de dialogue le contenu du second paragraphe de l'article.
+				Utilisez la méthode html().
+			*/
+			$(document).ready(function(){
+				console.log($("#fin_article").html());
+				
+				console.log($(".ici").css("color"));
+				
+				console.log($("section .ailleurs").css("height"));
+				
+				console.log($("ul li:nth-child(2) .ailleurs").html());
+				
+			});
+
+			/*
+			** 2 **
+			À la fin du chargement du document, affichez dans une boite de dialogue la couleur du troisième paragraphe de la section.
+				Utilisez la méthode css().
+			*/
+
+			/*
+			** 3 **
+			À la fin du chargement du document, affichez dans une boite de dialogue  la hauteur du second paragraphe de la section.
+				Utilisez la méthode css().
+			*/
+
+			/*
+			** 4 **
+			À la fin du chargement du document, affichez dans une boite de dialogue  le contenu du second lien du nav.
+				Utilisez la méthode html().
+			*/
+
+		</script>
+	</head>
+	<body>
+		<div id="page">
+			<header>
+					<h1>Titre du site</h1>
+					<h2>Sous-titre du site</h2>
+				<nav>
+					<ul>
+						<li class="ailleurs">
+							<a href="">Accueil</a>
+						</li>
+						<li>
+							<a href="" class="ailleurs">Information</a>
+						</li>
+						<li>
+							<a href="">Divers</a>
+						</li>
+						<li>
+							<a href="">Autre</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+			<section>
+				<p>
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+				</p>
+				<p class="ailleurs">
+					Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+				</p>
+				<p class="ici">
+					Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+				</p>
+			</section>
+			<article>
+				<h2>Titre de l'article</h2>
+				<p>
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+					</p>
+				<p id="fin_article">
+					Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+				</p>
+			</article>
+		</id>
+		<noscript>
+			<p>Veuillez activer JavaScript</p>
+		</noscript>
+	</body>
+</html>

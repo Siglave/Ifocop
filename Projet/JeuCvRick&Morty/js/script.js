@@ -22,6 +22,25 @@ class Coordinate {
 	}
 }
 
+
+
+class Element extends Coordinate{
+	constructor(img,x,y,width,height){
+		super(x,y);
+		this.sprite = new Sprite(img,0,0,img.width,img.height);
+		this.speed = 2;
+		this.width = width;
+		this.height = height;
+	}
+	move(){
+		this.x += this.speed;
+	}
+	draw(ctx){
+		this.move();
+		this.sprite.draw(this.x,this.y,this.width,this.height);
+	}
+}
+
 class Character extends Coordinate {
 	constructor(img, x, y, width, height) {
 		super(x, y);
@@ -182,16 +201,25 @@ class Game {
 }
 
 class Stage {
-	constructor() {
+	constructor(elemStage,elemBack,fctKeyDown,fctKeyUp) {
+		this.elemStage = elemStage;
+		this.elemBack = elemBack;
+		this.fctKeyDown = fctKeyDown;
+		this.fctKeyUp = fctKeyUp;
 	}
-	start() {
+	loadListeners() {
 		//load listeners
+		window.addEventListener("keydown",this.fctKeyDown);
+		window.addEventListener("keyup",this.fctKeyUp);
 	}
+	removeListener() {
+		//cancel listeners
+		window.removeEventListener("keydown",this.fctKeyDown);
+		window.removeEventListener("keyuo",this.fctKeyUp);
+	}
+
 	loop() {
 
-	}
-	end() {
-		//cancel listeners
 	}
 }
 
@@ -297,15 +325,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		function loop() {
 			//gameDraw
 			ctxGame.clearRect(0, 0, canvasGame.width, canvasGame.height);
-
-			/* ctxGame.beginPath();
-			ctxGame.strokeStyle = gradient;
-			ctxGame.moveTo(0, (canvasGame.height / 3) * 2);
-			ctxGame.lineTo(canvasGame.width, (canvasGame.height / 3) * 2);
-			ctxGame.moveTo(0, ((canvasGame.height / 3) * 2) + 1);
-			ctxGame.lineTo(canvasGame.width, ((canvasGame.height / 3) * 2) - 1);
-			ctxGame.stroke();
- */
 
 			ctxBack.fillStyle = gradient;
 			ctxBack.fillRect(0, ((canvasGame.height / 3) * 2), canvasBack.width, 1);

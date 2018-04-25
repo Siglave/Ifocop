@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQuery : Exercice 07</title>
+		<link rel="stylesheet" href="../src/styles1.css" type="text/css"/>
+		<script type="text/javascript" src="../src/jquery.js"></script>
+		<script type="text/javascript">
+			/*********************************
+			***********PRESENTATION***********
+			**********************************
+			jQuery permet de cibler des éléments en filtrant le DOM selon différents critères :
+			_ not() : vise tous les éléments qui ne sont pas entre parenthèses.
+			_ :even : vise les éléments pairs.
+			_ :header : vise l'ensemble des titres (h1 à h6).
+
+			L'ensemble des sélection par filtre se trouve ici :
+			http://api.jquery.com/category/selectors/basic-filter-selectors/
+			*/
+
+			/**********************************
+			*************EXERCICES*************
+			***********************************
+			** 1 **
+			À la fin du chargement du document, dans le menu, mettez en minuscule toutes les entrées sauf ACCUEIL;
+				Utilisez :not() et css().
+			*/
+			$(document).ready(function(){
+				$("a").not($("a:contains(Accueil)")).css("textTransform" ,"lowercase");
+				
+				$("li > ul > li ").not("li:even").css("backgroundColor","navy");
+				
+				$(":header").css({color:"green",fontSize:"2em"});				
+			});
+
+			/*
+			** 2 **
+			À la fin du chargement du document, dans les sous-menu, changez la couleur de fond des éléments impairs.
+				Utilisez :even et css().
+			*/
+
+			/*
+			** 3 **
+			À la fin du chargement du document, modifiez deux propriétés css des titres.
+				Utilisez :header et css().
+			*/
+
+		</script>
+	</head>
+	<body>
+		<div id="page">
+			<header>
+					<h1>Titre du site</h1>
+					<h2>Sous-titre du site</h2>
+				<nav>
+					<ul>
+						<li>
+							<a href="">Accueil</a>
+						</li>
+						<li>
+							<a href="">Information</a>
+								<ul>
+									<li><a href="">Un</a></li>
+									<li><a href="">Deux</a></li>
+									<li><a href="">Trois</a></li>
+									<li><a href="">Quatre</a></li>
+									<li><a href="">Cinq</a></li>
+								</ul>
+						</li>
+						<li>
+							<a href="">Divers</a>
+								<ul>
+									<li><a href="">Un</a></li>
+									<li><a href="">Deux</a></li>
+									<li><a href="">Trois</a></li>
+								</ul>
+						</li>
+						<li>
+							<a href="">Autre</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+			<section>
+				<p>
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+				</p>
+				<div>
+					<p>
+						Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+					</p>
+					<p>
+						Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+					</p>
+				</div>
+			</section>
+			<article>
+				<h2>Titre de l'article</h2>
+				<p>
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+					</p>
+				<p>
+					Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+				</p>
+			</article>
+		</div>
+		<noscript>
+			<p>Veuillez activer JavaScript</p>
+		</noscript>
+	</body>
+</html>

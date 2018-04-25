@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQuery : Exercice 17</title>
+		<link rel="stylesheet" href="../src/styles1.css" type="text/css"/>
+		<script type="text/javascript" src="../src/jquery.js"></script>
+		<script type="text/javascript">
+      /*********************************
+      ***********PRESENTATION***********
+      **********************************
+        Les méthodes hover(), mouseenter() et mouseleave() permettent de capturer les événements liés aux actions sur la souris quand elle survole un élément, entre dans la zone de l'élément ou quitte cette même zone.
+      */
+
+      /**********************************
+      *************EXERCICES*************
+      ***********************************
+        À la fin du chargement du document, prévoyez le script suivant :
+        a) Quand vous survolez un paragraphe, affichez une image en haut à droite.
+        b) Quand vous entrez au-dessus d'un paragraphe, affichez la longueur du texte du paragraphe dans la barre de titre.
+        c) Quand vous quittez le paragraphe, remettez le titre d'origine de la page et affichez après une seconde un message au milieu de la page (par-dessus le texte). Ce message se masque contient un bouton de fermeture.
+
+        Utilisez les méthodes text(), hover(), mouseenter(), mouseleave(), click() et setTimeout.
+      */
+
+		</script>
+	</head>
+	<body>
+		<div id="page">
+			<header>
+				<h1>Titre du site</h1>
+				<h2>Sous-titre du site</h2>
+				<nav>
+					<ul>
+						<li>
+							<a href="accueil.html">Accueil</a>
+						</li>
+						<li>
+							<a href="information.htlm">Information</a>
+								<ul>
+									<li><a href="un.html">Un</a></li>
+									<li><a href="deux.html">Deux</a></li>
+									<li><a href="trois.html">Trois</a></li>
+									<li><a href="quatre.html">Quatre</a></li>
+									<li><a href="cinq.html">Cinq</a></li>
+								</ul>
+						</li>
+						<li>
+							<a href="divers.html">Divers</a>
+								<ul>
+									<li><a href="un.html">Un</a></li>
+									<li><a href="deux.html">Deux</a></li>
+									<li><a href="trois.html">Trois</a></li>
+								</ul>
+						</li>
+						<li>
+							<a href="autre.html">Autre</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+			<section>
+				<p>
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+				</p>
+				<div>
+					<p>
+						Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+					</p>
+					<p>
+						Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+					</p>
+				</div>
+			</section>
+			<article>
+				<h2>Titre de l'article</h2>
+				<p>
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+					</p>
+				<p>
+					Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+				</p>
+			</article>
+				<form action="" method="post">
+					<div class="form_div">
+						<fieldset>
+							<legend>Vous</legend>
+							</legend>
+							<label for="titre">Titre</label>
+							<p class="titre_radio"><input type="radio" name="titre" value="M.">M.</p>
+							<p class="titre_radio"><input type="radio" name="titre" value="Mme">Mme</p>
+							<p class="titre_radio"><input type="radio" name="titre" value="Mlle">Mlle</p>
+							<label for="prenom">Prénom</label>
+							<input type="text" name="prenom">
+							<label for="nom">Nom</label>
+							<input type="text" name="nom">
+						</fieldset>
+						<fieldset>
+							<legend>Vos coordonnés</legend>
+							<label for="telephone">Téléphone</label>
+							<input type="tel" name="telephone">
+							<label for="email">Email</label>
+							<input type="email" name="email">
+						</fieldset>
+					</div>
+					<div class="form_div">
+						<fieldset>
+							<legend>Votre logement</legend>
+							<label for="numero">Numéro</label>
+							<input type="text" name="numero">
+							<label for="voie">Voie</label>
+							<select name="voie">
+								<option value="rue" selected>Rue</option>
+								<option value="voie" >Voie</option>
+								<option value="avenue" >Avenue</option>
+								<option value="impasse">Impasse</option>
+								<option value="boulevard">Boulevard</option>
+							</select>
+							<label for="CP">Code-Postal</label>
+							<input type="text" name="cp">
+							<label for="ville">Ville</label>
+							<input type="text" name="ville">
+						</fieldset>
+						<p class="checkbox_form"><input type="checkbox" value="newsletter">S'abonner à notre newsletter</p>
+						<input type="submit" name="envoyer" value="Envoyer">
+					</div>
+				</form>
+		</div>
+		<noscript>
+			<p>Veuillez activer JavaScript</p>
+		</noscript>
+	</body>
+</html>

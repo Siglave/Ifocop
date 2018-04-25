@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction à jQuery</title>
+  <script src="introduction-5.js"></script>
+  <script>
+    window.onload = function() {
+      // Je cible les class et je change le style puis le texte
+      outil('.element').unStyle('fontSize','2em').texte('coucou');
+    };
+  </script>
+</head>
+<body>
+  <h1>Introduction à jQuery</h1>
+  <p>Un premier paragraphe simple.</p>
+  <p id="cible">Un second paragraphe avec un id.</p>
+  <p class="element">Un troisème paragraphe avec une class.</p>
+  <p class="element">Un troisème paragraphe avec une class.</p>
+</body>
+</html>
