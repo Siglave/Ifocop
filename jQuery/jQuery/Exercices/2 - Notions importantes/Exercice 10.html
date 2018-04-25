@@ -21,7 +21,16 @@
 				Créez un class pour styler les paragraphes. À la fin du chargement du document, ajoutez cette class au second paragraphe de la section.
 				Utilisez addClass().
 			*/
+			$(document).ready(function(){
+				$("section > div > p:nth-child(1)").addClass("classP");
+				
+				$("section p").not("p:nth-child(1)").addClass("classP1");
 
+				setTimeout(function(){
+					$("section p").removeClass("classP classP1");
+				},2000);
+				
+			});
 			/*
 			** 2 **
 				Créez une second class pour styler des paragraphes. À la fin du chargement du document, ajoutez cette class aux premier et troisième paragraphe de la section.
@@ -37,7 +46,12 @@
 
 		</script>
 		<style>
-
+			.classP{
+				color:aqua;
+			}
+			.classP1{
+				color:crimson;
+			}
 		</style>
 	</head>
 	<body>

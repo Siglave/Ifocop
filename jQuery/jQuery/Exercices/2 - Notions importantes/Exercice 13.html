@@ -20,6 +20,13 @@
 				À la fin du chargement du document, modifiez le texte et le lien de la première entrée du menu.
 				Utilisez text() et attr().
 			*/
+			$(document).ready(function(){
+				$("a").first().text("Accueil 2").attr("href","http://www.google.com");
+
+				$("input").attr("disabled","disabled");
+				$("input[name='telephone']").removeAttr("disabled");
+
+			});
 
 			/*
 			** 2 **

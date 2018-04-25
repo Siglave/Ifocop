@@ -17,11 +17,28 @@
 			***********************************
 				Reprenez le code de l'exercice précédent en remplaçant addClass et removeClass par toggleClass(). Pour ce faire, factorisez votre code dans une fonction appelée à deux reprises.
 			*/
+			function toogleClassP(){
+				$("section > div > p:nth-child(1)").toggleClass("classP");
+				
+				$("section p").not("p:nth-child(1)").toggleClass("classP1");
 
+			}
+			$(document).ready(function(){
+				toogleClassP();
+				setTimeout(function(){
+					toogleClassP();
+				},2000);
+				
+			});
 
 		</script>
 		<style>
-
+			.classP{
+				color:aqua;
+			}
+			.classP1{
+				color:crimson;
+			}
 		</style>
 	</head>
 	<body>

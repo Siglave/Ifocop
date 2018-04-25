@@ -28,6 +28,21 @@
 				Utilisez html() et css().
 			*/
 
+			$(document).ready(function(){
+				var divMessage = $("#message");
+
+				divMessage.html("SHOW ME WHAT YOU GOT !!!").css("color","red");
+
+				setTimeout(function(){
+					divMessage.html("OK LETS GO").css("textTransform","lowercase");
+				},2000);
+
+				setTimeout(function(){
+					var htmlMessage = divMessage.html(); 
+					divMessage.html(htmlMessage+" get shiwfty").css("color","navy");
+				},4000);
+			});
+
 			/*
 			** 2 **
 				Deux secondes après le chargement du document , ajoutez un autre texte et modifiez l'apparence de ce texte.
