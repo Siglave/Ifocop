@@ -47,7 +47,8 @@ class Character extends Coordinate {
 		this.width = width;
 		this.height = height;
 		this.animation = getAnimationCharacter(img);
-		this.speed = 2;
+		this.speed = 3;
+		this.isCollision = false;
 		this.arrowMove = [{
 				keyCode: 38,
 				keyIsUp: false
@@ -70,7 +71,7 @@ class Character extends Coordinate {
 			} //shift
 		];
 	}
-	changeImg(img){
+	changeImg(img) {
 		this.animation = getAnimationCharacter(img);
 	}
 	restartCharacter() {
@@ -79,35 +80,62 @@ class Character extends Coordinate {
 		});
 		this.animation.direction = "stayStill";
 	}
+	effectCollision(collision) {
+		switch (collision.type) {
+			case "canvas":
+				console.log("collision canvas");
+				this.isCollision = true;
+				break;
+			default:
+				break;
+		}
+	}
+	setIsCollision(bool) {
+		this.isCollision = bool;
+	}
 	move() {
-		this.arrowMove.map(item => {
-			if (item.keyIsUp) {
-				/* this.speed = 2;
-				this.animation.maxTime = 8; */
-				switch (item.keyCode) {
-					case 38: //up
-						//this.setY(this.getY() - this.speed);
-						break;
-					case 40: //down
-						//this.setY(this.getY() + this.speed);
-						break;
-					case 37: //left
-						this.setX(this.getX() - this.speed);
-						this.animation.direction = "left";
-						break;
-					case 39: //right
-						this.setX(this.getX() + this.speed);
-						this.animation.direction = "right";
-						break;
-					case 16: //shift
-						this.speed = 5;
-						this.animation.maxTime = 3;
-						break;
-					default:
-						return;
+		if (!this.isCollision) {
+			this.arrowMove.map(item => {
+				if (item.keyIsUp) {
+					switch (item.keyCode) {
+						case 38: //up
+							//this.setY(this.getY() - this.speed);
+							break;
+						case 40: //down
+							//this.setY(this.getY() + this.speed);
+							break;
+						case 37: //left
+				
+							console.log(this.getX());
+							//attention  au superieur
+							if (this.getX() > 0) {
+								this.setX(this.getX() - this.speed);
+								this.animation.direction = "left";
+							
+							} else {
+								this.animation.direction = "left";
+								this.x = 0;
+							
+							} 
+							/* this.setX(this.getX() - this.speed);
+							this.animation.direction = "left"; */
+							break;
+						case 39: //right
+							this.setX(this.getX() + this.speed);
+							this.animation.direction = "right";
+							break;
+						case 16: //shift
+							this.speed = 5;
+							this.animation.maxTime = 3;
+							break;
+						default:
+							return;
+					}
 				}
-			}
-		});
+			});
+		} else {			
+			this.setX(0);
+		}
 
 	}
 	draw(ctx) {
@@ -176,7 +204,7 @@ class CollisionDetector {
 				direction: "down"
 			});
 		}
-		if (elem.getX() <= 0) {
+		if (elem.getX() < 0) {
 			//Check left
 			elem.effectCollision({
 				type: "canvas",
@@ -204,8 +232,8 @@ class Game {
 		this.canvasHeight = canvasHeight;
 		this.collisionDetector = new CollisionDetector(canvasWidth, canvasHeight);
 		this.characters = {
-			rick: new Character(tabAssets[0], 60, ((canvasHeight / 3) * 2) - 80, 60, 79),
-			morty: new Character(tabAssets[1], 0, ((canvasHeight / 3) * 2) - 79, 60, 79),
+			rick: new Character(tabAssets[0], 120, ((canvasHeight / 3) * 2) - 80, 60, 79),
+			morty: new Character(tabAssets[1], 2, ((canvasHeight / 3) * 2) - 79, 60, 79),
 		};
 		this.actualStage = 0;
 		this.stages = this.createStages();
@@ -217,15 +245,18 @@ class Game {
 		this.stages[this.actualStage].start(this.ctxs, this.canvasWidth, this.canvasHeight, this.switchStage);
 	}
 	switchStage() {
+		//Clear all Canvas
 		this.ctxs.back.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 		this.ctxs.game.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 		this.ctxs.ui.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-
+		//Clean movement of characters
 		this.characters.rick.restartCharacter();
 		this.characters.morty.restartCharacter();
-
+		//Remove event of previous stage
 		this.stages[this.actualStage].removeListener();
+		//Change stage
 		this.actualStage += 1;
+		//Load event for the next stage and start it
 		this.stages[this.actualStage].loadListeners();
 		this.stages[this.actualStage].start(this.ctxs, this.canvasWidth, this.canvasHeight, this.switchStage);
 	}
@@ -238,7 +269,6 @@ class Game {
 			}
 			var fctMap = function (elem) {
 				if (elem.keyCode == event.keyCode) {
-					console.log("stage1");
 					elem.keyIsUp = true;
 				}
 			}
@@ -264,7 +294,6 @@ class Game {
 			}
 			this.characters.rick.arrowMove.map(elem => {
 				if (elem.keyCode == event.keyCode) {
-					console.log("stage1 rick");
 					this.characters.rick.animation.frame = 0;
 					this.characters.rick.animation.direction = "stayStill";
 					elem.keyIsUp = false;
@@ -276,7 +305,6 @@ class Game {
 			});
 			this.characters.morty.arrowMove.map(elem => {
 				if (elem.keyCode == event.keyCode) {
-					console.log("stage1 morty");
 					this.characters.morty.animation.frame = 0;
 					this.characters.morty.animation.direction = "stayStill";
 					elem.keyIsUp = false;
@@ -288,7 +316,7 @@ class Game {
 			});
 			event.preventDefault();
 		}
-		var stage1 = new Stage([this.tabAssets[2]], [], this.characters, stage1FctDown, stage1FctUp);
+		var stage1 = new Stage([this.tabAssets[2]], [], this.characters, this.collisionDetector, stage1FctDown, stage1FctUp);
 
 		stage1.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
 			//Background
@@ -296,15 +324,16 @@ class Game {
 			ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
 
 			// Define portal
-			var speedPortal = 0.3;
-			var posProtal = 300;
-			var maxHPortal = 330;
+			var speedPortal = 0.2;
+			var posProtal = 320;
+			var maxHPortal = 340;
 			var dirPortal = true;
 			var portal = getPortalElement(this.elemStage[0]);
 
 			var rick = this.characters.rick;
 			var morty = this.characters.morty;
 
+			var objCollision = this.collisionDetector;
 
 			var gradient = ctxs.game.createLinearGradient(0, 0, canvasWidth, 0);
 			gradient.addColorStop("0", "black");
@@ -312,6 +341,13 @@ class Game {
 			gradient.addColorStop("0.60", "yellow");
 			gradient.addColorStop("1.0", "green");
 
+			/*var tabobj = [{s:"truc",x:30,y:30},{s:"truc",x:30,y:30}];
+			function nameFuntion(ctx,tabobj,font){
+				ctx.font = font;
+				tabobj.map(function(elem){
+					ctx.fillText(elem.s,elem.x,elem.y);
+				});
+			} */
 			ctxs.ui.font = "16px Arial";
 			ctxs.ui.fillText("Pierre Rouzaud", 30, 30);
 			ctxs.ui.fillText("Tél : 06 51 90 93 46", 30, 50);
@@ -334,12 +370,15 @@ class Game {
 			window.requestAnimationFrame(loop);
 
 			function loop() {
+				/* objCollision.isOutCanvas(rick);
+				objCollision.isOutCanvas(morty); */ 
 				//gameDraw
 				ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
 
 				ctxs.back.fillStyle = gradient;
 				ctxs.back.fillRect(0, ((canvasHeight / 3) * 2), canvasWidth, 1);
-
+				console.log(morty.x);
+				
 				rick.draw(ctxs.game);
 				morty.draw(ctxs.game);
 
@@ -352,7 +391,7 @@ class Game {
 				if (posProtal < maxHPortal && dirPortal) {
 					posProtal += speedPortal;
 				} else {
-					if (posProtal > 300) {
+					if (posProtal > 320) {
 						posProtal = posProtal - speedPortal;
 						dirPortal = false;
 					} else {
@@ -362,7 +401,6 @@ class Game {
 				portal.draw(ctxs.game, -((canvasWidth + 175) * 2), posProtal, 175, 175);
 				ctxs.game.restore();
 				if (morty.x > canvasWidth - 130) {
-					console.log(this);
 					fctStop();
 				} else {
 					window.requestAnimationFrame(loop);
@@ -402,12 +440,39 @@ class Game {
 			});
 			event.preventDefault();
 		}
-		var stage2 = new Stage([this.tabAssets[2],this.tabAssets[3],this.tabAssets[4],this.tabAssets[5]], [], this.characters, stage2FctDown, stage2FctUp);
+		var elemStage2 = [
+			this.tabAssets[2],
+			this.tabAssets[3],
+			this.tabAssets[4],
+			this.tabAssets[5]
+		];
+		var elemBackStage2 = [
+			this.tabAssets[6],
+			this.tabAssets[7],
+			this.tabAssets[8],
+			this.tabAssets[9],
+			this.tabAssets[10],
+			this.tabAssets[11],
+			this.tabAssets[12],
+		];
+		var stage2 = new Stage(
+			elemStage2,
+			elemBackStage2,
+			this.characters,
+			this.collisionDetector,
+			stage2FctDown,
+			stage2FctUp
+		);
 
 		stage2.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
 			//Background
-			ctxs.back.fillStyle = "navy";
-			ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
+			/* ctxs.back.fillStyle = "navy";
+			ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight); */
+
+			this.elemBack.map(function (elem) {
+				var s = new Sprite(elem, 0, 0, elem.width, elem.height);
+				s.draw(ctxs.back, 0, 0, canvasWidth, canvasHeight);
+			});
 
 			// Define portal
 			var speedPortal = 0.3;
@@ -419,11 +484,12 @@ class Game {
 			this.characters.rick.x = 850;
 			this.characters.rick.y = 50;
 			var rick = this.characters.rick;
-			this.characters.morty.x = canvasWidth/2;
+			this.characters.morty.x = canvasWidth / 2;
+			this.characters.morty.y = 465;
 			this.characters.morty.changeImg(this.elemStage[1]);
 			var morty = this.characters.morty;
 
-		
+
 
 			window.requestAnimationFrame(loop);
 
@@ -432,25 +498,22 @@ class Game {
 				ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight);
 
 				// to see morty
-				clearCircle(ctxs.ui,100,morty.x,morty.y,30,30);
+				clearCircle(ctxs.ui, 100, morty.x, morty.y, 30, 30);
 				//////////////////
 				//to see rick
-				clearCircle(ctxs.ui,70,rick.x,rick.y,30,35);
+				clearCircle(ctxs.ui, 70, rick.x, rick.y, 30, 35);
 				//////////////////
 				//ctxs.ui.clearRect(rick.x-(rick.width/2), rick.y-(rick.height/2), rick.width*2, rick.height*2);
 				//gameDraw
 				ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
 
-				ctxs.back.fillStyle = "black";
-				ctxs.back.fillRect(0, ((canvasHeight / 3) * 2), canvasWidth, 1);
+				/* ctxs.back.fillStyle = "black";
+				ctxs.back.fillRect(0, ((canvasHeight / 3) * 2), canvasWidth, 1); */
 
 				rick.draw(ctxs.game);
 				morty.draw(ctxs.game);
 
-
-				
 				window.requestAnimationFrame(loop);
-
 
 			}
 		}
@@ -458,19 +521,19 @@ class Game {
 		stages.push(stage1);
 		stages.push(stage2);
 
-
 		return stages;
 	}
 }
 
 class Stage {
-	constructor(elemStage, elemBack, characters, fctKeyDown, fctKeyUp) {
+	constructor(elemStage, elemBack, characters, collisionDetector, fctKeyDown, fctKeyUp) {
 		this.elemStage = elemStage;
 		this.elemBack = elemBack;
 		this.fctKeyDown = fctKeyDown;
 		this.fctKeyUp = fctKeyUp;
 		this.characters = characters;
 		this.startStage = false;
+		this.collisionDetector = collisionDetector;
 
 		this.fctKeyDown = this.fctKeyDown.bind(this);
 		this.fctKeyUp = this.fctKeyUp.bind(this);
@@ -509,11 +572,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	var tabSrc = [
 		"assets/character/rick.png",
-		"assets/character/morty.png", 
-		"assets/elements/element.png", 
+		"assets/character/morty.png",
+		"assets/elements/element.png",
 		"assets/character/mortyNoEye.png",
 		"assets/character/mortyOneEye.png",
 		"assets/character/mortyThreeEye.png",
+		//backgroundForest
+		"assets/background/forest/background.png",
+		"assets/background/forest/bigClouds.png",
+		"assets/background/forest/hill.png",
+		"assets/background/forest/bushes.png",
+		"assets/background/forest/distantTrees.png",
+		"assets/background/forest/tree.png",
+		"assets/background/forest/ground.png"
+
 	]
 	//loadAssets(tabSrc, initGame);
 	loadAssets(tabSrc, initGameClass);

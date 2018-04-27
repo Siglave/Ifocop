@@ -83,6 +83,7 @@ class PlayerShip extends Coordinate {
 						if (this.getX() > 0) {
 							this.setX(this.getX() - this.speed);
 						} else {
+							console.log("yoleft");
 							this.setX(0);
 						}
 						break;
