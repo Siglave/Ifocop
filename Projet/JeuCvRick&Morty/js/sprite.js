@@ -35,7 +35,7 @@ function getAnimationCharacter(img) {
         right: tabSprite,
         frame: 0,
         direction:"stayStill",
-        maxTime : 8,// set how much time the frame appear before next one 
+        maxTime : 10,// set how much time the frame appear before next one 
         actualTime : 0
     }
     return objAnimation;

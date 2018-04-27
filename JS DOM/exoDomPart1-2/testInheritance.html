@@ -77,7 +77,7 @@
     }
 
     window.setTimeout(maison.sayNom,1000); */
-    class Maison {
+   /*  class Maison {
         constructor(nom){
             this.nom = nom;
         }
@@ -94,8 +94,40 @@
 
     m.sayNom();
     m.sayTruc();
-    console.log(m);
+    console.log(m); */
     
+    class Game {
+        constructor(variable){
+            this.variable = variable
+            this.stages = this.createStage();
+        }
+        createStage(){
+            var stages = [];
+            var stage1 = new Stage("untruc");
+
+            stage1.add = function(){
+                console.log(this);
+                console.log(this.testVar);
+                console.log(this.variable);
+            }
+            stages.push(stage1);
+            return stages;
+        }
+        startGame(){
+            this.stages.map(function(elem){
+                elem.add();
+            });
+        }
+
+    }
+    class Stage{
+        constructor(testVar){
+            this.testVar = testVar;
+        }
+
+    }
+    var game = new Game("yoyo");
+    game.startGame();
 </script>
 
 <body>
