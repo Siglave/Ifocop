@@ -1,3 +1,4 @@
+// http://spritedatabase.net/file/21543/Horse
 class Sprite {
     constructor(img, sx, sy, sWidth, sHeight) {
         /* var img = new Image(sWidth,sHeight);
