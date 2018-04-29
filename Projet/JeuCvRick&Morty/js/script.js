@@ -161,34 +161,40 @@ class CollisionDetector {
     }
     isOutCanvas(elem) {
         elem.setIsCollision(false);
-        if (elem.getY() <= 0) {
+        if (elem.y <= 0) {
             //Check up
             elem.effectCollision({
                 type: "canvas",
                 direction: "up"
             });
+            return { isOut: false };
         }
-        if (elem.getY() + elem.height >= this.canvasHeight) {
+        if (elem.y + elem.height >= this.canvasHeight) {
             //Check down
             elem.effectCollision({
                 type: "canvas",
                 direction: "down"
             });
+            return { isOut: false };
         }
-        if (elem.getX() < 0) {
+        if (elem.x < 0) {
             //Check left
-            elem.effectCollision({
+            return elem.effectCollision({
                 type: "canvas",
-                direction: "left"
+                direction: "left",
+                offset: elem.x + elem.width,
+                canvasWidth: this.canvasWidth
             });
         }
-        if (elem.getX() + elem.width >= this.canvasWidth) {
+        if (elem.x + elem.width >= this.canvasWidth) {
             //Check right
             elem.effectCollision({
                 type: "canvas",
                 direction: "right"
             });
+            return { isOut: false };
         }
+        return { isOut: false };
     }
     testCollision() {}
     /* trucRick(elem,x){
@@ -457,7 +463,21 @@ class Game {
             this.tabAssets[2],
             this.tabAssets[3],
             this.tabAssets[4],
-            this.tabAssets[5]
+            this.tabAssets[5],
+            // Clouds
+            this.tabAssets[13],
+            this.tabAssets[14],
+            this.tabAssets[15],
+            this.tabAssets[16],
+            this.tabAssets[17],
+            //Skills
+            this.tabAssets[18],
+            this.tabAssets[19],
+            this.tabAssets[20],
+            this.tabAssets[21],
+            this.tabAssets[22],
+            //morty
+            this.tabAssets[1]
         ];
         var elemBackStage2 = [
             this.tabAssets[6],
@@ -478,22 +498,46 @@ class Game {
         );
 
         stage2.start = function(ctxs, canvasWidth, canvasHeight, fctStop) {
+            var elemStage = this.elemStage;
             //Background
-            /* ctxs.back.fillStyle = "navy";
-			ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight); */
-
             this.elemBack.map(function(elem) {
                 var s = new Sprite(elem, 0, 0, elem.width, elem.height);
                 s.draw(ctxs.back, 0, 0, canvasWidth, canvasHeight);
             });
-
+            ///////////////////////////////
             // Define portal
-            var speedPortal = 0.3;
-            var posProtal = 300;
-            var maxHPortal = 330;
-            var dirPortal = true;
-            var portal = getPortalElement(this.elemStage[0]);
-
+            //var portal = getPortalElement(this.elemStage[0]);
+            ///////////////////////////////////////////
+            // Create Clouds and Skills
+            var skills = [];
+            var clouds = [];
+            for (var i = 0; i < 5; i++) {
+                var cloud = new Cloud(
+                    this.elemStage[randomNumber(4, 8)],
+                    canvasWidth + randomNumber(0, canvasWidth),
+                    randomNumber(0, 150),
+                    110,
+                    70
+                );
+                cloud.speed = randomNumber(1, 3);
+                console.log( cloud.speed);
+                
+                if (randomNumber(1, 2) == 2) {
+                    var skill = new Skill(
+                        this.elemStage[randomNumber(9, 13)],
+                        cloud.x + 30,
+                        cloud.y + 10,
+                        40,
+                        50,
+                        randomNumber(0, canvasWidth - 50)
+                    );
+                    skill.speed = cloud.speed;
+                    skills.push(skill);
+                }
+                clouds.push(cloud);
+            }
+            //////////////////////////////////////
+            //Characters
             this.characters.rick.x = 850;
             this.characters.rick.y = 50;
             var rick = this.characters.rick;
@@ -501,30 +545,129 @@ class Game {
             this.characters.morty.y = 465;
             this.characters.morty.changeImg(this.elemStage[1]);
             var morty = this.characters.morty;
-
+            ///////////////////////////////
+            //Detect Collision
             var objCollision = this.collisionDetector;
-
+            //////////////////////
+            //Player
+            var scorePlayer = 0;
+            var visionPlayer = 100;
+            var statutGame = "noEye";
+            //////////
             window.requestAnimationFrame(loop);
 
             function loop() {
+                ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
+                ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
+                // Collision
                 objCollision.isOutCanvas(morty);
 
-                ctxs.ui.fillStyle = "black";
-                ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight);
-
-                // to see morty
-                clearCircle(ctxs.ui, 100, morty.x, morty.y, 30, 30);
-                //////////////////
-                //to see rick
-                clearCircle(ctxs.ui, 70, rick.x, rick.y, 30, 35);
+                //////////////
+                if(visionPlayer < 500){
+                    ctxs.ui.fillStyle = "black";
+                    ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight);
+                    // to see morty
+                    clearCircle(ctxs.ui, visionPlayer, morty.x, morty.y, 30, 30);
+                    //////////////////
+                    //to see rick
+                    clearCircle(ctxs.ui, 70, rick.x, rick.y, 30, 35);
+                }               
                 //////////////////
                 //ctxs.ui.clearRect(rick.x-(rick.width/2), rick.y-(rick.height/2), rick.width*2, rick.height*2);
                 //gameDraw
-                ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
-
+                //ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 /* ctxs.back.fillStyle = "black";
 				ctxs.back.fillRect(0, ((canvasHeight / 3) * 2), canvasWidth, 1); */
+                //Draw Clouds
+                var testCollisionCloud;
+                clouds.map(function(cloud) {
+                    testCollisionCloud = objCollision.isOutCanvas(cloud);
+                    if (testCollisionCloud.isOut) {
+                        if (randomNumber(1, 2) == 2) {
+                            setTimeout(function() {
+                                var skill = new Skill(
+                                    elemStage[randomNumber(9, 13)],
+                                    cloud.x + 30,
+                                    cloud.y + 10,
+                                    40,
+                                    50,
+                                    randomNumber(0, canvasWidth - 50)
+                                );
+                                skill.speed = cloud.speed;
+                                skills.push(skill);
+                            }, 0);
+                        }
+                    }
+                    cloud.draw(ctxs.game);
+                });
+                skills.map(function(skill, index) {
+                    if (
+                        objCollision.isCollision(
+                            morty.x,
+                            morty.y,
+                            morty.width,
+                            morty.height,
+                            skill.x,
+                            skill.y,
+                            skill.width,
+                            skill.height - 35
+                        )
+                    ) {
+                        setTimeout(function() {
+                            scorePlayer += 1;
+                            visionPlayer += 25;
+                            skills.splice(index, 1);
+                            if (visionPlayer >= 200) {
+                                if (visionPlayer >= 350) {
+                                    if (visionPlayer >= 500) {
+                                        morty.changeImg(elemStage[3]);
+                                    } else {
+                                        morty.changeImg(elemStage[14]);
+                                    }
+                                } else {
+                                    morty.changeImg(elemStage[2]);
+                                }
+                            }
+                            console.log(scorePlayer);
+                        }, 0);
+                    } else {
+                        if (skill.y > canvasHeight) {
+                            setTimeout(function() {
+                                skills.splice(index, 1);
+                            }, 0);
+                        } else {
+                            if (skill.x < skill.distanceFall) {
+                                skill.draw(ctxs.game);
+                            } else {
+                                skill.draw(ctxs.ui);
+                            }
+                        }
+                    }
+                });
 
+                ////////////////////
+                //Morty
+                /*  if (visionPlayer < 200 && statutGame != "noEye") {
+                    morty.changeImg(elemStage[1]);
+                    statutGame = "noEye";
+                }else{
+
+                    if (visionPlayer < 350 && statutGame != "oneEye") {
+                        morty.changeImg(elemStage[2]);         
+                        statutGame = "oneEye";
+                    }else{
+                        if (visionPlayer < 500 && statutGame != "twoEye") {
+                            morty.changeImg(elemStage[14]);
+                            statutGame = "twoEye";
+                        }else{
+
+                            if (visionPlayer < 700 && statutGame != "threeEye") {
+                                morty.changeImg(elemStage[3]);
+                                statutGame = "threeEye";
+                            }
+                        }
+                    }
+                } */
                 rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
 
@@ -608,7 +751,19 @@ document.addEventListener("DOMContentLoaded", function() {
         "assets/background/forest/bushes.png",
         "assets/background/forest/distantTrees.png",
         "assets/background/forest/tree.png",
-        "assets/background/forest/ground.png"
+        "assets/background/forest/ground.png",
+        //clouds
+        "assets/elements/cloud1.png",
+        "assets/elements/cloud2.png",
+        "assets/elements/cloud3.png",
+        "assets/elements/cloud4.png",
+        "assets/elements/cloud5.png",
+        //Skills
+        "assets/skills/html.png",
+        "assets/skills/css.png",
+        "assets/skills/js.png",
+        "assets/skills/php.png",
+        "assets/skills/jquery.png"
     ];
     //loadAssets(tabSrc, initGame);
     loadAssets(tabSrc, initGameClass);

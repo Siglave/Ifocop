@@ -37,7 +37,7 @@ class Portal extends Element {
         super(x, y,width, height);
         this.img = new Sprite(img, 2483, 329, 670, 670);
         this.speed = 0.2;
-        this.direction = true;
+        this.direction = true; 
         this.maxMouv = 340;
     }
     move() {
@@ -56,9 +56,73 @@ class Portal extends Element {
         this.move();
 
         ctx.save();
-        ctx.scale(0.4, 1);
+        ctx.scale(0.4, 1)
         // 870 * 2.5 cause 1/0.4 = 2.5
         this.img.draw(ctx,this.x*2.5, this.y, this.width, this.height);
         ctx.restore();
     }
+}
+
+class Cloud extends Element{
+    constructor(img, x, y, width, height) {
+        super(x, y,width, height);
+        this.img = new Sprite(img, 0, 0, img.width, img.height);
+        this.speed = 1;
+        this.isCollision = false;
+    }
+    setIsCollision(bool) {
+        this.isCollision = bool;
+    }
+    effectCollision(collision){
+        switch (collision.type) {
+            case "canvas":
+                switch (collision.direction) {
+                    case "left":
+                        //check if all img out
+                        if(collision.offset < 0){
+                            this.x = collision.canvasWidth;
+                            this.speed = randomNumber(1,4);
+                            return {isOut: true,speed:this.speed};
+                        }else{
+                            return {isOut: false};
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+    move(){
+        this.x -= this.speed;
+    }
+    draw(ctx){
+        this.move();
+        this.img.draw(ctx,this.x, this.y, this.width, this.height);
+    }
+}
+
+class Skill extends Element{
+    constructor(img, x, y, width, height,distanceFall) {
+        super(x, y,width, height);
+        this.img = new Sprite(img, 0, 0, img.width, img.height);
+        this.speed = 1;
+        this.isCollision = false;
+        this.distanceFall = distanceFall;
+    }
+    move(){
+        if (this.x < this.distanceFall) {
+            this.y += this.speed;
+        }else{
+            this.x -= this.speed;
+        }
+    }
+    draw(ctx){
+        this.move();
+        this.img.draw(ctx,this.x, this.y, this.width, this.height);
+    }
+
 }
