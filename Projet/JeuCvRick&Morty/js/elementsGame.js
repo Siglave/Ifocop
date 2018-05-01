@@ -154,10 +154,10 @@ class Bomb extends Element {
             if (this.explode) {
                 this.animation.explosion.explode[this.animation.explosion.frame % 12].draw(
                     ctx,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
+                    this.x-(this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth/2)+(this.width/2),
+                    this.y-(this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight/2)+(this.height/2),
+                    this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth,
+                    this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight
                 );
                 if (this.animation.explosion.actualTime < this.animation.explosion.maxTime) {
                     this.animation.explosion.actualTime++;
