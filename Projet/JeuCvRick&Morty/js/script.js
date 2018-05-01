@@ -216,25 +216,28 @@ class CollisionDetector {
 }
 
 class Game {
-    constructor(tabAssets, canvasWidth, canvasHeight, ctxs) {
+    constructor(objAssets, canvasWidth, canvasHeight, ctxs) {
         this.ctxs = ctxs; // obj ctxs {ui:ctx,game:ctx,back:ctx}
-        this.tabAssets = tabAssets;
+        this.objAssets = objAssets;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.collisionDetector = new CollisionDetector(
             canvasWidth,
             canvasHeight
         );
+        /*         console.log(objAssets.characters.rick[0][0]);
+         */
+        console.log(objAssets.characters.morty);
         this.characters = {
             rick: new Character(
-                tabAssets[0],
+                objAssets.characters.rick[0],
                 60,
                 canvasHeight / 3 * 2 - 80,
                 60,
                 79
             ),
             morty: new Character(
-                tabAssets[1],
+                objAssets.characters.morty[2],
                 0,
                 canvasHeight / 3 * 2 - 79,
                 60,
@@ -335,8 +338,12 @@ class Game {
             });
             event.preventDefault();
         };
+        console.log(this.objAssets.elements.portal[0][0]);
+        var elemStage = {
+            portal: this.objAssets.elements.portal[0]
+        };
         var stage1 = new Stage(
-            [this.tabAssets[2]], [],
+            elemStage, [],
             this.characters,
             this.collisionDetector,
             stage1FctDown,
@@ -349,7 +356,7 @@ class Game {
             ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
 
             // Define portal
-            var portal = new Portal(this.elemStage[0], 870, 320, 175, 175);
+            var portal = new Portal(this.elemStage.portal, 870, 320, 175, 175);
 
             var rick = this.characters.rick;
             var morty = this.characters.morty;
@@ -465,38 +472,15 @@ class Game {
             });
             event.preventDefault();
         };
-        var elemStage2 = [
-            this.tabAssets[2],
-            this.tabAssets[3],
-            this.tabAssets[4],
-            this.tabAssets[5],
-            // Clouds
-            this.tabAssets[13],
-            this.tabAssets[14],
-            this.tabAssets[15],
-            this.tabAssets[16],
-            this.tabAssets[17],
-            //Skills
-            this.tabAssets[18],
-            this.tabAssets[19],
-            this.tabAssets[20],
-            this.tabAssets[21],
-            this.tabAssets[22],
-            //morty
-            this.tabAssets[1],
-            //Bomb && explo
-            this.tabAssets[23],
-            this.tabAssets[24],
-        ];
-        var elemBackStage2 = [
-            this.tabAssets[6],
-            this.tabAssets[7],
-            this.tabAssets[8],
-            this.tabAssets[9],
-            this.tabAssets[10],
-            this.tabAssets[11],
-            this.tabAssets[12]
-        ];
+        var elemStage2 = {
+            morty: this.objAssets.characters.morty,
+            rick: this.objAssets.characters.rick,
+            clouds: this.objAssets.elements.clouds,
+            skills: this.objAssets.elements.skills,
+            bomb: this.objAssets.elements.bomb,
+            explosion: this.objAssets.effects.explosion
+        }
+        var elemBackStage2 = this.objAssets.background.forest;
         var stage2 = new Stage(
             elemStage2,
             elemBackStage2,
@@ -523,7 +507,7 @@ class Game {
             var clouds = [];
             for (var i = 0; i < 20; i++) {
                 var cloud = new Cloud(
-                    this.elemStage[randomNumber(4, 8)],
+                    this.elemStage.clouds[randomNumber(0, this.elemStage.clouds.length - 1)],
                     canvasWidth + randomNumber(0, canvasWidth),
                     randomNumber(0, 150),
                     110,
@@ -533,7 +517,7 @@ class Game {
 
                 if (randomNumber(1, 10) == 2) {
                     var skill = new Skill(
-                        this.elemStage[randomNumber(9, 13)],
+                        this.elemStage.skills[randomNumber(0, this.elemStage.skills.length - 1)],
                         cloud.x + 30,
                         cloud.y + 10,
                         40,
@@ -545,8 +529,8 @@ class Game {
                 } else {
                     if (true) {
                         var bomb = new Bomb(
-                            this.elemStage[15],
-                            this.elemStage[16],
+                            this.elemStage.bomb[0],
+                            this.elemStage.explosion[0],
                             cloud.x + 30,
                             cloud.y + 10,
                             50,
@@ -566,7 +550,7 @@ class Game {
             var rick = this.characters.rick;
             this.characters.morty.x = canvasWidth / 2;
             this.characters.morty.y = 465;
-            this.characters.morty.changeImg(this.elemStage[1]);
+            this.characters.morty.changeImg(this.elemStage.morty[0]);
             var morty = this.characters.morty;
             ///////////////////////////////
             //Detect Collision
@@ -588,7 +572,7 @@ class Game {
                 //////////////
                 if (visionPlayer < 500) {
                     ctxs.ui.fillStyle = "black";
-                    ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight); 
+                    ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight);
                     // to see morty
                     clearCircle(ctxs.ui, visionPlayer, morty.x, morty.y, 30, 30);
                     //////////////////
@@ -604,7 +588,7 @@ class Game {
                         if (randomNumber(1, 2) == 2) {
                             setTimeout(function () {
                                 var skill = new Skill(
-                                    elemStage[randomNumber(9, 13)],
+                                    elemStage.skills[randomNumber(0, elemStage.skills.length - 1)],
                                     cloud.x + 30,
                                     cloud.y + 10,
                                     40,
@@ -617,8 +601,8 @@ class Game {
                         } else {
                             setTimeout(function () {
                                 var bomb = new Bomb(
-                                    elemStage[15],
-                                    elemStage[16],
+                                    elemStage.bomb[0],
+                                    elemStage.explosion[0],
                                     cloud.x + 30,
                                     cloud.y + 10,
                                     50,
@@ -652,12 +636,12 @@ class Game {
                             if (visionPlayer >= 200) {
                                 if (visionPlayer >= 350) {
                                     if (visionPlayer >= 500) {
-                                        morty.changeImg(elemStage[3]);
+                                        morty.changeImg(elemStage.morty[3]);
                                     } else {
-                                        morty.changeImg(elemStage[14]);
+                                        morty.changeImg(elemStage.morty[2]);
                                     }
                                 } else {
-                                    morty.changeImg(elemStage[2]);
+                                    morty.changeImg(elemStage.morty[1]);
                                 }
                             }
                             console.log(scorePlayer);
@@ -691,18 +675,18 @@ class Game {
                         ) && !bomb.explode
                     ) {
                         bomb.explode = true;
-                        if(visionPlayer >=100){
-                            visionPlayer -= 20;                           
+                        if (visionPlayer >= 100) {
+                            visionPlayer -= 20;
                             if (visionPlayer <= 200) {
-                                morty.changeImg(elemStage[1]);
+                                morty.changeImg(elemStage.morty[0]);
                             } else {
                                 if (visionPlayer <= 350) {
-                                    morty.changeImg(elemStage[2]);
+                                    morty.changeImg(elemStage.morty[1]);
                                 } else {
                                     if (visionPlayer <= 500) {
-                                        morty.changeImg(elemStage[14]);
+                                        morty.changeImg(elemStage.morty[2]);
                                     } else {
-                                        morty.changeImg(elemStage[3]);
+                                        morty.changeImg(elemStage.morty[3]);
                                     }
                                 }
                             }
@@ -767,7 +751,9 @@ class Stage {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    function initGameClass(tabAssets) {
+    function initGameClass(objAssets) {
+        console.log(objAssets);
+
         var canvasBack = document.getElementById("gameBackGround");
         var canvasGame = document.getElementById("gameCanvas");
         var canvasUI = document.getElementById("gameUI");
@@ -781,46 +767,12 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         var game = new Game(
-            tabAssets,
+            objAssets,
             canvasBack.width,
             canvasBack.height,
             ctxs
         );
         game.startGame();
     }
-
-    var tabSrc = [
-        "assets/character/rick.png",
-        "assets/character/morty.png",
-        "assets/elements/element.png",
-        "assets/character/mortyNoEye.png",
-        "assets/character/mortyOneEye.png",
-        "assets/character/mortyThreeEye.png",
-        //backgroundForest
-        "assets/background/forest/background.png",
-        "assets/background/forest/bigClouds.png",
-        "assets/background/forest/hill.png",
-        "assets/background/forest/bushes.png",
-        "assets/background/forest/distantTrees.png",
-        "assets/background/forest/tree.png",
-        "assets/background/forest/ground.png",
-        //clouds
-        "assets/elements/cloud1.png",
-        "assets/elements/cloud2.png",
-        "assets/elements/cloud3.png",
-        "assets/elements/cloud4.png",
-        "assets/elements/cloud5.png",
-        //Skills
-        "assets/skills/html.png",
-        "assets/skills/css.png",
-        "assets/skills/js.png",
-        "assets/skills/php.png",
-        "assets/skills/jquery.png",
-        //Bomb and explos
-        "assets/elements/bomb.png",
-        "assets/effects/effectExplo.png",
-
-    ];
-    //loadAssets(tabSrc, initGame);
-    loadAssets(tabSrc, initGameClass);
+    loadAssets(initGameClass);
 });
