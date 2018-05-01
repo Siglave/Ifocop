@@ -627,12 +627,13 @@ class Game {
                             skill.y,
                             skill.width,
                             skill.height - 35
-                        )
+                        ) && !skill.collision
                     ) { // Collision
                         setTimeout(function () {
                             scorePlayer += 1;
                             visionPlayer += 25;
-                            skills.splice(index, 1);
+                            skill.collision = true
+                            //skills.splice(index, 1);
                             if (visionPlayer >= 200) {
                                 if (visionPlayer >= 350) {
                                     if (visionPlayer >= 500) {
@@ -647,7 +648,7 @@ class Game {
                             console.log(scorePlayer);
                         }, 0);
                     } else { // Pas de collision
-                        if (skill.y > canvasHeight) {
+                        if (skill.y > canvasHeight || skill.alpha < 0) {
                             setTimeout(function () {
                                 skills.splice(index, 1);
                             }, 0);

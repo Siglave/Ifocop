@@ -117,17 +117,30 @@ class Skill extends Element {
         this.speed = 1;
         this.isCollision = false;
         this.distanceFall = distanceFall;
+        this.alpha = 1;
+        this.collision = false;
     }
     move() {
-        if (this.x < this.distanceFall) {
-            this.y += this.speed;
-        } else {
-            this.x -= this.speed;
+        if(this.collision){           
+            this.y -= 0.5;
+        }else{
+            if (this.x < this.distanceFall) {
+                this.y += this.speed;
+            } else {
+                this.x -= this.speed;
+            }      
         }
     }
     draw(ctx) {
         this.move();
-        this.img.draw(ctx, this.x, this.y, this.width, this.height);
+        if(this.collision){
+            ctx.fillStyle = "rgba(255, 255, 255, " + this.alpha + ")";
+            ctx.font = "20pt Arial";
+            ctx.fillText("+1", this.x, this.y+(this.height/2));
+            this.alpha -= 0.005;
+        }else{
+            this.img.draw(ctx, this.x, this.y, this.width, this.height);
+        }
     }
 
 }
