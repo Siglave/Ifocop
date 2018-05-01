@@ -8,8 +8,7 @@ class Character extends Coordinate {
         this.animation = getAnimationCharacter(img);
         this.speed = 2;
         this.isCollision = false;
-        this.arrowMove = [
-            {
+        this.arrowMove = [{
                 keyCode: 38,
                 keyIsUp: false
             }, //up
@@ -35,7 +34,7 @@ class Character extends Coordinate {
         this.animation = getAnimationCharacter(img);
     }
     restartCharacter() {
-        this.arrowMove.map(function(elem) {
+        this.arrowMove.map(function (elem) {
             elem.keyIsUp = false;
         });
         this.animation.direction = "stayStill";
@@ -167,7 +166,9 @@ class CollisionDetector {
                 type: "canvas",
                 direction: "up"
             });
-            return { isOut: false };
+            return {
+                isOut: false
+            };
         }
         if (elem.y + elem.height >= this.canvasHeight) {
             //Check down
@@ -175,7 +176,9 @@ class CollisionDetector {
                 type: "canvas",
                 direction: "down"
             });
-            return { isOut: false };
+            return {
+                isOut: false
+            };
         }
         if (elem.x < 0) {
             //Check left
@@ -192,9 +195,13 @@ class CollisionDetector {
                 type: "canvas",
                 direction: "right"
             });
-            return { isOut: false };
+            return {
+                isOut: false
+            };
         }
-        return { isOut: false };
+        return {
+            isOut: false
+        };
     }
     testCollision() {}
     /* trucRick(elem,x){
@@ -272,13 +279,13 @@ class Game {
     createStages() {
         var stages = [];
         /////////////////////////////// STAGE 1 //////////////////////////////////////////
-        var stage1FctDown = function(event) {
+        var stage1FctDown = function (event) {
             if (event.defaultPrevented) {
                 return;
             }
             //Only allow right move and sprint
             if (event.keyCode == 39 || event.keyCode == 16) {
-                var fctMap = function(elem) {
+                var fctMap = function (elem) {
                     if (elem.keyCode == event.keyCode) {
                         elem.keyIsUp = true;
                     }
@@ -289,11 +296,11 @@ class Game {
 
             event.preventDefault();
         };
-        var stage1FctUp = function(event) {
+        var stage1FctUp = function (event) {
             if (event.defaultPrevented) {
                 return;
             }
-            var fctMap = function(elem, character) {
+            var fctMap = function (elem, character) {
                 if (elem.keyCode == event.keyCode) {
                     character.animation.frame = 0;
                     character.animation.direction = "stayStill";
@@ -329,15 +336,14 @@ class Game {
             event.preventDefault();
         };
         var stage1 = new Stage(
-            [this.tabAssets[2]],
-            [],
+            [this.tabAssets[2]], [],
             this.characters,
             this.collisionDetector,
             stage1FctDown,
             stage1FctUp
         );
 
-        stage1.start = function(ctxs, canvasWidth, canvasHeight, fctStop) {
+        stage1.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
             //Background
             ctxs.back.fillStyle = "white";
             ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -429,11 +435,11 @@ class Game {
         };
         ///////////////////////// STAGE 2 //////////////////////////////////////
 
-        var stage2FctDown = function(event) {
+        var stage2FctDown = function (event) {
             if (event.defaultPrevented) {
                 return;
             }
-            var fctMap = function(elem) {
+            var fctMap = function (elem) {
                 if (elem.keyCode == event.keyCode) {
                     elem.keyIsUp = true;
                 }
@@ -442,7 +448,7 @@ class Game {
 
             event.preventDefault();
         };
-        var stage2FctUp = function(event) {
+        var stage2FctUp = function (event) {
             if (event.defaultPrevented) {
                 return;
             }
@@ -477,7 +483,10 @@ class Game {
             this.tabAssets[21],
             this.tabAssets[22],
             //morty
-            this.tabAssets[1]
+            this.tabAssets[1],
+            //Bomb && explo
+            this.tabAssets[23],
+            this.tabAssets[24],
         ];
         var elemBackStage2 = [
             this.tabAssets[6],
@@ -497,10 +506,10 @@ class Game {
             stage2FctUp
         );
 
-        stage2.start = function(ctxs, canvasWidth, canvasHeight, fctStop) {
+        stage2.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
             var elemStage = this.elemStage;
             //Background
-            this.elemBack.map(function(elem) {
+            this.elemBack.map(function (elem) {
                 var s = new Sprite(elem, 0, 0, elem.width, elem.height);
                 s.draw(ctxs.back, 0, 0, canvasWidth, canvasHeight);
             });
@@ -510,8 +519,9 @@ class Game {
             ///////////////////////////////////////////
             // Create Clouds and Skills
             var skills = [];
+            var bombs = [];
             var clouds = [];
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < 20; i++) {
                 var cloud = new Cloud(
                     this.elemStage[randomNumber(4, 8)],
                     canvasWidth + randomNumber(0, canvasWidth),
@@ -520,9 +530,8 @@ class Game {
                     70
                 );
                 cloud.speed = randomNumber(1, 3);
-                console.log( cloud.speed);
-                
-                if (randomNumber(1, 2) == 2) {
+
+                if (randomNumber(1, 10) == 2) {
                     var skill = new Skill(
                         this.elemStage[randomNumber(9, 13)],
                         cloud.x + 30,
@@ -533,6 +542,20 @@ class Game {
                     );
                     skill.speed = cloud.speed;
                     skills.push(skill);
+                } else {
+                    if (true) {
+                        var bomb = new Bomb(
+                            this.elemStage[15],
+                            this.elemStage[16],
+                            cloud.x + 30,
+                            cloud.y + 10,
+                            50,
+                            50,
+                            randomNumber(0, canvasWidth - 50)
+                        );
+                        bomb.speed = cloud.speed;
+                        bombs.push(bomb);
+                    }
                 }
                 clouds.push(cloud);
             }
@@ -563,28 +586,23 @@ class Game {
                 objCollision.isOutCanvas(morty);
 
                 //////////////
-                if(visionPlayer < 500){
+                if (visionPlayer < 500) {
                     ctxs.ui.fillStyle = "black";
-                    ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight);
+                    ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight); 
                     // to see morty
                     clearCircle(ctxs.ui, visionPlayer, morty.x, morty.y, 30, 30);
                     //////////////////
                     //to see rick
                     clearCircle(ctxs.ui, 70, rick.x, rick.y, 30, 35);
-                }               
-                //////////////////
-                //ctxs.ui.clearRect(rick.x-(rick.width/2), rick.y-(rick.height/2), rick.width*2, rick.height*2);
-                //gameDraw
-                //ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
-                /* ctxs.back.fillStyle = "black";
-				ctxs.back.fillRect(0, ((canvasHeight / 3) * 2), canvasWidth, 1); */
+                }
+                //////////////////               
                 //Draw Clouds
                 var testCollisionCloud;
-                clouds.map(function(cloud) {
+                clouds.map(function (cloud) {
                     testCollisionCloud = objCollision.isOutCanvas(cloud);
                     if (testCollisionCloud.isOut) {
                         if (randomNumber(1, 2) == 2) {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 var skill = new Skill(
                                     elemStage[randomNumber(9, 13)],
                                     cloud.x + 30,
@@ -596,11 +614,25 @@ class Game {
                                 skill.speed = cloud.speed;
                                 skills.push(skill);
                             }, 0);
+                        } else {
+                            setTimeout(function () {
+                                var bomb = new Bomb(
+                                    elemStage[15],
+                                    elemStage[16],
+                                    cloud.x + 30,
+                                    cloud.y + 10,
+                                    50,
+                                    50,
+                                    randomNumber(0, canvasWidth - 50)
+                                );
+                                bomb.speed = cloud.speed;
+                                bombs.push(bomb);
+                            }, 0);
                         }
                     }
                     cloud.draw(ctxs.game);
                 });
-                skills.map(function(skill, index) {
+                skills.map(function (skill, index) {
                     if (
                         objCollision.isCollision(
                             morty.x,
@@ -612,8 +644,8 @@ class Game {
                             skill.width,
                             skill.height - 35
                         )
-                    ) {
-                        setTimeout(function() {
+                    ) { // Collision
+                        setTimeout(function () {
                             scorePlayer += 1;
                             visionPlayer += 25;
                             skills.splice(index, 1);
@@ -630,9 +662,9 @@ class Game {
                             }
                             console.log(scorePlayer);
                         }, 0);
-                    } else {
+                    } else { // Pas de collision
                         if (skill.y > canvasHeight) {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 skills.splice(index, 1);
                             }, 0);
                         } else {
@@ -645,29 +677,49 @@ class Game {
                     }
                 });
 
-                ////////////////////
-                //Morty
-                /*  if (visionPlayer < 200 && statutGame != "noEye") {
-                    morty.changeImg(elemStage[1]);
-                    statutGame = "noEye";
-                }else{
-
-                    if (visionPlayer < 350 && statutGame != "oneEye") {
-                        morty.changeImg(elemStage[2]);         
-                        statutGame = "oneEye";
-                    }else{
-                        if (visionPlayer < 500 && statutGame != "twoEye") {
-                            morty.changeImg(elemStage[14]);
-                            statutGame = "twoEye";
-                        }else{
-
-                            if (visionPlayer < 700 && statutGame != "threeEye") {
-                                morty.changeImg(elemStage[3]);
-                                statutGame = "threeEye";
+                bombs.map(function (bomb, index) {
+                    if (
+                        objCollision.isCollision(
+                            morty.x,
+                            morty.y,
+                            morty.width,
+                            morty.height,
+                            bomb.x,
+                            bomb.y,
+                            bomb.width,
+                            bomb.height - 35
+                        ) && !bomb.explode
+                    ) {
+                        bomb.explode = true;
+                        if(visionPlayer >=100){
+                            visionPlayer -= 20;                           
+                            if (visionPlayer <= 200) {
+                                morty.changeImg(elemStage[1]);
+                            } else {
+                                if (visionPlayer <= 350) {
+                                    morty.changeImg(elemStage[2]);
+                                } else {
+                                    if (visionPlayer <= 500) {
+                                        morty.changeImg(elemStage[14]);
+                                    } else {
+                                        morty.changeImg(elemStage[3]);
+                                    }
+                                }
                             }
                         }
+                    } else {
+                        if (bomb.y > canvasHeight || bomb.animation.explosion.frame >= 12) {
+                            setTimeout(function () {
+                                bombs.splice(index, 1);
+                            }, 0);
+                        } else {
+                            bomb.draw(ctxs.game);
+                        }
                     }
-                } */
+                });
+
+                ////////////////////
+                //Morty
                 rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
 
@@ -714,7 +766,7 @@ class Stage {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     function initGameClass(tabAssets) {
         var canvasBack = document.getElementById("gameBackGround");
         var canvasGame = document.getElementById("gameCanvas");
@@ -763,7 +815,11 @@ document.addEventListener("DOMContentLoaded", function() {
         "assets/skills/css.png",
         "assets/skills/js.png",
         "assets/skills/php.png",
-        "assets/skills/jquery.png"
+        "assets/skills/jquery.png",
+        //Bomb and explos
+        "assets/elements/bomb.png",
+        "assets/effects/effectExplo.png",
+
     ];
     //loadAssets(tabSrc, initGame);
     loadAssets(tabSrc, initGameClass);
