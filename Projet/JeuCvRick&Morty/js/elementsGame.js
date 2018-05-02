@@ -38,13 +38,15 @@ class Portal extends Element {
         this.img = new Sprite(img, 2483, 329, 670, 670);
         this.speed = 0.2;
         this.direction = true;
-        this.maxMouv = 340;
+        this.maxMouv = y+10;
+        this.scaleX = 0.4;
+        this.scaleY = 1;
     }
     move() {
         if (this.y < this.maxMouv && this.direction) {
             this.y += this.speed;
         } else {
-            if (this.y > 320) {
+            if (this.y > this.maxMouv-20) {
                 this.y = this.y - this.speed;
                 this.direction = false;
             } else {
@@ -52,13 +54,17 @@ class Portal extends Element {
             }
         }
     }
+    setScaleXY(scaleX,scaleY){
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+    }
     draw(ctx) {
         this.move();
 
         ctx.save();
-        ctx.scale(0.4, 1)
+        ctx.scale(this.scaleX, this.scaleY)
         // 870 * 2.5 cause 1/0.4 = 2.5
-        this.img.draw(ctx, this.x * 2.5, this.y, this.width, this.height);
+        this.img.draw(ctx, this.x * (1/this.scaleX), this.y* (1/this.scaleY), this.width, this.height);
         ctx.restore();
     }
 }

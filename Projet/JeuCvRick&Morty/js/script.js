@@ -476,7 +476,8 @@ class Game {
             clouds: this.objAssets.elements.clouds,
             skills: this.objAssets.elements.skills,
             bomb: this.objAssets.elements.bomb,
-            explosion: this.objAssets.effects.explosion
+            explosion: this.objAssets.effects.explosion,
+            portal : this.objAssets.elements.portal
         }
         var elemBackStage2 = this.objAssets.background.forest;
         var stage2 = new Stage(
@@ -490,6 +491,7 @@ class Game {
 
         stage2.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
             var elemStage = this.elemStage;
+            var endStage = false;
             //Background
             this.elemBack.map(function (elem) {
                 var s = new Sprite(elem, 0, 0, elem.width, elem.height);
@@ -535,20 +537,19 @@ class Game {
             var objCollision = this.collisionDetector;
             //////////////////////
             //Player
-            var scorePlayer = 0;
+            var scorePlayer = 49;
             var visionPlayer = 100;
-            var statutGame = "noEye";
             //////////
-            window.requestAnimationFrame(loop);
+            window.requestAnimationFrame(loopGame);
 
-            function loop() {
+            function loopGame() {
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
                 // Collision
                 objCollision.isOutCanvas(morty);
 
                 //////////////
-                if (visionPlayer < 500) {
+                if (visionPlayer < 550) {
                     ctxs.ui.fillStyle = "black";
                     ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight);
                     // to see morty
@@ -587,8 +588,8 @@ class Game {
                     ) { // Collision
                         setTimeout(function () {
                             scorePlayer += skill.score;
-                            visionPlayer += 25;
-                            skill.collision = true
+                            visionPlayer += 10*skill.score;
+                            skill.collision = true;
                             //skills.splice(index, 1);
                             if (visionPlayer >= 200) {
                                 if (visionPlayer >= 350) {
@@ -600,6 +601,9 @@ class Game {
                                 } else {
                                     morty.changeImg(elemStage.morty[1]);
                                 }
+                            }
+                            if (scorePlayer >= 50) {
+                                endStage = true;
                             }
                         }, 0);
                     } else { // Pas de collision
@@ -670,8 +674,73 @@ class Game {
                 //Draw UI/////
                 drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
                 //////////////
+                if(endStage){
+                    window.requestAnimationFrame(loopEnd);
+                }else{
+                    window.requestAnimationFrame(loopGame);
+                }
+            }
+            console.log(this.elemStage);
+            
+            var portalRick = new Portal(this.elemStage.portal[0], 900, 10, 175, 175);
+            var portalMorty = new Portal(this.elemStage.portal[0], canvasWidth/2, 410, 175, 175);
+            portalRick.setScaleXY(0,0);
+            portalMorty.setScaleXY(0,0);
+            function loopEnd(){
+                ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
+                ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
+                // Collision
+                objCollision.isOutCanvas(morty);
+                //Clean Cloud
+                var testCollisionCloud;
+                clouds.map(function (cloud,index) {
+                    testCollisionCloud = objCollision.isOutCanvas(cloud);
+                    if (testCollisionCloud.isOut) {
+                        clouds.splice(index, 1);
+                    }else{
+                        cloud.draw(ctxs.game);
+                    }
+                });
+                //Clean skills
+                skills.map(function(skill,index){
+                    if (skill.y > canvasHeight ) {
+                        setTimeout(function () {
+                            skills.splice(index, 1);
+                        }, 0);
+                    } else {
+                        skill.draw(ctxs.game);
+                    }
+                });
+                //Clean bombs
+                bombs.map(function(bomb,index){
+                    if (bomb.y > canvasHeight ) {
+                        setTimeout(function () {
+                            bombs.splice(index, 1);
+                        }, 0);
+                    } else {
+                        bomb.draw(ctxs.game);
+                    }
+                });
+                rick.draw(ctxs.game);
+                morty.draw(ctxs.game);
+                if (clouds.length == 0) {
+                    if (portalMorty.scaleX < 0.4) {
+                        portalMorty.scaleX += 0.001;
+                        portalRick.scaleX += 0.001;
+                    }
+                    if (portalMorty.scaleY < 1) {
+                        portalMorty.scaleY += 0.005;
+                        portalRick.scaleY += 0.005;
+                    }
+                    portalMorty.draw(ctxs.game);
+                    portalRick.draw(ctxs.game);
+                }
 
-                window.requestAnimationFrame(loop);
+                
+                drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
+
+              
+                window.requestAnimationFrame(loopEnd);
             }
         };
         ////////////////////////////////////////////////////////////////////////

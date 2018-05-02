@@ -8,8 +8,10 @@
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/darkly/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-ae362vOLHy2F1EfJtpMbNW0i9pNM1TP2l5O4VGYYiLJKsaejqVWibbP6BSf0UU5i"
         crossorigin="anonymous"> -->
-        <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-LlPOZK7jvvPEMrrhdqVlEYmX2u/GWKdcq/p7wuVYAUladqNeK7VN1PUZQDmiqlql" crossorigin="anonymous">
-        
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/sketchy/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-LlPOZK7jvvPEMrrhdqVlEYmX2u/GWKdcq/p7wuVYAUladqNeK7VN1PUZQDmiqlql"
+        crossorigin="anonymous">
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -89,34 +91,34 @@
             <div class="col-xl-1 tomato">col-xl-1</div>
         </div>  -->
         <div class="row" style="margin-top: 200px">
-            <div class="col-6">
-                    <div class="row">
-                            <div class="col">
-                                <h1>Formulaire</h1>
-                            </div>
-                        </div>
+            <div class="col-6" style="background-color: gray">
+                <div class="row">
+                    <div class="col">
+                        <h1>Formulaire</h1>
+                    </div>
+                </div>
                 <form>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Nom</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Nom">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Prenom</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                            <input type="text" class="form-control" id="inputPassword3" placeholder="Prenom">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Mail</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                            <input type="text" class="form-control" id="inputPassword3" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">
-                            <label for="inputAddress">Message</label>
-                            <textarea  class="form-control" id="inputAddress" placeholder="1234 Main St" rows="10"></textarea>
+                        <label for="inputAddress">Message</label>
+                        <textarea class="form-control" id="inputAddress" placeholder="1234 Main St" rows="10"></textarea>
                     </div>
                     <div class="row">
                         <div class="offset-8 col-4">
@@ -125,8 +127,98 @@
                     </div>
                 </form>
             </div>
+            <div class="col-6" style="background-color: rgb(194, 194, 194)">
+                <div class="row">
+                    <div class="col">
+                        <h1>Experience</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h2>HTML</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 0%;" aria-valuenow="70"
+                                aria-valuemin="0" aria-valuemax="100">95%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h2>CSS</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 0%;" aria-valuenow="50"
+                                aria-valuemin="0" aria-valuemax="100">75%</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col">
+                        <h2>JS</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="progress" style="height: 20px;">
+                        <div class="col">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 0%;" aria-valuenow="70"
+                                aria-valuemin="0" aria-valuemax="100">80%</div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
         </div>
     </div>
 </body>
+<script>
+    $(function () {
+        console.log("fichier ok");
+        var width1 = 0;
+        var width2 = 0;
+        setInterval(function () {
+            $(".progress-bar").each(function (index) {
+                /* console.log(this);
+                console.log(elem); */
+                if (index == 0) {
+
+                    setTimeout(function () {
+                        $(this).css("width",
+                            width1 + "%");
+                        $(this).html(width1 +
+                            "%");
+                        width1 += 1;
+                        if (width1 > $(this).attr(
+                                "aria-valuenow"
+                            )) {
+                            width1 = 0;
+                        }
+                    }.bind(this), 10);
+                }
+                if (index == 1) {
+
+                    setTimeout(function () {
+                        $(this).css("width",
+                            width2 + "%");
+                        $(this).html(width2 +
+                            "%");
+                        width2 += 1;
+                        if (width2 > $(this).attr(
+                                "aria-valuenow"
+                            )) {
+                            width2 = 0;
+                        }
+                    }.bind(this), 500);
+                }
+            });
+
+        }, 150);
+    });
+</script>
 
 </html>

@@ -6,5 +6,5 @@ function drawScore(ctx, x, y, text,canvasWidth) {
     gradient.addColorStop("1.0", "red"); */
     // Fill with gradient
     ctx.fillStyle = "rgb(107, 244, 66)";
-    ctx.fillText(text, x, y);
+    ctx.fillText(text+" / 50", x, y);
 }
