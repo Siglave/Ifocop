@@ -140,6 +140,13 @@ function loadAssets(callback) {
                 "assets/skills/js.png",
                 "assets/skills/php.png",
                 "assets/skills/jquery.png",
+                "assets/skills/bootstrap.png",
+                "assets/skills/angular.png",
+                "assets/skills/react.png",
+                "assets/skills/symfony.png",
+                "assets/skills/nodejs.png",
+                "assets/skills/mongodb.png",
+                "assets/skills/mysql.png",
             ]
         }
     }

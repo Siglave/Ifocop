@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/darkly/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-ae362vOLHy2F1EfJtpMbNW0i9pNM1TP2l5O4VGYYiLJKsaejqVWibbP6BSf0UU5i"
+        crossorigin="anonymous"> -->
+        <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-LlPOZK7jvvPEMrrhdqVlEYmX2u/GWKdcq/p7wuVYAUladqNeK7VN1PUZQDmiqlql" crossorigin="anonymous">
+        
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<style>
+    .tomato {
+        color: tomato;
+        background-color: aqua;
+    }
+
+    .aquaImg {
+        background-color: aqua;
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="offset-6 col-6">
+                <h1>Citation</h1>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-2">
+                <div class="aquaImg"></div>
+            </div>
+            <div class="offset-2 col-8">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita minima qui iste
+                corporis culpa exercitationem inventore reprehenderit molestiae nisi
+                labore non voluptatibus, eos ipsum consectetur omnis architecto quia
+                ipsa totam.
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-2">
+                <div class="aquaImg"></div>
+            </div>
+            <div class="offset-2 col-8">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita minima qui iste
+                corporis culpa exercitationem inventore reprehenderit molestiae nisi
+                labore non voluptatibus, eos ipsum consectetur omnis architecto quia
+                ipsa totam.
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-2">
+                <div class="aquaImg"></div>
+            </div>
+            <div class="offset-2 col-8">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita minima qui iste
+                corporis culpa exercitationem inventore reprehenderit molestiae nisi
+                labore non voluptatibus, eos ipsum consectetur omnis architecto quia
+                ipsa totam.
+            </div>
+        </div>
+        <!--  <div class="row">
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+            <div class="col-xl-1 tomato">col-xl-1</div>
+        </div>  -->
+        <div class="row" style="margin-top: 200px">
+            <div class="col-6">
+                    <div class="row">
+                            <div class="col">
+                                <h1>Formulaire</h1>
+                            </div>
+                        </div>
+                <form>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Nom</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Prenom</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Mail</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="inputAddress">Message</label>
+                            <textarea  class="form-control" id="inputAddress" placeholder="1234 Main St" rows="10"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="offset-8 col-4">
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

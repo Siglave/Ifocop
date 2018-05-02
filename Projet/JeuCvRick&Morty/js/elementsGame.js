@@ -119,6 +119,7 @@ class Skill extends Element {
         this.distanceFall = distanceFall;
         this.alpha = 1;
         this.collision = false;
+        this.score = 1;
     }
     move() {
         if(this.collision){           
@@ -136,7 +137,7 @@ class Skill extends Element {
         if(this.collision){
             ctx.fillStyle = "rgba(255, 255, 255, " + this.alpha + ")";
             ctx.font = "20pt Arial";
-            ctx.fillText("+1", this.x, this.y+(this.height/2));
+            ctx.fillText("+"+this.score, this.x, this.y+(this.height/2));
             this.alpha -= 0.005;
         }else{
             this.img.draw(ctx, this.x, this.y, this.width, this.height);
@@ -194,5 +195,70 @@ class Bomb extends Element {
                 }
             }
         }
+    }
+}
+
+function createSkillOrBomb(imgsSkill,imgBomb,imgExplosion,cloud,canvasWidth){
+    var objRet = {type:null,img:null};
+    var score = 1;
+    switch (randomNumber(0,50)) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+            score = 1;
+            objRet.type = "skill";
+            objRet.img = imgsSkill[randomNumber(0, 3)];
+            break;
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+            score = 2;
+            objRet.type = "skill";
+            objRet.img = imgsSkill[randomNumber(4, 5)];
+            break;
+        case 9:
+        case 10:
+        case 11:
+            score = 3;
+            objRet.type = "skill";
+            objRet.img = imgsSkill[randomNumber(6, 7)];
+            break;
+        case 12:
+        case 13:
+            score = 4;
+            objRet.type = "skill";
+            objRet.img = imgsSkill[randomNumber(8, 11)];
+            break;
+        default:
+            objRet.type = "bomb";
+            break;
+    }
+    if (objRet.type == "skill") {
+        var skill = new Skill(
+            objRet.img,
+            cloud.x + 30,
+            cloud.y + 10,
+            40,
+            50,
+            randomNumber(0, canvasWidth - 50)
+        );
+        skill.score = score;
+        skill.speed = cloud.speed;
+        return {type:"skill",obj:skill};
+    }else{
+        var bomb = new Bomb(
+            imgBomb,
+            imgExplosion,
+            cloud.x + 30,
+            cloud.y + 10,
+            50,
+            50,
+            randomNumber(0, canvasWidth - 50)
+        );
+        bomb.speed = cloud.speed;
+        return {type:"bomb",obj:bomb};
     }
 }

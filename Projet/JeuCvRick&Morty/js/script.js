@@ -227,7 +227,6 @@ class Game {
         );
         /*         console.log(objAssets.characters.rick[0][0]);
          */
-        console.log(objAssets.characters.morty);
         this.characters = {
             rick: new Character(
                 objAssets.characters.rick[0],
@@ -338,7 +337,6 @@ class Game {
             });
             event.preventDefault();
         };
-        console.log(this.objAssets.elements.portal[0][0]);
         var elemStage = {
             portal: this.objAssets.elements.portal[0]
         };
@@ -505,7 +503,7 @@ class Game {
             var skills = [];
             var bombs = [];
             var clouds = [];
-            for (var i = 0; i < 20; i++) {
+            for (var i = 0; i < 15; i++) {
                 var cloud = new Cloud(
                     this.elemStage.clouds[randomNumber(0, this.elemStage.clouds.length - 1)],
                     canvasWidth + randomNumber(0, canvasWidth),
@@ -515,31 +513,11 @@ class Game {
                 );
                 cloud.speed = randomNumber(1, 3);
 
-                if (randomNumber(1, 10) == 2) {
-                    var skill = new Skill(
-                        this.elemStage.skills[randomNumber(0, this.elemStage.skills.length - 1)],
-                        cloud.x + 30,
-                        cloud.y + 10,
-                        40,
-                        50,
-                        randomNumber(0, canvasWidth - 50)
-                    );
-                    skill.speed = cloud.speed;
-                    skills.push(skill);
+                var skillOrBomb = createSkillOrBomb(this.elemStage.skills, this.elemStage.bomb[0], this.elemStage.explosion[0], cloud, canvasWidth);
+                if (skillOrBomb.type == "skill") {
+                    skills.push(skillOrBomb.obj);
                 } else {
-                    if (true) {
-                        var bomb = new Bomb(
-                            this.elemStage.bomb[0],
-                            this.elemStage.explosion[0],
-                            cloud.x + 30,
-                            cloud.y + 10,
-                            50,
-                            50,
-                            randomNumber(0, canvasWidth - 50)
-                        );
-                        bomb.speed = cloud.speed;
-                        bombs.push(bomb);
-                    }
+                    bombs.push(skillOrBomb.obj);
                 }
                 clouds.push(cloud);
             }
@@ -585,33 +563,11 @@ class Game {
                 clouds.map(function (cloud) {
                     testCollisionCloud = objCollision.isOutCanvas(cloud);
                     if (testCollisionCloud.isOut) {
-                        if (randomNumber(1, 2) == 2) {
-                            setTimeout(function () {
-                                var skill = new Skill(
-                                    elemStage.skills[randomNumber(0, elemStage.skills.length - 1)],
-                                    cloud.x + 30,
-                                    cloud.y + 10,
-                                    40,
-                                    50,
-                                    randomNumber(0, canvasWidth - 50)
-                                );
-                                skill.speed = cloud.speed;
-                                skills.push(skill);
-                            }, 0);
+                        var skillOrBomb = createSkillOrBomb(elemStage.skills, elemStage.bomb[0], elemStage.explosion[0], cloud, canvasWidth);
+                        if (skillOrBomb.type == "skill") {
+                            skills.push(skillOrBomb.obj);
                         } else {
-                            setTimeout(function () {
-                                var bomb = new Bomb(
-                                    elemStage.bomb[0],
-                                    elemStage.explosion[0],
-                                    cloud.x + 30,
-                                    cloud.y + 10,
-                                    50,
-                                    50,
-                                    randomNumber(0, canvasWidth - 50)
-                                );
-                                bomb.speed = cloud.speed;
-                                bombs.push(bomb);
-                            }, 0);
+                            bombs.push(skillOrBomb.obj);
                         }
                     }
                     cloud.draw(ctxs.game);
@@ -630,7 +586,7 @@ class Game {
                         ) && !skill.collision
                     ) { // Collision
                         setTimeout(function () {
-                            scorePlayer += 1;
+                            scorePlayer += skill.score;
                             visionPlayer += 25;
                             skill.collision = true
                             //skills.splice(index, 1);
@@ -645,7 +601,6 @@ class Game {
                                     morty.changeImg(elemStage.morty[1]);
                                 }
                             }
-                            console.log(scorePlayer);
                         }, 0);
                     } else { // Pas de collision
                         if (skill.y > canvasHeight || skill.alpha < 0) {
@@ -675,9 +630,13 @@ class Game {
                             bomb.height - 35
                         ) && !bomb.explode
                     ) {
+                        if(scorePlayer > 0){
+                            scorePlayer -= 1;
+                        }
                         bomb.explode = true;
                         if (visionPlayer >= 100) {
                             visionPlayer -= 20;
+                            
                             if (visionPlayer <= 200) {
                                 morty.changeImg(elemStage.morty[0]);
                             } else {
@@ -707,6 +666,10 @@ class Game {
                 //Morty
                 rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
+                //
+                //Draw UI/////
+                drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
+                //////////////
 
                 window.requestAnimationFrame(loop);
             }
@@ -753,8 +716,6 @@ class Stage {
 
 document.addEventListener("DOMContentLoaded", function () {
     function initGameClass(objAssets) {
-        console.log(objAssets);
-
         var canvasBack = document.getElementById("gameBackGround");
         var canvasGame = document.getElementById("gameCanvas");
         var canvasUI = document.getElementById("gameUI");
