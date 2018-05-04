@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Expressions : Exercice 5</title>
+    <script src="../lib/jquery-3.2.1.min.js"></script>
+    <script src="../lib/angular-1.6.6.min.js"></script>
+    <script>
+      // Énoncé
+      /* La directive ng-model et la directive ng-bind */
+      /**************************************************************************************************
+        Comme vu précédemment, La directive ng-model permet d'associer le contenu d'un champ de type input, select ou textarea à une variable (propriété du contexte). La documentation officielle de la directive ng-model est disponible ici : https://docs.angularjs.org/api/ng/directive/ngModel
+
+        La directive ng-bind permet de remplacer le contenu d'une balise par le résultat d'une expression. 
+        Si cette expression est une valeur, le contenu de la balise est remplacé par cette valeur. 
+        Si cette expression est une variable (propriété du contexte), le contenu texte de la balise est remplacé 
+        par la valeur de cette variable (propriété du contexte). En cas de changement de la valeur de la variable 
+        (propriété du contexte), ng-bind actualise le contenu texte de la balise. La documentation officielle de 
+        la directive ng-bind est disponible ici : https://docs.angularjs.org/api/ng/directive/ngBind
+      **************************************************************************************************/
+      
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice5. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+      
+      /*
+        2. Dans une div, créez un formulaire d'inscription pour un élève. Ce formulaire propose les saisies suivantes :
+        - Le nom de l'élève, qui est un champ texte;
+        - Le prénom de l'élève, qui est un champ texte;
+        - L'adresse e-mail de l'élève, qui est un champ texte;
+        - La date de naissance de l'élève, qui est un champ texte;
+        - une liste de sélection de formations, qui est une liste de sélection;
+      */
+
+      /*
+        3.  A l'aide d'une expression et sur la div, initialisez une variable (propriété de contexte) qui est un objet représentant un élève. Les caractéristiques d'un élève sont : 
+        - Son nom, que vous initialiserez avec la valeur 'Inconnu';
+        - Son prénom, que vous initialiserez avec la valeur 'Inconnu';
+        - Son adresse e-mail, que vous initialiserez avec la valeur 'Inconnue';
+        - Sa date de naissance que vous initialiserez avec la valeur 'Inconnue';
+        - Sa formation que vous initialiserez avec la valeur 'Inconnue'.
+      */
+      
+      /*
+        4. A l'aide de la directive ng-model, associez le contenu de chaque champ de votre formulaire avec l'objet correspondant à un élève que vous avez initialisé.
+      */
+
+      /*
+        5. Créez 5 paragraphes, à l'aide de la directive ng-bind, associez le contenu de chaque propriété de l'objet correspondant à l'élève à un des paragraphes créé.
+      */
+
+      /**************************************************************************************************
+        Lorsque vous saisissez une valeur dans un des champs de votre formulaire, l'objet élève est mis à jour grâce à la directive ng-model et un des paragraphes doit être mis à jour avec le contenu de la propriété de l'objet élève qui a été modifiée grâce à la directive ng-bind.
+      **************************************************************************************************/
+    </script>
+  </head>
+  <body>
+    <div ng-init="eleve = {nom:'Inconnue',prenom:'Inconnue',adresse:'Inconnue',date:'Inconnue',formation:'Inconnue'}">
+      <h4>Formulaire d'inscription</h4>
+      <form name="monform">
+        <label>Nom</label>
+        <input type="text" name="nom" >
+        <label>Prenom</label>
+        <input type="text" name="prenom" >
+        <label>Email</label>
+        <input type="text" name="email" >
+        <label>Date</label>
+        <input type="text"name="date">
+        <label>Selection</label>
+        <select name="listSelect">
+            <option value="truc1">truc1</option>
+            <option value="truc2">truc2</option>
+          </select>
+      </form>
+      <h4>Récapitulatif des informations saisies</h4>
+    </div>
+  </body>
+  <script>
+      angular.module("generalModule", []);
+      angular.bootstrap(window.document, ["generalModule"], {
+        strictDi: true
+      });
+    </script>
+</html>

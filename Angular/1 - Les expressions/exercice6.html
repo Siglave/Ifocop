@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Expressions : Exercice 6</title>
+    <script>
+      // Énoncé
+      /* Les directives ng-submit, ng-src*/
+      /**************************************************************************************************
+        La directive ng-submit permet d'associer une expression AngularJS à l'événement onsubmit. Cette directive annule comportement par défaut du formulaire (il n'est pas envoyé !). La documentation officielle de la directive ng-submit est disponible ici : https://docs.angularjs.org/api/ng/directive/ngSubmit
+
+        La directive ng-src permet d'associer une expression AngularJS à l'attribut src d'une balise img par exemple (si on utilisait l'attribut src directement, le navigateur essaierai d'interpréter l'attribut src contenant l'expression pendant le chargement du document avant que AngularJS ne soit chargé !). La documentation officielle de la directive ng-src est disponible ici : https://docs.angularjs.org/api/ng/directive/ngSrc
+      **************************************************************************************************/
+      
+      /*
+        1. Chargez AngularJS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice6. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+      
+      /*
+        2. Créez un formulaire contenant un champ de saisie texte et un bouton contenant le texte 'afficher'. A l'aide d'une expression, associez le contenu du champ de saisie à une variable saisie.
+      */
+
+      /*
+        3. Créez une balise image. Utilisez l'attribut ng-submit pour affecter le contenu de la variable saisie à une variable src que vous utilisez sur la balise image à l'aide de la directive ng-src. Attention : la directive ng-src a pour valeur un template, pas une expression. 
+      */
+
+      /**************************************************************************************************
+        Lorsque vous saisissez l'url d'une image dans le champ de saisie et que vous cliquez sur le bouton afficher, l'image doit être téléchargée et affichée par la navigateur Internet.
+      **************************************************************************************************/
+    </script>
+  </head>
+  <body>
+    <div>
+      <h4>Le formulaire</h4>
+      <h4>L'image</h4>
+    </div>
+  </body>
+</html>

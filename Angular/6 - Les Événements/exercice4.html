@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Évènements : Exercice 4</title>
+    <script>
+      // Énoncé
+      /* Les évènements*/
+      /**************************************************************************************************
+       A partir d'un objet scope, on peut "émettre" un "message" avec la méthode .$emit(). On peut, à partir du même objet scope ou d'un autre objet scope PARENT utiliser la méthode .$on() pour déclencher une fonction si le "message" paramétré à été émis. A partir d'un objet scope on a accès à une référence vers l'objet scope de base dans la propriété $root (monObjetScope.$root est une référence à l'objet scope à la base de la chaîne de prototypes des objets de type scope.)
+
+       La documentation officielle concernant l'objet scope est disponible ici dans la documentation : https://docs.angularjs.org/api/ng/type/$rootScope.Scope
+      **************************************************************************************************/
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice4. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+
+      /*
+        2. Créez 2 formulaires dans les 2 div du document affiché. Les deux div sont chacune gérées par un contrôleur. Les 2 formulaires sont configurés comme dans les exercices précédent (1 champ de saisie qui associe sa valeur à une propriété du contrôleur). En revanche, le titre du premier formulaire est statique (pas d'expressions) alors que le titre du second est créé à l'aide d'une expression.
+        
+        L'objectif est de faire en sorte qu'en saisissant un texte de votre choix dans le premier formulaire, le titre du second appartenant au scope de l'autre contrôleur soit modifié.
+      */
+
+      /*
+        Vous devez donc créer 2 directives. Un directive émet un "message" quand la propriété associée au champ de saisie change. L'autre directive change la propriété de titre lorsqu'un le "message" émis est détecté. Vous devez positionner une directive sur la div contenant le titre statique et l'autre directive sur la div contenant le titre dynamique. 
+        
+        Point d'attention : les scopes des deux contrôleurs sont au même niveau hiérarchique. Vous ne pourrez donc pas utiliser la méthode .$on() directement à partir du scope du deuxième contrôleur pour récupérer la valeur du titre émise par la méthode .$emit() utilisée à partir du scope du premier contrôleur.
+      */
+    </script>
+  </head>
+  <body>
+    <div>
+      <h4></h4>
+    </div>
+    <div>
+      <h4></h4>
+    </div>
+  </body>
+</html>

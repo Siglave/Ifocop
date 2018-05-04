@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Formulaires : Exercice 2</title>
+    <script>
+      // Énoncé
+      /* Les directives ng-controller et ng-model*/
+      /**************************************************************************************************
+        Désormais, vous devez utiliser au maximum les contrôleurs et de préférence en utilisant la notation "controler as" c'est à dire en utilisant une instance nommée du contrôleur et en utilisant les propriétés ou méthodes de cette instance.
+
+        Comme on l'a vu lors des exercices sur les expressions, si on dote le formulaire d'un attribut name, celui-ci devient accessible sous forme d'une propriété de contexte portant le nom spécifié. Cette propriété proposée par AngularJS est un objet qui possède des propriétés contenant des informations relatives au formulaire.
+
+        Dans cet exercice nous allons créer un formulaire d'enregistrement utilisateur. Ce formulaire devra être valide (champs requis fournis, dates correctes, adresses e-mail, etc...) pour qu'il puisse être ajouté à la liste des utilisateurs. La liste des utilisateurs sera matérialisée par un tableau d'objets correspondant chacun à un utilisateur.
+      **************************************************************************************************/
+
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice2. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+
+      /*
+        2. Vous devez ajouter l'attribut novalidate sur la balise form pour désactiver la validation native des formulaires proposée par certain navigateur Internet et lui attribuer un nom à l'aide de l'attribut name.
+      */
+
+      /*
+        3. Créez les champs suivant :
+        - Nom qui est un texte de au moins 2 caractères et au maximum 128 caractères et qui est requis;
+        - Prenom qui est un texte de au moins 2 caractères et au maximum 128 caractères et qui est requis;
+        - Date de naissance qui est une date valide;
+        - Adresse e-mail qui est une adresse valide.
+
+        N'oubliez pas de spécifier un attribut name pour chacune des champs.
+ 
+        Les attributs proposés par AngularJS pour la gestion de la validation des champs est documentée ici : https://docs.angularjs.org/api/ng/directive/input
+      */
+
+      /*
+        4. Créez un contrôleur pour gérer la div qui contient le formulaire et la liste des utilisateurs. Ce contrôleur possède 2 propriétés et une méthode :
+        - Une propriété qui contiendra un utilisateur : un objet vide.
+        - Une propriété qui contiendra des utilisateurs : un tableau vide.
+        - Un méthode qui prend en argument un booléen qui indique si le formulaire est valide ou non et qui en fonction de ce booléen ajoute l'utilisateur au tableau des utilisateurs.
+      */
+
+      /*
+        5. Utilisez la directive ng-model pour associer chaque champ du formulaire à une propriété de l'objet dans la propriété du contrôleur correspondant à un utilisateur.
+      */
+
+      /*
+        6. Utilisez la directive ng-bind affichez en temps réel sous le formulaire la liste des informations saisies par l'utilisateur sous la forme d'une liste.
+      */
+
+      /*
+        7. Lorsqu'on utilise la directive form, on a accès à une propriété de contexte nommée selon la valeur de l'attribut name du formulaire. Cette propriété de contexte est un objet qui contient des informations relatives au comportement et au contenu du formulaire. 
+        - Utilisez une expression pour afficher cette propriété de contexte sous le formulaire. Vous pouvez constater qu'elle contient une propriété concernant l'état de validation de formulaire.
+        - Utilisez la directive ng-submit pour exécuter la méthode du contrôleur en lui fournissant en argument l'état de validation du formulaire.
+      */
+
+      /*
+        8. Un peu de mise en forme : utilisez firebug pour observer les modification de l'attribut class des balise input lorsque vous saisissez un texte. Vous remarquez qu'AngularJS en fonction de l'état de la balise (pas encore modifiée, valide, non valide) attribue différentes classes CSS aux éléments. Utilisez ces classes CSS pour afficher à l'aide d'un code couleur (rouge = champ pas valide / vert = champ valide) l'état de validation des champs.
+      */
+
+      /*
+        9. Utilisez la directive ng-repeat pour afficher en temps réel la liste des utilisateurs sauvegardés à l'aide du contrôleur.
+      */
+    </script>
+  </head>
+  <body>
+    <div>
+      <form>
+        <input type="submit" value="Enregistrer"/>
+      </form>
+    </div>
+  </body>
+</html>

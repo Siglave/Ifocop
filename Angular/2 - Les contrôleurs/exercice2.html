@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Contrôleurs : Exercice 2</title>
+    <script>
+      // Énoncé
+      /* Les directives ng-controller, ng-click et ng-if */
+      /**************************************************************************************************
+        Pour chaque question qui implique l'utilisation d'un contrôleur, vous répondrez 2 fois. Vous utiliserez :
+        - La technique qui consiste à enrichir l'objet $scope de nouvelles propriétés ou méthodes et utiliser ces propriétés ou méthode.
+        - La technique qui consiste à créer une instance nommée du contrôleur et utiliser les propriétés ou méthodes de cette instance.
+
+        Lorsque la directive ng-if est positionnée sur un élément du DOM, les éléments enfant sont supprimés du DOM si l'expression fournie à la directive est équivalente à false ou sont recréés dans le DOM si l'expression fournie à la directive est équivalente à true. La directive ng-if est documentée ici :  https://docs.angularjs.org/api/ng/directive/ngIf
+      **************************************************************************************************/
+
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice2. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+
+      /*
+        2. Ce document contient 3 rubriques. Lorsqu'une des rubriques est chargée et affichée dans le DOM, les autres doivent être masquées est retirées du DOM. Pour atteindre cet objectif, nous allons utiliser les directives ng-controller, ng-click et ng-if. Vous devez créer un contrôleur qui a 1 propriété et 2 méthodes :
+        - La propriété contient le numéro de la rubrique active;
+        - La première méthode prend en argument un numéro de rubrique et l'affecte à la propriété contenant le numéro de rubrique active.
+        - La seconde méthode prend en argument un numéro de rubrique active et retourne true si la propriété qui contient le numéro de rubrique active est le même que celui fourni en argument sinon false.
+
+        Pour tester vos méthodes, vous pouvez utiliser des expressions.
+      */
+
+      /*
+        3. Utilisez la directive ng-click sur chaque h4 pour exécuter la méthode du contrôleur qui permet d'affecter le numéro de rubrique active correspondant au titre sur lequel on a cliqué.
+      */
+
+      /*
+        4. Utilisez la directive ng-if sur chaque div qui contient une rubrique pour exécuter la méthode du contrôleur qui indique si il est vrai ou faux que la rubrique concernée est active.
+      */
+    </script>
+  </head>
+  <body>
+    <div>
+      <p>Quelle est la rubrique active ?</p>
+      <h4>Rubrique 1</h4>
+      <div>
+        <h5>Titre de la rubrique 1</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien nulla, laoreet consectetur urna et, elementum suscipit magna. Aliquam erat volutpat. Quisque felis purus, tempus at accumsan quis, molestie in elit.</p>
+      </div>
+      <h4>Rubrique 2</h4>
+      <div>
+        <h5>Titre de la rubrique 2</h5>
+        <p>Aliquam erat volutpat. Quisque felis purus, tempus at accumsan quis, molestie in elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien nulla, laoreet consectetur urna et, elementum suscipit magna.</p>
+      </div>
+      <h4>Rubrique 3</h4>
+      <div>
+        <h5>Titre de la rubrique 3</h5>
+        <p>Sed ligula libero, tristique id vestibulum vel, imperdiet ac est. Nulla venenatis posuere neque eget venenatis. Nulla congue est neque, nec dapibus tellus gravida ac. Donec ligula massa, molestie at placerat eu, hendrerit sed eros. In elementum ipsum sit amet consequat fringilla.</p>
+      </div>
+    </div>
+  </body>
+</html>

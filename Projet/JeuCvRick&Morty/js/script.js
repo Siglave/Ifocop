@@ -373,7 +373,8 @@ class Game {
 				tabobj.map(function(elem){
 					ctx.fillText(elem.s,elem.x,elem.y);
 				});
-			} */
+            } */
+            
             ctxs.ui.font = "16px Arial";
             ctxs.ui.fillText("Pierre Rouzaud", 30, 30);
             ctxs.ui.fillText("Tél : 06 51 90 93 46", 30, 50);
@@ -537,7 +538,7 @@ class Game {
             var objCollision = this.collisionDetector;
             //////////////////////
             //Player
-            var scorePlayer = 49;
+            var scorePlayer = 48;
             var visionPlayer = 100;
             //////////
             window.requestAnimationFrame(loopGame);
@@ -725,12 +726,12 @@ class Game {
                 morty.draw(ctxs.game);
                 if (clouds.length == 0) {
                     if (portalMorty.scaleX < 0.4) {
-                        portalMorty.scaleX += 0.001;
-                        portalRick.scaleX += 0.001;
+                        portalMorty.scaleX += 0.002;
+                        portalRick.scaleX += 0.002;
                     }
                     if (portalMorty.scaleY < 1) {
-                        portalMorty.scaleY += 0.005;
-                        portalRick.scaleY += 0.005;
+                        portalMorty.scaleY += 0.01;
+                        portalRick.scaleY += 0.01;
                     }
                     portalMorty.draw(ctxs.game);
                     portalRick.draw(ctxs.game);

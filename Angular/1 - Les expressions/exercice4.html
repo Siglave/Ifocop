@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Expressions : Exercice 4</title>
+    <script src="../lib/jquery-3.2.1.min.js"></script>
+    <script src="../lib/angular-1.6.6.min.js"></script>
+    <script>
+      // Énoncé
+      /* La directive ng-model et la prise en charge des formulaires des champs par Angular JS */
+      /**************************************************************************************************
+        Lorsqu'on utilise AngularJS, si on créé une balise form avec un attribut name, la valeur de cet attribut fait office de nom de variable (propriété du contexte) pour accéder aux propriétés du formulaire définies par AngularJS. La prise en charge de la balise form est documentée ici dans la documentation officielle d'AngularJS : https://docs.angularjs.org/api/ng/directive/form
+      **************************************************************************************************/
+
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice4. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+
+      /*
+        2. Créez un formulaire dans votre document Web et précisez un attribut name sur le formulaire. 
+        Créez un paragraphe et affichez à l'aide d'une expression le contenu de la variable (propriété du contexte) 
+        correspondant à votre formulaire. Créez un second paragraphe et, à l'aide d'une expression affichez la valeur de 
+        l'attribut name du formulaire. Attention : votre formulaire ne doit pas avoir d'attribut action. 
+        Si le formulaire possède un attribut action, Angular JS ne désactive pas l'évènement submit par défaut 
+        du navigateur Internet.
+      */
+
+      /*
+        3. Dans le formulaire que vous avez créé, créez les champs de saisie suivants :
+        - Nom, qui est un champ texte;
+        - Prénom, qui est un champ texte;
+        - Adresse e-mail, qui est un champ texte;
+        - Date de naissance, qui est un champ texte.
+        N'oubliez pas de spécifier un attribut name pour chacun de ces champs.
+      */
+
+      /**************************************************************************************************
+        La directive ng-model permet d'associer le contenu d'un champ de type input, select ou textarea à une variable (propriété du contexte). La documentation officielle de la directive ng-model est disponible ici : https://docs.angularjs.org/api/ng/directive/ngModel
+      ***************************************************************************************************/
+
+      /*
+        4. Sur la div, initialisez un objet vide. Sur chacun des champs de votre formulaire utilisez la directive ng-model pour associer à chaque champ du formulaire une propriété de votre choix de l'objet initialisé.
+      */
+
+      /*
+        5. Pour chaque champ créez un paragraphe de texte et utilisez une expression pour afficher la propriété de l'objet initialisé correspondant au champ. Par exemple si votre objet s'appelle donnees et la propriété correspond au champ dateDeNaissance, alors l'expression à utiliser sera {{ donnees.dateDeNaissance }}
+      */
+
+      /*
+        6. Saisissez des valeurs de test dans vos champ. Que remarquez vous ?
+      */
+
+      /***************************************************************************************************
+        Lorsqu'on utilise AngularJS, si on crée des éléments HTML de type input, select ou textarea à l'intérieur d'un formulaire et qu'on associe leur contenu à une variable (propriété du contexte) à l'aide de la directive ng-model; leurs attributs name sont alors utilisés pour créer des propriétés de l'objet correspondant au formulaire.
+
+        Ces propriétés contiennent alors les objets contenant un ensemble d'informations relatives au champ. La prise en charge (générale) des champs de saisie est documentée ici dans la documentation officielle d'AngularJS : https://docs.angularjs.org/api/ng/directive/input
+      ***************************************************************************************************/
+
+      /*
+        7. Assurez vous d'avoir nommé chacun des champs de votre formulaire. Pour chaque champ créez un paragraphe de texte et utilisez une expression pour afficher l'objet correspondant au champ. Par exemple si votre formulaire à pour nom monFormulaire et votre champ monChamp, alors l'expression à utiliser sera {{ monFormulaire.monChamp }}
+      */
+
+      /*
+        8. Saisissez des valeurs de test dans vos champ. Que remarquez vous ? Modifiez les expressions que vous avez utilisées dans vos paragraphes pour n'afficher que la valeur du champ considéré.
+      */
+    </script>
+  </head>
+  <body>
+    <div ng-init="objEmpty = {}">
+      <h4>Formulaire</h4>
+      <form name="monform">
+        <label>Nom</label>
+        <input type="text" name="nom" ng-model="objEmpty.name">
+        <label>Prenom</label>
+        <input type="text" name="prenom" ng-model="objEmpty.prenom">
+        <label>Email</label>
+        <input type="text" name="email" ng-model="objEmpty.email">
+        <label>Date</label>
+        <input type="text"name="date" ng-model="objEmpty.date">
+      </form>
+     <!--  <p>{{monform}}</p> -->
+<!--       <p>Separation</p>
+      <p>{{monform.$name}}</p> -->
+      <h4>Objet objEmpty</h4>
+      <p>{{objEmpty.name}}</p>
+      <p>{{objEmpty.prenom}}</p>
+      <p>{{objEmpty.email}}</p>
+      <p>{{objEmpty.date}}</p>
+      <p>{{objEmpty}}</p>
+      <h4>Objet Form</h4>
+      <p>{{monform.nom.$viewValue}}</p>
+      <p>{{monform.prenom.$viewValue}}</p>
+      <p>{{monform.email.$viewValue}}</p>
+      <p>{{monform.date.$viewValue}}</p>
+  
+    </div>
+  </body>
+  <script>
+      angular.module("generalModule", []);
+      angular.bootstrap(window.document, ["generalModule"], {
+        strictDi: true
+      });
+    </script>
+</html>

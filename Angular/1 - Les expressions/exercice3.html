@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS : Les Expressions : Exercice 3</title>
+	<script src="../lib/jquery-3.2.1.min.js"></script>
+	<script src="../lib/angular-1.6.6.min.js"></script>
+	<script>
+		// Énoncé
+		/* La directive ng-repeat */
+		/**************************************************************************************************
+		  La directive ng-repeat permet de répéter une branche de l'arborescence du DOM pour chaque élément d'une collection (i.e d'un tableau ou d'un objet). La documentation officielle de la directive ng-repeat est disponible ici : https://docs.angularjs.org/api/ng/directive/ngRepeat.
+		**************************************************************************************************/
+
+		/*
+		  1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice3. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+		*/
+
+		/*
+		  2. A l'aide d'une expression et sur une div, initialisez une variable (propriété du contexte) classe qui est un objet. Les caractéristiques de votre classe sont :
+		  - Son nom, qui est une chaîne de caractère;
+		  - Sa spécialité, qui est une chaîne de caractère;
+		  - Ses inscrits, qui est un tableau qui contient 3 objets qui décrivent les caractéristiques d'un élève.
+		  
+		  Les caractéristiques d'un élève sont :
+		  - Son prénom, qui est une chaîne de caractère;
+		  - Son nom, qui est une chaîne de caractère;
+		  - Son âge, qui est un nombre.
+		*/
+
+		/*
+		  5. A l'aide d'une expression, affichez à l'intérieur de la div le prénom, nom et l'âge de chaque élève de la classe en utilisant la directive présentée en introduction.
+		*/
+
+		/*
+		  6. A l'aide d'une expression, affichez à l'intérieur d'un paragraphe de texte le nombre d'inscrits (vous devez vous baser sur le tableau des inscrits pour obtenir cette information).
+		*/
+	</script>
+</head>
+
+<body>
+	<div ng-init="classe = {nom:'monNom',specialite:'js',inscrits :[{prenom :'pre1',nom:'nom1',age:20},{prenom :'pre2',nom:'nom2',age:20},{prenom :'pre3',nom:'nom3',age:20}]}">
+		<h4>Les inscrits</h4>
+		<ul ng-repeat="eleve in classe.inscrits">
+			<li>{{eleve.prenom+" "+eleve.nom+" "+eleve.age}}</li>
+		</ul>
+		<p>Quel est le nombre d'inscrits ? {{classe.inscrits.length}}</p>
+	</div>
+</body>
+<script>
+	angular.module("generalModule", []);
+	angular.bootstrap(window.document, ["generalModule"], {
+		strictDi: true
+	});
+</script>
+
+</html>

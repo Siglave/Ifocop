@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Services : Exercice 3</title>
+    <script>
+      // Énoncé
+      /* Les injections de dépendance et les services*/
+      /**************************************************************************************************
+        AngularJS propose des méthodes permettant de créer des dépendances qu'on peut ensuite injecter dans les contrôleurs. Ces méthode sont la méthode .factory(), .service() et .provider().
+
+        Les Usines (i.e ""fonctions usine")
+        - Méthode .factory() :
+        Syntaxe : module.factory( 'nomDUsine', maFonctionUsine ); 
+        Resultat: Quand on déclare maFonctionUsine comme un argument à injecter dans un contrôleur, par exemple, dans le contrôleur nous aurons accès à la valeur retournée suite à l'exécution de la fonction usine à savoir : maFonctionUsine();
+
+        Les Services
+        - Méthode .service() :
+        Syntaxe : module.service( 'nomDuService', maFonctionConstructeur ); 
+        Résultat: Quand on déclare nomDuService comme argument à injecter dans un contrôleur, par exemple, dans le contrôleur nous aurons accès à une instance de la fonction constructeur à savoir : new maFonctionConstructeur();
+
+        Les Providers
+        - Méthode .provider() :
+        Syntaxe : module.provider( 'nomDuProvider', maFonctionConstructeur );
+        Quand on déclare nomDuProvider comme un argument injectable et si on a prévu une méthode nommée $get dans maFonctionConstructeur, on obtient la valeur de retour de (new maFonctionConstructeur()).$get().
+
+        Les fonctions constructeur utilisées avec la méthode .provider() peuvent être utilisées avec la méthode .config() au chargement du module.
+        Syntaxe : module.config(['nomDuProviderProvider', function(nomDuProviderProvider){});
+        Dans la fonction en argument nomDuProviderProvider est une instance de maFonctionConstructeur associée à nomDuProvider.
+
+      **************************************************************************************************/
+      /*
+        1. Chargez Angular JS dans ce document.
+      */
+
+      /*
+        2. Créer 2 modules :
+        - Créez 1 premier module AngularJS. Votre module s'appellera angularjsExercice3Module1. Il englobe la première div.
+        - Créez 1 second module AngularJS. Votre module s'appellera angularjsExercice3Module2. Il englobe la deuxième div. 
+        
+        Nous avons donc 2 modules AngularJS séparés.
+        
+        Attention vous devez utiliser la méthode .bootstrap() de AngularJS pour démarrer les modules manuellement (i.e en JavaScript) et séparément (2 appels à la méthode, sur 2 portions du DOM distinctes). Voir la documentation officielle ici : https://docs.angularjs.org/api/ng/function/angular.bootstrap
+      */
+
+
+      /*
+        3. Créez un contrôleur dans chacun des 2 modules. Chaque contrôleur définit une propriété titre à la valeur différente. Pour chaque module affichez le titre provenant de leur contrôleur dans leurs portions respectives du document. 
+      */
+
+      /*
+        4. Définissez un 3ème module séparé des 2 premiers mais ne le "bootstrappez" pas. Il nous servira à définir un fournisseur de services (un provider) qui sera utilisé dans le 2 autres modules.
+
+        Ce module s'appelle monModuleFournisseurDeService. Injectez le dans les 2 autres modules.
+
+        Dans ce module créez un fournisseur de service (provider). Ce fournisseur de service déclare une fonction constructeur qui définit :
+        - 1 VARIABLE qui contient un titre configurable;
+        - 1 VARIABLE qui contient un titre statique;
+        - 1 méthode qui prend en argument un texte et qui l'affecte à la VARIABLE titre configurable;
+        - 1 méthode nommée $get (c'est impératif), qui retourne un objet de 2 propriétés. La première contient la VARIABLE titre configurable et la deuxième la VARIABLE titre statique.
+
+        Injectez ce fournisseur de service dans chacun des contrôleurs de chacun des modules.
+      */
+
+      /*
+        5. Affectez le fournisseur de service injecté dans chacun des contrôleurs dans une propriété de chacun des contrôleur. Cette propriété s'appellera mesTitresFournis. Cette propriété contiendra la valeur de retour de la méthode .$get() du fournisseur de service. Affichez les titres statique et configurable contenus dans la propriété mesTitreFournis dans chacune des portions couverte par chacun des contrôleurs des 2 modules.
+      */
+
+      /*
+        6. Sur chacun des 2 modules, après leur initialisation, utilisez la méthode .config() documentée ici : https://docs.angularjs.org/guide/providers#provider-recipe pour exécuter la méthode du fournisseur de service qui prend en argument un texte et qui l'affecte à la VARIABLE titre configurable. Vous devez configurer 2 titres configurables différents pour le fournisseur de service pour chacun des 2 modules. ATTENTION, pour injecter votre fournisseur de service dans la méthode .config() vous devez le suffixer par "Provider".
+      */
+    </script>
+  </head>
+  <body>
+    <h3>Les services</h3>
+    <div id="angularjsExercice3Module1">
+      <h4>Premier Module</h4>
+      <div>
+        
+      </div>
+    </div>
+    <div id="angularjsExercice3Module2">
+      <h4>Deuxième Module</h4>
+      <div>
+        
+      </div>
+    </div>
+  </body>
+</html>

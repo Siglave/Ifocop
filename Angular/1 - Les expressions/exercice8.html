@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Expressions : Exercice 8</title>
+    <script>
+      // Énoncé
+      /* La directive ng-include et l'utilisation de la balise script */
+      /**************************************************************************************************
+        AngularJS propose une gestion des "templates" - modèle (ou "partials" - partiels). Les templates sont des extraits de code HTML qu'on peut décider d'utiliser à tout moment dans le corps de notre document Web. Ils sont soit dans des fichiers externes et sont téléchargés en cas de besoin par Angular JS. Soit, ils sont directement dans le corps du document, présents mais masqués à l'utilisateur (on les appelle alors des "inline templates"). La particularité des "templates" réside dans le fait que les expressions qu'ils contiennent ne sont pas évaluées tant qu'il ne sont pas inclus dans le document Web.
+
+        Pour utiliser des "templates", on peut utiliser la directive ng-include. Pour créer des "inline templates" on utilise la balise script avec une valeur spéciale pour l'attribut type et un identifiant. La directive ng-include peut prendre pour valeur une expression AngularJS qui pourra alors être soit l'url d'un "template" externe soit l'identifiant d'un "inline template".
+
+        La documentation officielle de la directive ng-include est disponible ici : https://docs.angularjs.org/api/ng/directive/ngInclude
+        La documentation officielle de la directive script est disponible ici : https://docs.angularjs.org/api/ng/directive/script
+      **************************************************************************************************/
+
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice8. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00.
+      */
+
+      /*
+        2. Nous allons utiliser l'API de http://openweathermap.org/ pour afficher la météo dans notre document Web. L'url : http://api.openweathermap.org/data/2.5/weather?q=Paris,fr&mode=html&appid=e8869cefff238e1133cad162a3752e9b nous permet d'obtenir un code HTML dans lequel s'affiche la météo du jour.
+
+        La première chose à faire est d'autoriser Angular JS à télécharger un fichier HTML à partir de l'url http://api.openweathermap.org/.
+
+        Pour réaliser cette opération, il faut modifier les instructions de bootstrap d'AngularJS pour ajouter une configuration spécifique au service en charge des requêtes : $sceDelegateProvider. Inspirez vous de la documentation ici : https://docs.angularjs.org/api/ng/provider/$sceDelegateProvider pour modifier votre séquence de bootstrap et ajouter l'url de l'API d'Open Weather Map dans les urls en liste blanche. Attention : L'exemple de la documentation ne respecte pas les injections de dépendance strictes. Pour démarrer votre module, vous utiliserez donc la méthode angular.bootstrap() en précisant la valeur du booléen strictDi à false.
+      */
+
+      /*
+        3. Utilisez une directive ng-include pour faire en sorte qu'AngularJS télécharge et incorpore dans le document la météo du jour à Paris. Vos essais doivent être effectués sur Mozilla FireFox. Des restrictions de Chrome empêcherons de récupérer une ressource qui provient d'un serveur alors que votre fichier n'est pas lui même fourni par un serveur.
+      */
+
+      /*
+        4. Créez un formulaire avec un liste de sélection de 3 villes. Faite en sorte que, à la sélection d'une ville, la météo correspondante s'affiche.
+      */
+    </script>
+  </head>
+  <body>
+    <div>
+      <h4>Quel temps fait-t-il à Paris ?</h4>
+      <h4>Choisissez votre ville !</h4>
+    </div>
+  </body>
+</html>

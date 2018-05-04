@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Formulaires : Exercice 1</title>
+    <script>
+      // Énoncé
+      /* Les directives ng-controller, ng-model et ng-repeat*/
+      /**************************************************************************************************
+        Désormais, vous devez utiliser au maximum les contrôleurs et de préférence en utilisant la notation "controler as" c'est à dire en utilisant une instance nommée du contrôleur et en utilisant les propriétés ou méthodes de cette instance.
+
+        Sur ce document nous avons un formulaire avec un champ de saisie dans une div. Nous souhaitons faire en sorte que lorsque l'utilisateur saisit un texte et clique sur le bouton submit :
+          1. Sa saisie s'affiche à la suite sous le formulaire.
+          2. Le champ de saisie soit réinitialisé à une valeur vide.
+          3. Lorsque l'utilisateur saisit un nouveau texte et clique sur le bouton submit => étape 1.
+      **************************************************************************************************/
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice1. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+
+      /*
+        2. Commencez par créer un contrôleur pour gérer la div qui contient le formulaire et la liste des messages. Ce contrôleur possède 2 propriétés et une méthode :
+        - Une propriété qui contiendra un message : une chaîne de caractère vide
+        - Une propriété qui contiendra des messages : un tableau vide.
+        - Une méthode qui SI le message n'est pas vide, l'ajoute dans le tableau des messages.
+      */
+
+      /*
+        3. Utilisez la directive ng-model pour associer la propriété message du contrôleur au champ de saisie. Utilisez la directive ng-submit pour associer l'exécution de la méthode créé dans le contrôleur à la soumission du formulaire. Utilisez la directive ng-repeat pour afficher la liste des messages enregistrés (attention pour éviter un plantage en cas de doublon de message vous devez ajouter "track by $index" dans la directive ng-repeat, voir : https://docs.angularjs.org/error/ngRepeat/dupes et https://docs.angularjs.org/api/ng/directive/ngRepeat#tracking-and-duplicates).
+      */
+    </script>
+  </head>
+  <body>
+    <div>
+      <form>
+        <p>Mon message : <input type="text"/></p>
+        <p><input type="submit" value="Enregistrer"/></p>
+      </form>
+      <h4>Mes messages</h4>
+      <div></div>
+    </div>
+  </body>
+</html>

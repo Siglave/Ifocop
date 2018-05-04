@@ -207,7 +207,7 @@ class Bomb extends Element {
 function createSkillOrBomb(imgsSkill,imgBomb,imgExplosion,cloud,canvasWidth){
     var objRet = {type:null,img:null};
     var score = 1;
-    switch (randomNumber(0,50)) {
+    switch (randomNumber(0,40)) {
         case 0:
         case 1:
         case 2:

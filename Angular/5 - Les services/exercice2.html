@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Services : Exercice 2</title>
+    <script>
+      // Énoncé
+      /* Les injections de dépendance et les services*/
+      /**************************************************************************************************
+        AngularJS propose des méthodes permettant de créer des dépendances qu'on peut ensuite injecter dans les contrôleurs. Ces méthode sont la méthode .factory(), .service() et .provider().
+
+        Les Usines (i.e ""fonctions usine")
+        - Méthode .factory() :
+        Syntaxe : module.factory( 'nomDUsine', maFonctionUsine ); 
+        Resultat: Quand on déclare maFonctionUsine comme un argument à injecter dans un contrôleur, par exemple, dans le contrôleur nous aurons accès à la valeur retournée suite à l'exécution de la fonction usine à savoir : maFonctionUsine();
+
+        Les Services
+        - Méthode .service() :
+        Syntaxe : module.service( 'nomDuService', maFonctionConstructeur ); 
+        Résultat: Quand on déclare nomDuService comme argument à injecter dans un contrôleur, par exemple, dans le contrôleur nous aurons accès à une instance de la fonction constructeur à savoir : new maFonctionConstructeur();
+
+        Les Providers
+        - Méthode .provider() :
+        Syntaxe : module.provider( 'nomDuProvider', maFonctionConstructeur );
+        Quand on déclare nomDuProvider comme un argument injectable et si on a prévu une méthode nommée $get dans maFonctionConstructeur, on obtient la valeur de retour de (new maFonctionConstructeur()).$get().
+
+        Les fonctions constructeur utilisées avec la méthode .provider() peuvent être utilisées avec la méthode .config() au chargement du module.
+        Syntaxe : module.config(['nomDuProviderProvider', function(nomDuProviderProvider){});
+        Dans la fonction en argument nomDuProviderProvider est une instance de maFonctionConstructeur associée à nomDuProvider.
+
+      **************************************************************************************************/
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice2. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+
+      /*
+        2. Définissez une fonction usine qui retourne un objet contenant une propriété contenant un tableau de 3 objets représentant des commentaires (titre, corps, date de de publication). L'idée est de "partager" la liste des commentaires entre 2 contrôleurs en utilisant l'usine. 
+      */
+
+      /*
+        3. Injectez cette fonction usine dans 2 contrôleurs :
+        - Le premier contrôleur gère un formulaire qui permet de mettre à jour la liste avec de nouveaux commentaires. Il contient 1 propriété qui contiendra la liste de messages obtenue à partir de l'usine, une propriété pour 1 message et 1 méthode qui permet d'ajouter 1 message à la liste des messages. Ce contrôleur prend en charge la logique applicative du formulaire de saisie de commentaire.
+
+        - Le second contrôleur sera utilisé pour afficher la liste des commentaires. Il contient 1 propriété qui contiendra la liste de message obtenue à partir de l'usine.
+
+        La div contenant le formulaire doit être gérée par le premier contrôleur et doit permettre la sauvegarde des messages dans la liste de messages fournis par l'usine. La deuxième div doit être gérée avec le second contrôleur et provoquer l'affichage de la liste des messages fournies par l'usine. 
+      */
+    </script>
+  </head>
+  <body>
+    <h3>Les services</h3>
+    <div>
+      <h4>Formulaire de sauvegarde de commentaires</h4>
+      <form >
+        <p>Titre : <input type="text"/></p>
+        <p>Corps : <textarea></textarea></p>
+        <input type="submit" value="Envoyer"/>
+      </form>
+    </div>
+    <div>
+      <h4>Les Derniers Commentaires</h4>
+    </div>
+  </body>
+</html>

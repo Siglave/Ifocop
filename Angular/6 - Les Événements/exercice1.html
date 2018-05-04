@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Évènements : Exercice 1</title>
+    <script>
+      // Énoncé
+      /* Les évènements*/
+      /**************************************************************************************************
+        En utilisant les directives, nous pouvons faire en sorte que des modifications de propriétés d'un scope considéré entraînent le déclenchement de fonctions qui modifient d'autres propriétés du même scope.
+      **************************************************************************************************/
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice1. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+
+      /*
+        2. Créez une directive. Cette directive sera un attribut de balise uniquement. Vous devez définir une méthode link pour cette directive. AngularJS appelle la méthode link en lui transmettant 3 arguments :
+        - Le scope de l'élément portant la directive à partir duquel la méthode a été appelée. C'est un objet décrit ici dans la documentation officielle : https://docs.angularjs.org/api/ng/type/$rootScope.Scope
+        - Un objet jQLite contenant l'élément sur lequel la directive est appliquée. Les propriétés et méthodes d'un objet jQlite sont définies ici dans la documentation : https://docs.angularjs.org/api/ng/function/angular.element
+        - Un objet Attributes contenant les attributs de la balise sur lequel la directive est appliquée. Les propriétés d'un objet Attributes sont définies ici : https://docs.angularjs.org/api/ng/type/$compile.directive.Attributes
+
+        Dans la méthode link, nous allons surveiller la valeur d'un champ de saisie. Si cette valeur prend une valeur particulière, nous affecterons une nouvelle valeur à une expression !
+      */
+
+      /*
+        3. Dans votre document, sans utiliser de contrôleur :
+          3.1 Créez un formulaire avec un champ de saisie, associez le champ de saisie à une propriété du scope.
+          3.2 Positionnez votre directive en tant qu'attribut de la div.
+          3.3 Initialisez une propriété du scope. Cette propriété contient le titre qui sera affiché dans le h4.
+          3.4 Utilisez une expression pour afficher le titre dans le h4.
+      */
+
+      /*
+        4.  Dans la méthode link, utilisez la méthode .$watch() de l'objet scope. Cette méthode prend en argument le nom d'une propriété du scope ainsi qu'une fonction à laquelle AngularJS transmet la nouvelle valeur de la propriété et l'ancienne. La propriété de scope que vous allez surveiller est celle qui est attachée au champ de saisie.
+
+        Dans cette fonction, SI la nouvelle valeur de votre champ est un mot magique que vous définirez, changer la valeur de la propriété de scope utilisée pour afficher le titre dans le h4. 
+      */
+    </script>
+  </head>
+  <body>
+    <div>
+      <h4></h4>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS : Les Contrôleurs : Exercice 1</title>
+    <script>
+      // Énoncé
+      /* Les directives ng-controller et ng-click */
+      /**************************************************************************************************
+        Pour chaque question qui implique l'utilisation d'un contrôleur, vous répondrez 2 fois. Vous utiliserez :
+        - La technique qui consiste à enrichir l'objet $scope de nouvelles propriétés ou méthodes et utiliser ces propriétés ou méthode.
+        - La technique qui consiste à créer une instance nommée du contrôleur et utiliser les propriétés ou méthodes de cette instance.
+
+        La directive ng-click permet d'associer un comportement à l'évènement onclick d'un élément du DOM. La directive ng-click est documentée ici :  https://docs.angularjs.org/api/ng/directive/ngClick.
+      **************************************************************************************************/
+
+      /*
+        1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice1. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+      */
+
+      /*
+        1. Créez un contrôleur qui définit une propriété et une méthode de contexte. La propriété est un nombre qui a initialement pour valeur 0. La méthode incrémente ce nombre de 1.
+      */
+
+      /*
+        2. Utilisez la directive ng-click pour exécuter la méthode du contrôleur à chaque fois qu'on clique sur le titre h4. Affichez à l'aide d'une expression la propriété contenant le nombre en dessous du titre h4 dans un paragraphe.
+      */
+
+      /*
+        3. Modifiez la méthode pour faire en sorte que si l'incrémentation du nombre atteint 10, ce soit une décrémentation qui se produise et que si la décrémentation atteint 0 ce soit une incrémentation qui se produise (vous allez devoir créer un propriété qui vous indique si vous devez incrémenter/décrémenter).
+        
+      /*
+        4. Faîtes en sorte que le titre h4 n'affiche pas le mot "incrémentation" lorsque la décrémentation se produit mais le mot "décrémentation" (vous devez remplacer cette partie de la phrase par une expression qui utilise une propriété du contrôleur que la méthode modifiera selon le cas de figure).
+      */
+    </script>
+  </head>
+  <body>
+    <div>
+      <h4>Incrémentation contrôlée</h4>
+      <p>Quelle est la valeur courante ?</p>
+    </div>
+  </body>
+</html>

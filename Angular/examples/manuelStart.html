@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body>
+    <p>{{ 2+3 }}</p> <!-- template -->
+    <p>{{ 2>3 }}</p> <!-- template -->
+    <p>{{ 2%3 }}</p> <!-- template -->
+    <p>{{ 2>3 ? "salut" : "yo" }}</p> <!-- template -->
+    <p>{{ this }}</p> <!-- template -->
+    <!-- ng-init pour creer une variable -->
+    <div ng-init="vartest = 'salut'; vartest2 = 'salut2'">{{vartest}} {{vartest2}}</div>
+    <!-- ng-hide pour cacher une balise avec une condition si faux affiche sinon cache -->
+    <p ng-hide="5<10">yoyoyo du hide 5<10</p>
+    <!-- ng-show inverse de ng-hide-->   
+    <p ng-show="5<10">yoyoyo du show 5<10</p>
+</body>
+<script>
+    //Pour demarrage manuel besoin d'un module
+    angular.module("monModulePrincipale", []);
+    //En passant un tab en 2 eme arg on crée un module portant le nom indiqué en 1 er argument(setter)
+    angular.bootstrap(window.document, ["monModulePrincipale"], {
+        strictDi: true
+    });
+</script>
+
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS : Les Expressions : Exercice 2</title>
+	<script src="../lib/jquery-3.2.1.min.js"></script>
+	<script src="../lib/angular-1.6.6.min.js"></script>
+	<script>
+		// Énoncé
+		/* La directive ng-init */
+		/**************************************************************************************************
+		  La directive ng-init (attribut de balise non standard introduit par Angular JS) permet d'initialiser des propriétés dans un contexte. Ici nous n'aurons qu'un seul contexte : l'application. La directive ng-init prend pour valeur une expression. La documentation officielle de la directive ng-init est disponible ici : https://docs.angularjs.org/api/ng/directive/ngInit.
+		**************************************************************************************************/
+
+		/*
+		  1. Chargez Angular JS dans ce document. Le contexte applicatif d'Angular JS doit englober tout le document. Votre application s'appellera angularjsExercice2. Un tutoriel officiel sur le chargement d'Angular JS est disponible ici : https://docs.angularjs.org/tutorial/step_00
+		*/
+
+		/*
+		  2. A l'aide d'une expression et sur une div, initialisez une variable (qui, on le verra plus tard, est une propriété du contexte) promotions qui contient 5 éléments qui sont les 5 dernières années (2014 à 2018).
+		*/
+
+		/*
+		  3. A l'aide d'une expression affichez votre année de promotion dans le paragraphe à l'intérieur de la div.
+		*/
+
+		/*
+		  4. A l'aide d'une expression et sur une div, initialisez une variable (propriété du contexte) classe. Cette variable classe est un objet. Les caractéristiques de votre objet classe sont :
+		  - Son nom, qui est une chaîne de caractère;
+		  - Sa spécialité, qui est une chaîne de caractère;
+		  - Son nombre d'inscrits, qui est un nombre.
+		*/
+
+		/*
+		  5. A l'aide d'une expression, affichez à l'intérieur de la div le nom de votre classe avec sa spécialité sur une même ligne. Affichez sur une autre ligne le nombre d'inscrits de votre classe.
+		*/
+	</script>
+</head>
+
+<body>
+	<div ng-init="promotions = ['2014','2015','2016','2017','2018']"></div>
+	<div>
+		<h4>Promotion</h4>
+		<p>Quelle est ma promotion ?</p>
+		<p>{{promotions[4]}}</p>
+	</div>
+	<div>
+		<h4 ng-init="classe = {nom:'monNom',specialite:'js',nbrIns : 20}">Classe</h4>
+		<p>Quelle est l'intitulé de ma formation ? </p>
+		<p>{{ classe.nom +" specialite : "+classe.specialite}}</p>
+		<p>Quel est le nombre d'inscrits dans ma formation ?</p>
+		<p>{{ classe.nbrIns}}</p>
+
+	</div>
+</body>
+<script>
+	angular.module("generalModule", []);
+	angular.bootstrap(window.document, ["generalModule"], {
+		strictDi: true
+	});
+</script>
+
+</html>
