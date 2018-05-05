@@ -38,6 +38,10 @@ class Character extends Coordinate {
             elem.keyIsUp = false;
         });
         this.animation.direction = "stayStill";
+        this.x = 0;
+        this.y = 0;
+        this.speed = 2;
+        this.animation.maxTime = 10;
     }
     effectCollision(collision) {
         switch (collision.type) {
@@ -203,6 +207,11 @@ class CollisionDetector {
             isOut: false
         };
     }
+    passPortal(portal, character) {
+        if (character.x >= portal.x) {
+            return true;
+        }
+    }
     testCollision() {}
     /* trucRick(elem,x){
 		if (elem.getX() < x) {
@@ -258,6 +267,11 @@ class Game {
         );
     }
     switchStage() {
+        //console.log("autreStage");
+        console.log("actuStage");
+        console.log(this.actualStage);
+        console.log(this);
+        
         //Clear all Canvas
         this.ctxs.back.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         this.ctxs.game.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
@@ -269,7 +283,15 @@ class Game {
         this.stages[this.actualStage].removeListener();
         //Change stage
         this.actualStage += 1;
+        console.log("prochainStage");
+        console.log(this.actualStage);
+       // console.log(this.stages[this.actualStage]);
         //Load event for the next stage and start it
+        console.log("morty x");
+        console.log(this.characters.morty.x);
+        //this.characters.morty.x = 0;
+        console.log(this.stages[this.actualStage].characters.morty.x);
+        
         this.stages[this.actualStage].loadListeners();
         this.stages[this.actualStage].start(
             this.ctxs,
@@ -335,6 +357,8 @@ class Game {
                     }
                 }
             });
+            console.log("from1");
+            
             event.preventDefault();
         };
         var elemStage = {
@@ -367,44 +391,8 @@ class Game {
             gradient.addColorStop("0.60", "yellow");
             gradient.addColorStop("1.0", "green");
 
-            /*var tabobj = [{s:"truc",x:30,y:30},{s:"truc",x:30,y:30}];
-			function nameFuntion(ctx,tabobj,font){
-				ctx.font = font;
-				tabobj.map(function(elem){
-					ctx.fillText(elem.s,elem.x,elem.y);
-				});
-            } */
-            
-            ctxs.ui.font = "16px Arial";
-            ctxs.ui.fillText("Pierre Rouzaud", 30, 30);
-            ctxs.ui.fillText("Tél : 06 51 90 93 46", 30, 50);
-            ctxs.ui.fillText("Mail : pierrerouzaud18@gmail.com", 30, 70);
-            ctxs.ui.fillText("Age : 22 ans", 30, 90);
-
-            ctxs.ui.font = "bold 18px Arial";
-            ctxs.ui.fillText("Mes Atouts :", 30, 240);
-            ctxs.ui.font = "18px Arial";
-            ctxs.ui.fillText(
-                "Mes compétences professionnelles  dans le développement Web à la fois front-end",
-                30,
-                270
-            );
-            ctxs.ui.fillText(
-                "et back-end associées à ma formation en Dut Informatique et ma capacité linguistique. ",
-                30,
-                290
-            );
-
-            ctxs.ui.font = "bold 24px Arial";
-            ctxs.ui.textAlign = "center";
-            ctxs.ui.fillText(
-                "Développeur Web Full Stack",
-                canvasWidth / 2,
-                170
-            );
-
-            ctxs.ui.font = "bold 18px Arial";
-            ctxs.ui.fillText("Compétences : ", 900, 240);
+            drawCvPart1(ctxs.ui, canvasWidth, canvasHeight);
+            drawText(ctxs.ui, 900, 240, "Compétences", "bold 18px Arial", null, null);
 
             window.requestAnimationFrame(loop);
 
@@ -469,6 +457,8 @@ class Game {
                     }
                 }
             });
+            console.log("from2");
+
             event.preventDefault();
         };
         var elemStage2 = {
@@ -478,7 +468,7 @@ class Game {
             skills: this.objAssets.elements.skills,
             bomb: this.objAssets.elements.bomb,
             explosion: this.objAssets.effects.explosion,
-            portal : this.objAssets.elements.portal
+            portal: this.objAssets.elements.portal
         }
         var elemBackStage2 = this.objAssets.background.forest;
         var stage2 = new Stage(
@@ -526,7 +516,7 @@ class Game {
             }
             //////////////////////////////////////
             //Characters
-            this.characters.rick.x = 850;
+            this.characters.rick.x = 800;
             this.characters.rick.y = 50;
             var rick = this.characters.rick;
             this.characters.morty.x = canvasWidth / 2;
@@ -551,7 +541,7 @@ class Game {
 
                 //////////////
                 if (visionPlayer < 550) {
-                    ctxs.ui.fillStyle = "black";
+                    ctxs.ui.fillStyle = "grey";
                     ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight);
                     // to see morty
                     clearCircle(ctxs.ui, visionPlayer, morty.x, morty.y, 30, 30);
@@ -589,7 +579,7 @@ class Game {
                     ) { // Collision
                         setTimeout(function () {
                             scorePlayer += skill.score;
-                            visionPlayer += 10*skill.score;
+                            visionPlayer += 10 * skill.score;
                             skill.collision = true;
                             //skills.splice(index, 1);
                             if (visionPlayer >= 200) {
@@ -635,13 +625,13 @@ class Game {
                             bomb.height - 35
                         ) && !bomb.explode
                     ) {
-                        if(scorePlayer > 0){
+                        if (scorePlayer > 0) {
                             scorePlayer -= 1;
                         }
                         bomb.explode = true;
                         if (visionPlayer >= 100) {
                             visionPlayer -= 20;
-                            
+
                             if (visionPlayer <= 200) {
                                 morty.changeImg(elemStage.morty[0]);
                             } else {
@@ -675,79 +665,253 @@ class Game {
                 //Draw UI/////
                 drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
                 //////////////
-                if(endStage){
+                if (endStage) {
+                    clouds.map(function (cloud) {
+                        cloud.speed = cloud.speed * 1.5;
+                    });
+                    skills.map(function (skill) {
+                        skill.speed = skill.speed * 1.5;
+                    });
+                    bombs.map(function (bomb) {
+                        bomb.speed = bomb.speed * 1.5;
+                    });
                     window.requestAnimationFrame(loopEnd);
-                }else{
+                } else {
                     window.requestAnimationFrame(loopGame);
                 }
             }
             console.log(this.elemStage);
-            
-            var portalRick = new Portal(this.elemStage.portal[0], 900, 10, 175, 175);
-            var portalMorty = new Portal(this.elemStage.portal[0], canvasWidth/2, 410, 175, 175);
-            portalRick.setScaleXY(0,0);
-            portalMorty.setScaleXY(0,0);
-            function loopEnd(){
+
+            var portalMorty = new Portal(this.elemStage.portal[0], 925, 410, 175, 175);
+            portalMorty.setScaleXY(0, 0);
+            var trueEndStage = false;
+            function loopEnd() {
+                
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
                 // Collision
                 objCollision.isOutCanvas(morty);
-                //Clean Cloud
-                var testCollisionCloud;
-                clouds.map(function (cloud,index) {
-                    testCollisionCloud = objCollision.isOutCanvas(cloud);
-                    if (testCollisionCloud.isOut) {
-                        clouds.splice(index, 1);
-                    }else{
-                        cloud.draw(ctxs.game);
-                    }
-                });
-                //Clean skills
-                skills.map(function(skill,index){
-                    if (skill.y > canvasHeight ) {
-                        setTimeout(function () {
-                            skills.splice(index, 1);
-                        }, 0);
-                    } else {
-                        skill.draw(ctxs.game);
-                    }
-                });
-                //Clean bombs
-                bombs.map(function(bomb,index){
-                    if (bomb.y > canvasHeight ) {
-                        setTimeout(function () {
-                            bombs.splice(index, 1);
-                        }, 0);
-                    } else {
-                        bomb.draw(ctxs.game);
-                    }
-                });
-                rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
+                drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
+                //console.log(clouds.length);
                 if (clouds.length == 0) {
-                    if (portalMorty.scaleX < 0.4) {
-                        portalMorty.scaleX += 0.002;
-                        portalRick.scaleX += 0.002;
+                    /* console.log("no more clouds"); */
+                    
+                    if (objCollision.passPortal(portalMorty, morty)) {
+                        console.log("out");
+                        console.log(this);
+                        trueEndStage = true;
+                        fctStop();
+                        
                     }
-                    if (portalMorty.scaleY < 1) {
-                        portalMorty.scaleY += 0.01;
-                        portalRick.scaleY += 0.01;
+                    if (portalMorty.x> rick.x) {
+                        rick.draw(ctxs.game);
                     }
-                    portalMorty.draw(ctxs.game);
-                    portalRick.draw(ctxs.game);
+                    if (rick.y < morty.y) {
+                        rick.y += 2.5;
+                        if (morty.x + morty.width * 2 >= portalMorty.x) {
+                            morty.x -= morty.speed * 2;
+                        }
+                    } else {
+                        if (portalMorty.scaleX < 0.4 || portalMorty.scaleY < 1) {
+                            if (portalMorty.scaleX < 0.4) {
+                                portalMorty.scaleX += 0.002;
+                            }
+                            if (portalMorty.scaleY < 1) {
+                                portalMorty.scaleY += 0.01;
+                            }
+                        } else {
+                            rick.arrowMove.map(function (elem) {
+                                if (elem.keyCode == 39 && !elem.keyIsUp) {
+                                    rick.animation.maxTime = 20;
+                                    rick.speed = 1;
+                                    elem.keyIsUp = true;
+                                }
+                            });
+                        }
+                        portalMorty.draw(ctxs.game);
+                    }
+
+                } else {
+                    //Clean Cloud
+                    var testCollisionCloud;
+                    clouds.map(function (cloud, index) {
+                        testCollisionCloud = objCollision.isOutCanvas(cloud);
+                        if (testCollisionCloud.isOut) {
+                            clouds.splice(index, 1);
+                        } else {
+                            cloud.draw(ctxs.game);
+                        }
+                    });
+                    //Clean skills
+                    skills.map(function (skill, index) {
+                        if (skill.y > canvasHeight) {
+                            setTimeout(function () {
+                                skills.splice(index, 1);
+                            }, 0);
+                        } else {
+                            skill.draw(ctxs.game);
+                        }
+                    });
+                    //Clean bombs
+                    bombs.map(function (bomb, index) {
+                        if (bomb.y > canvasHeight) {
+                            setTimeout(function () {
+                                bombs.splice(index, 1);
+                            }, 0);
+                        } else {
+                            bomb.draw(ctxs.game);
+                        }
+                    });
+
+                    rick.draw(ctxs.game);
+
                 }
 
-                
-                drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
+                if (!trueEndStage) {
+                    console.log("loop end")
+                    window.requestAnimationFrame(loopEnd);
+                }
+            }
+        };
+        ////////////////////////////////////////////////////////////////////////
+        /////////////////////STAGE 3////////////////////////////////////////////
 
-              
-                window.requestAnimationFrame(loopEnd);
+        var stage3FctDown = function (event) {
+            if (event.defaultPrevented) {
+                return;
+            }
+            //Only allow right move and sprint
+            if (event.keyCode == 39 || event.keyCode == 16) {
+                var fctMap = function (elem) {
+                    if (elem.keyCode == event.keyCode) {
+                        elem.keyIsUp = true;
+                    }
+                };
+                this.characters.rick.arrowMove.map(fctMap);
+                this.characters.morty.arrowMove.map(fctMap);
+            }
+
+            event.preventDefault();
+        };
+        var stage3FctUp = function (event) {
+            if (event.defaultPrevented) {
+                return;
+            }
+            var fctMap = function (elem, character) {
+                if (elem.keyCode == event.keyCode) {
+                    character.animation.frame = 0;
+                    character.animation.direction = "stayStill";
+                    elem.keyIsUp = false;
+                    if (event.keyCode == 16) {
+                        character.animation.maxTime = 10;
+                        character.speed = 2;
+                    }
+                }
+            };
+            this.characters.rick.arrowMove.map(elem => {
+                if (elem.keyCode == event.keyCode) {
+                    this.characters.rick.animation.frame = 0;
+                    this.characters.rick.animation.direction = "stayStill";
+                    elem.keyIsUp = false;
+                    if (event.keyCode == 16) {
+                        this.characters.rick.animation.maxTime = 10;
+                        this.characters.rick.speed = 2;
+                    }
+                }
+            });
+            this.characters.morty.arrowMove.map(elem => {
+                if (elem.keyCode == event.keyCode) {
+                    this.characters.morty.animation.frame = 0;
+                    this.characters.morty.animation.direction = "stayStill";
+                    elem.keyIsUp = false;
+                    if (event.keyCode == 16) {
+                        this.characters.morty.animation.maxTime = 10;
+                        this.characters.morty.speed = 2;
+                    }
+                }
+            });
+            console.log("from3");
+
+            event.preventDefault();
+        };
+        var elemStage3 = {
+            portal: this.objAssets.elements.portal[0]
+        };
+        var stage3 = new Stage(
+            elemStage3, [],
+            this.characters,
+            this.collisionDetector,
+            stage3FctDown,
+            stage3FctUp
+        );
+
+        stage3.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+            console.log("stage3");
+            ctxs.back.fillStyle = "white";
+            ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            // Define portal
+            var portal = new Portal(this.elemStage.portal, 870, 320, 175, 175);
+
+            var rick = this.characters.rick;
+            var morty = this.characters.morty;
+            rick.x = 60;
+            rick.y = canvasHeight / 3 * 2 - 80
+            morty.x = 0;
+            morty.y = canvasHeight / 3 * 2 - 79;
+
+            var objCollision = this.collisionDetector;
+
+            var gradient = ctxs.game.createLinearGradient(0, 0, canvasWidth, 0);
+            gradient.addColorStop("0", "black");
+            gradient.addColorStop("0.5", "black");
+            gradient.addColorStop("0.60", "yellow");
+            gradient.addColorStop("1.0", "green");
+
+            drawCvPart1(ctxs.ui, canvasWidth, canvasHeight);
+            drawText(ctxs.ui, 900, 240, "Compétences", "bold 18px Arial", null, null);
+
+            window.requestAnimationFrame(loop);
+
+            function loop() {
+                objCollision.isOutCanvas(rick);
+                //objCollision.trucRick(rick,morty.x+morty.width);
+                objCollision.isOutCanvas(morty);
+                //gameDraw
+                ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                ctxs.back.fillStyle = gradient;
+                ctxs.back.fillRect(0, canvasHeight / 3 * 2, canvasWidth, 1);
+
+                rick.draw(ctxs.game);
+                morty.draw(ctxs.game);
+
+                //blank block to make character disepear
+                ctxs.game.fillStyle = "white";
+                ctxs.game.fillRect(
+                    900,
+                    canvasHeight / 3 * 2 - 108,
+                    canvasWidth,
+                    108
+                );
+                //Draw portal
+                portal.draw(ctxs.game);
+
+                if (morty.x > canvasWidth - 130) {
+                    fctStop();
+                } else {
+                    window.requestAnimationFrame(loop);
+                }
             }
         };
         ////////////////////////////////////////////////////////////////////////
         stages.push(stage1);
         stages.push(stage2);
-
+        stages.push(stage3);
+        //stages.push(stage1);
+        console.log(stages);
+        
         return stages;
     }
 }

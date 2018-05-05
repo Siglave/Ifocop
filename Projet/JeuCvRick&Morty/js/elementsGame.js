@@ -66,6 +66,7 @@ class Portal extends Element {
         // 870 * 2.5 cause 1/0.4 = 2.5
         this.img.draw(ctx, this.x * (1/this.scaleX), this.y* (1/this.scaleY), this.width, this.height);
         ctx.restore();
+        
     }
 }
 
