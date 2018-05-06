@@ -105,6 +105,17 @@ function loadAssets(callback) {
                 "assets/background/forest/tree.png",
                 "assets/background/forest/ground.png"
             ],
+            western: [
+                "assets/background/western/background.png",
+                "assets/background/western/stars.png",
+                "assets/background/western/sun.png",
+                "assets/background/western/mountains.png",
+                "assets/background/western/clouds.png",
+                "assets/background/western/layer4.png",
+                "assets/background/western/layer3.png",
+                "assets/background/western/layer2.png",
+                "assets/background/western/layer1.png"
+            ]
         },
         characters: {
             rick: [
@@ -153,6 +164,7 @@ function loadAssets(callback) {
     var assets = {
         background: {
             forest: null,
+            western: null,
         },
         characters: {
             rick: null,
@@ -184,7 +196,10 @@ function loadAssets(callback) {
                                 assets.elements.portal = tabImg;
                                 loadImgs(assetsSrc.elements.skills, function (tabImg) {
                                     assets.elements.skills = tabImg;
-                                    callback(assets);
+                                    loadImgs(assetsSrc.background.western,function(tabImg){
+                                        assets.background.western = tabImg;
+                                        callback(assets);
+                                    });
                                 });
                             });
                         });

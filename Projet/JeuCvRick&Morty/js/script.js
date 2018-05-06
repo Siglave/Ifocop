@@ -271,7 +271,7 @@ class Game {
         console.log("actuStage");
         console.log(this.actualStage);
         console.log(this);
-        
+
         //Clear all Canvas
         this.ctxs.back.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         this.ctxs.game.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
@@ -285,13 +285,13 @@ class Game {
         this.actualStage += 1;
         console.log("prochainStage");
         console.log(this.actualStage);
-       // console.log(this.stages[this.actualStage]);
+        // console.log(this.stages[this.actualStage]);
         //Load event for the next stage and start it
         console.log("morty x");
         console.log(this.characters.morty.x);
         //this.characters.morty.x = 0;
         console.log(this.stages[this.actualStage].characters.morty.x);
-        
+
         this.stages[this.actualStage].loadListeners();
         this.stages[this.actualStage].start(
             this.ctxs,
@@ -358,7 +358,7 @@ class Game {
                 }
             });
             console.log("from1");
-            
+
             event.preventDefault();
         };
         var elemStage = {
@@ -402,9 +402,10 @@ class Game {
                 objCollision.isOutCanvas(morty);
                 //gameDraw
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
+                ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
 
                 ctxs.back.fillStyle = gradient;
-                ctxs.back.fillRect(0, canvasHeight / 3 * 2, canvasWidth, 1);
+                ctxs.back.fillRect(morty.x +10, canvasHeight / 3 * 2, canvasWidth, 1);
 
                 rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
@@ -528,7 +529,7 @@ class Game {
             var objCollision = this.collisionDetector;
             //////////////////////
             //Player
-            var scorePlayer = 48;
+            var scorePlayer = 0;
             var visionPlayer = 100;
             //////////
             window.requestAnimationFrame(loopGame);
@@ -685,8 +686,9 @@ class Game {
             var portalMorty = new Portal(this.elemStage.portal[0], 925, 410, 175, 175);
             portalMorty.setScaleXY(0, 0);
             var trueEndStage = false;
+
             function loopEnd() {
-                
+
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
                 // Collision
@@ -696,15 +698,15 @@ class Game {
                 //console.log(clouds.length);
                 if (clouds.length == 0) {
                     /* console.log("no more clouds"); */
-                    
+
                     if (objCollision.passPortal(portalMorty, morty)) {
                         console.log("out");
                         console.log(this);
                         trueEndStage = true;
                         fctStop();
-                        
+
                     }
-                    if (portalMorty.x> rick.x) {
+                    if (portalMorty.x > rick.x) {
                         rick.draw(ctxs.game);
                     }
                     if (rick.y < morty.y) {
@@ -838,8 +840,10 @@ class Game {
         var elemStage3 = {
             portal: this.objAssets.elements.portal[0]
         };
+        
         var stage3 = new Stage(
-            elemStage3, [],
+            elemStage3,
+            [],
             this.characters,
             this.collisionDetector,
             stage3FctDown,
@@ -856,9 +860,9 @@ class Game {
 
             var rick = this.characters.rick;
             var morty = this.characters.morty;
-            rick.x = 60;
+            rick.x = 460;
             rick.y = canvasHeight / 3 * 2 - 80
-            morty.x = 0;
+            morty.x = 400;
             morty.y = canvasHeight / 3 * 2 - 79;
 
             var objCollision = this.collisionDetector;
@@ -869,20 +873,22 @@ class Game {
             gradient.addColorStop("0.60", "yellow");
             gradient.addColorStop("1.0", "green");
 
-            drawCvPart1(ctxs.ui, canvasWidth, canvasHeight);
-            drawText(ctxs.ui, 900, 240, "Compétences", "bold 18px Arial", null, null);
-
+            drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
+            drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);            
             window.requestAnimationFrame(loop);
-
+            
             function loop() {
                 objCollision.isOutCanvas(rick);
                 //objCollision.trucRick(rick,morty.x+morty.width);
                 objCollision.isOutCanvas(morty);
                 //gameDraw
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
-
+                ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+                
+                drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
+                drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
                 ctxs.back.fillStyle = gradient;
-                ctxs.back.fillRect(0, canvasHeight / 3 * 2, canvasWidth, 1);
+                ctxs.back.fillRect(morty.x+10, canvasHeight / 3 * 2, canvasWidth, 1);
 
                 rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
@@ -906,12 +912,71 @@ class Game {
             }
         };
         ////////////////////////////////////////////////////////////////////////
+        /////////////////////////STAGE 4 WESTERN/////////////////////////////////
+        var stage4FctDown = function (event) {
+            if (event.defaultPrevented) {
+                return;
+            }
+            event.preventDefault();
+        };
+        var stage4FctUp = function (event) {
+            if (event.defaultPrevented) {
+                return;
+            }
+            console.log("from4");
+            event.preventDefault();
+        };
+        var elemStage4 = {
+            portal: this.objAssets.elements.portal[0]
+        };
+        var elemBackStage4 = this.objAssets.background.western;
+        
+        var stage4 = new Stage(
+            elemStage4,
+            elemBackStage4,
+            this.characters,
+            this.collisionDetector,
+            stage4FctDown,
+            stage4FctUp
+        );
+
+        stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+            console.log("stage4");
+            var tabParralaxBack = [
+                new BackParallax(this.elemBack[0], 0, 0, this.elemBack[0].width, this.elemBack[0].height,0),
+                new BackParallax(this.elemBack[1], 0, 0, this.elemBack[1].width, this.elemBack[1].height,0),
+                new BackParallax(this.elemBack[2], 0, 0, this.elemBack[2].width, this.elemBack[2].height,0),
+                new BackParallax(this.elemBack[3], 0, 0, this.elemBack[3].width, this.elemBack[3].height,0.3),
+                new BackParallax(this.elemBack[4], 0, 0, this.elemBack[4].width, this.elemBack[4].height,1),
+                new BackParallax(this.elemBack[5], 0, 0, this.elemBack[5].width, this.elemBack[5].height,0.5),
+                new BackParallax(this.elemBack[6], 0, 0, this.elemBack[6].width, this.elemBack[6].height,1.5),
+                new BackParallax(this.elemBack[7], 0, 0, this.elemBack[7].width, this.elemBack[7].height,1.8),
+                new BackParallax(this.elemBack[8], 0, 0, this.elemBack[8].width, this.elemBack[8].height,3),
+            ];
+
+            window.requestAnimationFrame(loop);
+            /* this.elemBack.map(function(elem,index){
+                var backPara = new BackParallax(elem, 0, 0, elem.width, elem.height,index);
+                tabParralaxBack.push(backPara);
+            }); */
+            function loop() {
+                //Clear background
+                ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+                //Draw background
+                tabParralaxBack.map(function(elemBack){
+                    elemBack.draw(ctxs.back,canvasWidth,canvasHeight);
+                })
+                window.requestAnimationFrame(loop);
+            }
+        };
+        /////////////////////////END STAGE 4 WESTERN/////////////////////////////////
         stages.push(stage1);
-        stages.push(stage2);
-        stages.push(stage3);
+        //stages.push(stage2);
+       // stages.push(stage3);
+        stages.push(stage4);
         //stages.push(stage1);
         console.log(stages);
-        
+
         return stages;
     }
 }
