@@ -405,7 +405,7 @@ class Game {
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
 
                 ctxs.back.fillStyle = gradient;
-                ctxs.back.fillRect(morty.x +10, canvasHeight / 3 * 2, canvasWidth, 1);
+                ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1);
 
                 rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
@@ -840,10 +840,9 @@ class Game {
         var elemStage3 = {
             portal: this.objAssets.elements.portal[0]
         };
-        
+
         var stage3 = new Stage(
-            elemStage3,
-            [],
+            elemStage3, [],
             this.characters,
             this.collisionDetector,
             stage3FctDown,
@@ -874,9 +873,9 @@ class Game {
             gradient.addColorStop("1.0", "green");
 
             drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
-            drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);            
+            drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
             window.requestAnimationFrame(loop);
-            
+
             function loop() {
                 objCollision.isOutCanvas(rick);
                 //objCollision.trucRick(rick,morty.x+morty.width);
@@ -884,11 +883,11 @@ class Game {
                 //gameDraw
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
-                
+
                 drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
                 drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
                 ctxs.back.fillStyle = gradient;
-                ctxs.back.fillRect(morty.x+10, canvasHeight / 3 * 2, canvasWidth, 1);
+                ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1);
 
                 rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
@@ -930,7 +929,7 @@ class Game {
             portal: this.objAssets.elements.portal[0]
         };
         var elemBackStage4 = this.objAssets.background.western;
-        
+
         var stage4 = new Stage(
             elemStage4,
             elemBackStage4,
@@ -942,37 +941,29 @@ class Game {
 
         stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
             console.log("stage4");
-            var tabParralaxBack = [
-                new BackParallax(this.elemBack[0], 0, 0, this.elemBack[0].width, this.elemBack[0].height,0),
-                new BackParallax(this.elemBack[1], 0, 0, this.elemBack[1].width, this.elemBack[1].height,0),
-                new BackParallax(this.elemBack[2], 0, 0, this.elemBack[2].width, this.elemBack[2].height,0),
-                new BackParallax(this.elemBack[3], 0, 0, this.elemBack[3].width, this.elemBack[3].height,0.3),
-                new BackParallax(this.elemBack[4], 0, 0, this.elemBack[4].width, this.elemBack[4].height,1),
-                new BackParallax(this.elemBack[5], 0, 0, this.elemBack[5].width, this.elemBack[5].height,0.5),
-                new BackParallax(this.elemBack[6], 0, 0, this.elemBack[6].width, this.elemBack[6].height,1.5),
-                new BackParallax(this.elemBack[7], 0, 0, this.elemBack[7].width, this.elemBack[7].height,1.8),
-                new BackParallax(this.elemBack[8], 0, 0, this.elemBack[8].width, this.elemBack[8].height,3),
-            ];
+            //Define speed for each background
+            var tabSpeed = [0, 0, 0, 0.3, 1, 0.5, 1.5, 1.8, 3];
+
+            var tabParralaxBack = [];
+            this.elemBack.map(function (elem, index) {
+                tabParralaxBack.push(new BackParallax(elem, 0, 0, elem.width, elem.height, tabSpeed[index]));
+            });
 
             window.requestAnimationFrame(loop);
-            /* this.elemBack.map(function(elem,index){
-                var backPara = new BackParallax(elem, 0, 0, elem.width, elem.height,index);
-                tabParralaxBack.push(backPara);
-            }); */
             function loop() {
                 //Clear background
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
                 //Draw background
-                tabParralaxBack.map(function(elemBack){
-                    elemBack.draw(ctxs.back,canvasWidth,canvasHeight);
+                tabParralaxBack.map(function (elemBack) {
+                    elemBack.draw(ctxs.back, canvasWidth, canvasHeight);
                 })
                 window.requestAnimationFrame(loop);
             }
         };
         /////////////////////////END STAGE 4 WESTERN/////////////////////////////////
         stages.push(stage1);
-        //stages.push(stage2);
-       // stages.push(stage3);
+        // stages.push(stage2);
+        stages.push(stage3);
         stages.push(stage4);
         //stages.push(stage1);
         console.log(stages);

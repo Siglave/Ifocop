@@ -2,7 +2,10 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
+    <script src="../lib/angular-1.6.6.min.js"></script>
+
     <title>AngularJS : Les Contrôleurs : Exercice 0</title>
+    
     <script>
       // Énoncé
       /* Les contextes, les contrôleurs et la directive ng-controller */
@@ -34,7 +37,7 @@
       <h4>Message contenu dans un contexte enfant</h4>
       <p>{{ jeSuis }}</p>
     </div>
-    <div ng-controller="jeCreeUnControleurNommme as monControleur">
+    <div ng-controller="jeCreeUnControleurNommme as monControleur"><!-- as permet de def un autre objet -->
       <h4>Message contenu dans une instance de contrôleur</h4>
       <p>{{ monControleur.jeSuis }}</p>
     </div>

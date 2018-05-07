@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../lib/angular-1.6.6.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div ng-controller="monPremierController">
+        <p>{{prenom}}</p>
+        <p>{{nombre1 / nombre2}}</p>
+        <p>{{sayHello()}}</p>
+    </div>
+</body>
+<script>
+    var monModulePrincipal = angular.module("monModule",[]);
+    //on place $scope dans le tableau pour def la valeur du 1 er param
+    monModulePrincipal.controller("monPremierController",["$scope",function(context){
+        context.prenom = "Toto";
+        context.nombre1 = 2341;
+        context.nombre2 = 12;
+        context.sayHello = function(){
+            return "hey what's up";
+        }
+
+    }]);
+
+    angular.bootstrap(window.document, ["monModule"],{strictDi:true});
+</script>
+</html>

@@ -1,4 +1,31 @@
 // http://spritedatabase.net/file/21543/Horse
+
+
+/*
+.sprite { background: url('sprite.png') no-repeat top left; width: 192px; height: 144px;  } 
+.sprite.ice-horse { background-position: 0 0; } 
+.sprite.ice-horse-bend-00 { background-position: -192px 0; } 
+.sprite.ice-horse-bend-01 { background-position: -384px 0; } 
+.sprite.ice-horse-bend-02 { background-position: -576px 0; } 
+.sprite.ice-horse-bend-03 { background-position: -768px 0; } 
+.sprite.ice-horse-jump-00 { background-position: -960px 0; } 
+.sprite.ice-horse-jump-01 { background-position: -1152px 0; } 
+.sprite.ice-horse-jump-02 { background-position: -1344px 0; } 
+.sprite.ice-horse-jump-03 { background-position: -1536px 0; } 
+.sprite.ice-horse-jump-04 { background-position: -1728px 0; } 
+.sprite.ice-horse-jump-05 { background-position: -1920px 0; } 
+.sprite.ice-horse-jump-06 { background-position: -2112px 0; } 
+.sprite.ice-horse-run-00 { background-position: -2304px 0; } 
+.sprite.ice-horse-run-01 { background-position: -2496px 0; } 
+.sprite.ice-horse-run-02 { background-position: -2688px 0; } 
+.sprite.ice-horse-run-03 { background-position: -2880px 0; } 
+.sprite.ice-horse-run-04 { background-position: -3072px 0; } 
+.sprite.ice-horse-run-05 { background-position: -3264px 0; } 
+.sprite.ice-horse-run-06 { background-position: -3456px 0; } 
+*/ 
+
+
+
 class Sprite {
     constructor(img, sx, sy, sWidth, sHeight) {
         /* var img = new Image(sWidth,sHeight);
