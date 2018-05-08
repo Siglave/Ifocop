@@ -22,7 +22,7 @@
 .sprite.ice-horse-run-04 { background-position: -3072px 0; } 
 .sprite.ice-horse-run-05 { background-position: -3264px 0; } 
 .sprite.ice-horse-run-06 { background-position: -3456px 0; } 
-*/ 
+*/
 
 
 
@@ -105,6 +105,32 @@ function getAnimationExplosion(img) {
     }
 }
 
+function getAnimationHorse(img) {
+    var jumpSprites = [];
+    var runSprites = [];
+    var pointerImgX = 960;
+    for (var i = 0; i < 7; i++) {
+        jumpSprites.push(new Sprite(img, pointerImgX, 0, 192, 144));
+        pointerImgX += 192;
+    }
+    pointerImgX = 2304 ;
+    for (var j = 0; j < 7; j++) {
+        runSprites.push(new Sprite(img, pointerImgX, 0, 192, 144));
+        pointerImgX += 192;
+    }
+    return {
+        stayStill: new Sprite(img, 0, 0, 192, 144),
+        run: runSprites,
+        jump: jumpSprites,
+        frame: 0,
+        direction: "stayStill",
+        maxTime: 7, // set how much time the frame appear before next one 
+        maxTimeJump: 8, // set how much time the frame appear before next one 
+        actualTime: 0
+
+    }
+}
+
 function loadImgs(tabSrc, callback) {
     var tabRetImg = [];
     tabSrc.map(function (src, index) {
@@ -154,6 +180,9 @@ function loadAssets(callback) {
                 "assets/character/morty.png",
                 "assets/character/mortyThreeEye.png",
             ],
+            horse: [
+                "assets/character/horseSprite.png",
+            ]
         },
         effects: {
             explosion: ["assets/effects/effectExplo.png"],
@@ -196,6 +225,7 @@ function loadAssets(callback) {
         characters: {
             rick: null,
             morty: null,
+            horse: null,
         },
         effects: {
             explosion: null,
@@ -223,9 +253,12 @@ function loadAssets(callback) {
                                 assets.elements.portal = tabImg;
                                 loadImgs(assetsSrc.elements.skills, function (tabImg) {
                                     assets.elements.skills = tabImg;
-                                    loadImgs(assetsSrc.background.western,function(tabImg){
+                                    loadImgs(assetsSrc.background.western, function (tabImg) {
                                         assets.background.western = tabImg;
-                                        callback(assets);
+                                        loadImgs(assetsSrc.characters.horse, function (tabImg) {
+                                            assets.characters.horse = tabImg;
+                                            callback(assets);
+                                        });
                                     });
                                 });
                             });

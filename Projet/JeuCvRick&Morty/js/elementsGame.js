@@ -1,34 +1,17 @@
 "use strict";
 
-class Coordinate {
-    constructor(x = 0, y = 0) {
-        this.x = x;
-        this.y = y;
-    }
-    setX(x) {
-        this.x = x;
-    }
-    setY(y) {
-        this.y = y;
-    }
-    setXY(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    getX() {
-        return this.x;
-    }
-    getY() {
-        return this.y;
-    }
-}
-
 class Element {
     constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+    }
+    setX(x) {
+        this.x = x;
+    }
+    setY(y) {
+        this.y = y;
     }
 }
 
@@ -267,5 +250,248 @@ function createSkillOrBomb(imgsSkill,imgBomb,imgExplosion,cloud,canvasWidth){
         );
         bomb.speed = cloud.speed;
         return {type:"bomb",obj:bomb};
+    }
+
+}
+
+class Character extends Element {
+    constructor(img, x, y, width, height) {
+        super(x, y, width,height);
+        this.animation = getAnimationCharacter(img);
+        this.speed = 2;
+        this.isCollision = false;
+        this.arrowMove = [{
+                keyCode: 38,
+                keyIsUp: false
+            }, //up
+            {
+                keyCode: 40,
+                keyIsUp: false
+            }, //down
+            {
+                keyCode: 37,
+                keyIsUp: false
+            }, //left
+            {
+                keyCode: 39,
+                keyIsUp: false
+            }, //right
+            {
+                keyCode: 16,
+                keyIsUp: false
+            } //shift
+        ];
+    }
+    changeImg(img) {
+        this.animation = getAnimationCharacter(img);
+    }
+    restartCharacter() {
+        this.arrowMove.map(function (elem) {
+            elem.keyIsUp = false;
+        });
+        this.animation.direction = "stayStill";
+        this.x = 0;
+        this.y = 0;
+        this.speed = 2;
+        this.animation.maxTime = 10;
+    }
+    effectCollision(collision) {
+        switch (collision.type) {
+            case "canvas":
+                switch (collision.direction) {
+                    /* if collision with canvas add or sub speed to nullify movement and keep
+					character to the same place */
+                    case "left":
+                        this.setX(this.x + this.speed);
+                        break;
+                    case "right":
+                        this.setX(this.x - this.speed);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    setIsCollision(bool) {
+        this.isCollision = bool;
+    }
+    move() {
+        this.arrowMove.map(item => {
+            if (item.keyIsUp) {
+                switch (item.keyCode) {
+                    case 38: //up
+                        //this.setY(this.getY() - this.speed);
+                        break;
+                    case 40: //down
+                        //this.setY(this.getY() + this.speed);
+                        break;
+                    case 37: //left
+                        this.setX(this.x - this.speed);
+                        this.animation.direction = "left";
+                        break;
+                    case 39: //right
+                        this.setX(this.x + this.speed);
+                        this.animation.direction = "right";
+                        break;
+                    case 16: //shift
+                        this.speed = 5;
+                        this.animation.maxTime = 3;
+                        break;
+                    default:
+                        return;
+                }
+            }
+        });
+    }
+    draw(ctx) {
+        this.move();
+        switch (this.animation.direction) {
+            case "stayStill":
+                this.animation.stayStill.draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                break;
+            case "left":
+                this.animation.left[this.animation.frame % 4].draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTime) {
+                    this.animation.actualTime++;
+                } else {
+                    this.animation.frame++;
+                    this.animation.actualTime = 0;
+                }
+                break;
+            case "right":
+                ctx.save();
+                ctx.scale(-1, 1); // needed to flip the img
+                this.animation.left[this.animation.frame % 4].draw(
+                    ctx,
+                    (this.x + this.width) * -1,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTime) {
+                    this.animation.actualTime++;
+                } else {
+                    this.animation.frame++;
+                    this.animation.actualTime = 0;
+                }
+                ctx.restore();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+class Horse extends Element{
+    constructor(img,x,y,width,height){
+        super(x,y,width,height);
+        this.animation = getAnimationHorse(img);
+        this.speed = 4;
+        this.isCollision = false;
+        this.isJumping = false;
+        this.limitJump = 150;
+        this.baseY = y;
+        this.movementJumpUp = true;
+        this.velocityY = 0;
+        this.gravity = 0.5;
+        this.arrowMove = [{
+                keyCode: 37,
+                keyIsUp: false
+            }, //left
+            {
+                keyCode: 39,
+                keyIsUp: false
+            }, //right
+            {
+                keyCode: 16,
+                keyIsUp: false
+            }, //shift
+            {
+                keyCode: 32,
+                keyIsUp: false
+            } //shift
+        ];
+    }
+    move(){
+        if (this.isJumping) {
+            this.animation.direction = "jump";
+            if(this.velocityY > 0){
+                this.movementJumpUp = false;
+            }
+            this.velocityY += this.gravity;
+            if(this.movementJumpUp){
+                this.y += this.velocityY;
+            }else{
+                this.y += this.velocityY;
+                if(this.y >= this.baseY){
+                    this.animation.direction = "run";
+                    this.animation.frame = 0;
+                    this.isJumping = false;  
+                    this.movementJumpUp = true;
+                }
+            }
+        }
+    }
+    draw(ctx){
+        this.move();
+        switch (this.animation.direction) {
+            case "stayStill":
+                this.animation.stayStill.draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                break;
+            case "run":
+                this.animation.run[this.animation.frame % 7].draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTime) {
+                    this.animation.actualTime++;
+                } else {
+                    this.animation.frame++;
+                    this.animation.actualTime = 0;
+                }
+                break;
+            case "jump":
+                this.animation.jump[this.animation.frame % 7].draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTimeJump) {
+                    this.animation.actualTime++;
+                } else {
+                    this.animation.frame++;
+                    this.animation.actualTime = 0;
+                }
+                break;
+            default:
+                break;
+        }
+
     }
 }

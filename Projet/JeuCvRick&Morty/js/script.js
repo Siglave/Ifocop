@@ -1,149 +1,5 @@
 "use strict";
 
-class Character extends Coordinate {
-    constructor(img, x, y, width, height) {
-        super(x, y);
-        this.width = width;
-        this.height = height;
-        this.animation = getAnimationCharacter(img);
-        this.speed = 2;
-        this.isCollision = false;
-        this.arrowMove = [{
-                keyCode: 38,
-                keyIsUp: false
-            }, //up
-            {
-                keyCode: 40,
-                keyIsUp: false
-            }, //down
-            {
-                keyCode: 37,
-                keyIsUp: false
-            }, //left
-            {
-                keyCode: 39,
-                keyIsUp: false
-            }, //right
-            {
-                keyCode: 16,
-                keyIsUp: false
-            } //shift
-        ];
-    }
-    changeImg(img) {
-        this.animation = getAnimationCharacter(img);
-    }
-    restartCharacter() {
-        this.arrowMove.map(function (elem) {
-            elem.keyIsUp = false;
-        });
-        this.animation.direction = "stayStill";
-        this.x = 0;
-        this.y = 0;
-        this.speed = 2;
-        this.animation.maxTime = 10;
-    }
-    effectCollision(collision) {
-        switch (collision.type) {
-            case "canvas":
-                switch (collision.direction) {
-                    /* if collision with canvas add or sub speed to nullify movement and keep
-					character to the same place */
-                    case "left":
-                        this.setX(this.getX() + this.speed);
-                        break;
-                    case "right":
-                        this.setX(this.getX() - this.speed);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                break;
-        }
-    }
-    setIsCollision(bool) {
-        this.isCollision = bool;
-    }
-    move() {
-        this.arrowMove.map(item => {
-            if (item.keyIsUp) {
-                switch (item.keyCode) {
-                    case 38: //up
-                        //this.setY(this.getY() - this.speed);
-                        break;
-                    case 40: //down
-                        //this.setY(this.getY() + this.speed);
-                        break;
-                    case 37: //left
-                        this.setX(this.getX() - this.speed);
-                        this.animation.direction = "left";
-                        break;
-                    case 39: //right
-                        this.setX(this.getX() + this.speed);
-                        this.animation.direction = "right";
-                        break;
-                    case 16: //shift
-                        this.speed = 5;
-                        this.animation.maxTime = 3;
-                        break;
-                    default:
-                        return;
-                }
-            }
-        });
-    }
-    draw(ctx) {
-        this.move();
-        switch (this.animation.direction) {
-            case "stayStill":
-                this.animation.stayStill.draw(
-                    ctx,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
-                );
-                break;
-            case "left":
-                this.animation.left[this.animation.frame % 4].draw(
-                    ctx,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
-                );
-                if (this.animation.actualTime < this.animation.maxTime) {
-                    this.animation.actualTime++;
-                } else {
-                    this.animation.frame++;
-                    this.animation.actualTime = 0;
-                }
-                break;
-            case "right":
-                ctx.save();
-                ctx.scale(-1, 1); // needed to flip the img
-                this.animation.left[this.animation.frame % 4].draw(
-                    ctx,
-                    (this.x + this.width) * -1,
-                    this.y,
-                    this.width,
-                    this.height
-                );
-                if (this.animation.actualTime < this.animation.maxTime) {
-                    this.animation.actualTime++;
-                } else {
-                    this.animation.frame++;
-                    this.animation.actualTime = 0;
-                }
-                ctx.restore();
-                break;
-            default:
-                break;
-        }
-    }
-}
 
 class CollisionDetector {
     constructor(canvasWidth, canvasHeight) {
@@ -916,6 +772,15 @@ class Game {
             if (event.defaultPrevented) {
                 return;
             }
+            if(event.keyCode == 32){
+                //if(!this.characters.horse.isJumping){
+                    this.characters.horse.isJumping = true;
+                    this.characters.horse.animation.frame = 0;
+                    this.characters.horse.velocityY =  -15
+                //}
+            }
+            console.log(event.keyCode);
+            
             event.preventDefault();
         };
         var stage4FctUp = function (event) {
@@ -926,7 +791,7 @@ class Game {
             event.preventDefault();
         };
         var elemStage4 = {
-            portal: this.objAssets.elements.portal[0]
+            portal: this.objAssets.elements.portal[0],
         };
         var elemBackStage4 = this.objAssets.background.western;
 
@@ -938,34 +803,53 @@ class Game {
             stage4FctDown,
             stage4FctUp
         );
+        //Add horse character in stage4
+        stage4.characters.horse =  new Horse(this.objAssets.characters.horse[0],350,450,156,120);
+        stage4.characters.horse.animation.direction = "run";
 
         stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
             console.log("stage4");
             //Define speed for each background
             var tabSpeed = [0, 0, 0, 0.3, 1, 0.5, 1.5, 1.8, 3];
-
             var tabParralaxBack = [];
             this.elemBack.map(function (elem, index) {
                 tabParralaxBack.push(new BackParallax(elem, 0, 0, elem.width, elem.height, tabSpeed[index]));
             });
-
+            //Set rick position////
+            var rick = this.characters.rick;
+            rick.x = 415;
+            rick.y = 435;
+            rick.width = 50;
+            rick.height = 65.5;
+            rick.animation.direction = "right";
+            //Access horse character////
+            var horse = this.characters.horse;
+            //Start loop
             window.requestAnimationFrame(loop);
             function loop() {
                 //Clear background
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+                ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 //Draw background
                 tabParralaxBack.map(function (elemBack) {
                     elemBack.draw(ctxs.back, canvasWidth, canvasHeight);
-                })
+                });
+                //Draw Rick////
+                rick.draw(ctxs.game);
+                //to stay in the 1st frame of right animation
+                rick.animation.actualTime = 0;
+                //Draw horse
+                horse.draw(ctxs.game);
+                rick.y = horse.y-15;
+                tabParralaxBack[8].draw(ctxs.game, canvasWidth, canvasHeight);
                 window.requestAnimationFrame(loop);
             }
         };
         /////////////////////////END STAGE 4 WESTERN/////////////////////////////////
-        stages.push(stage1);
-        // stages.push(stage2);
-        stages.push(stage3);
-        stages.push(stage4);
         //stages.push(stage1);
+        // stages.push(stage2);
+        //stages.push(stage3);
+        stages.push(stage4);
         console.log(stages);
 
         return stages;
