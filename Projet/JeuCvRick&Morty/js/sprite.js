@@ -1,35 +1,7 @@
 // http://spritedatabase.net/file/21543/Horse
 
-
-/*
-.sprite { background: url('sprite.png') no-repeat top left; width: 192px; height: 144px;  } 
-.sprite.ice-horse { background-position: 0 0; } 
-.sprite.ice-horse-bend-00 { background-position: -192px 0; } 
-.sprite.ice-horse-bend-01 { background-position: -384px 0; } 
-.sprite.ice-horse-bend-02 { background-position: -576px 0; } 
-.sprite.ice-horse-bend-03 { background-position: -768px 0; } 
-.sprite.ice-horse-jump-00 { background-position: -960px 0; } 
-.sprite.ice-horse-jump-01 { background-position: -1152px 0; } 
-.sprite.ice-horse-jump-02 { background-position: -1344px 0; } 
-.sprite.ice-horse-jump-03 { background-position: -1536px 0; } 
-.sprite.ice-horse-jump-04 { background-position: -1728px 0; } 
-.sprite.ice-horse-jump-05 { background-position: -1920px 0; } 
-.sprite.ice-horse-jump-06 { background-position: -2112px 0; } 
-.sprite.ice-horse-run-00 { background-position: -2304px 0; } 
-.sprite.ice-horse-run-01 { background-position: -2496px 0; } 
-.sprite.ice-horse-run-02 { background-position: -2688px 0; } 
-.sprite.ice-horse-run-03 { background-position: -2880px 0; } 
-.sprite.ice-horse-run-04 { background-position: -3072px 0; } 
-.sprite.ice-horse-run-05 { background-position: -3264px 0; } 
-.sprite.ice-horse-run-06 { background-position: -3456px 0; } 
-*/
-
-
-
 class Sprite {
     constructor(img, sx, sy, sWidth, sHeight) {
-        /* var img = new Image(sWidth,sHeight);
-        img.src = srcImg; */
         this.img = img;
         this.sX = sx;
         this.sY = sy;
@@ -124,8 +96,8 @@ function getAnimationHorse(img) {
         jump: jumpSprites,
         frame: 0,
         direction: "stayStill",
-        maxTime: 7, // set how much time the frame appear before next one 
-        maxTimeJump: 8, // set how much time the frame appear before next one 
+        maxTime: 4, // set how much time the frame appear before next one 
+        maxTimeJump: 7, // set how much time the frame appear before next one 
         actualTime: 0
 
     }
@@ -215,6 +187,11 @@ function loadAssets(callback) {
                 "assets/skills/mongodb.png",
                 "assets/skills/mysql.png",
             ]
+        },
+        tiles :{
+            grass: [
+                "assets/tiles/grass/tile_grass_02.png"
+            ]
         }
     }
     var assets = {
@@ -235,6 +212,9 @@ function loadAssets(callback) {
             clouds: null,
             portal: null,
             skills: null
+        },
+        tiles: {
+            grass : null
         }
     }
     loadImgs(assetsSrc.background.forest, function (tabImg) {
@@ -257,7 +237,11 @@ function loadAssets(callback) {
                                         assets.background.western = tabImg;
                                         loadImgs(assetsSrc.characters.horse, function (tabImg) {
                                             assets.characters.horse = tabImg;
-                                            callback(assets);
+                                            loadImgs(assetsSrc.tiles.grass, function(tabImg){
+                                                assets.tiles.grass = tabImg;
+                                                
+                                                callback(assets);
+                                            });
                                         });
                                     });
                                 });

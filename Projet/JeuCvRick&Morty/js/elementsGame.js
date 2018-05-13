@@ -21,7 +21,7 @@ class Portal extends Element {
         this.img = new Sprite(img, 2483, 329, 670, 670);
         this.speed = 0.2;
         this.direction = true;
-        this.maxMouv = y+10;
+        this.maxMouv = y + 10;
         this.scaleX = 0.4;
         this.scaleY = 1;
     }
@@ -29,7 +29,7 @@ class Portal extends Element {
         if (this.y < this.maxMouv && this.direction) {
             this.y += this.speed;
         } else {
-            if (this.y > this.maxMouv-20) {
+            if (this.y > this.maxMouv - 20) {
                 this.y = this.y - this.speed;
                 this.direction = false;
             } else {
@@ -37,7 +37,7 @@ class Portal extends Element {
             }
         }
     }
-    setScaleXY(scaleX,scaleY){
+    setScaleXY(scaleX, scaleY) {
         this.scaleX = scaleX;
         this.scaleY = scaleY;
     }
@@ -47,9 +47,9 @@ class Portal extends Element {
         ctx.save();
         ctx.scale(this.scaleX, this.scaleY)
         // 870 * 2.5 cause 1/0.4 = 2.5
-        this.img.draw(ctx, this.x * (1/this.scaleX), this.y* (1/this.scaleY), this.width, this.height);
+        this.img.draw(ctx, this.x * (1 / this.scaleX), this.y * (1 / this.scaleY), this.width, this.height);
         ctx.restore();
-        
+
     }
 }
 
@@ -82,6 +82,11 @@ class Cloud extends Element {
                             };
                         }
                         break;
+                    case "right":
+                        return {
+                            isOut: false
+                        };
+                        break;
                     default:
                         break;
                 }
@@ -89,7 +94,6 @@ class Cloud extends Element {
             default:
                 break;
         }
-
     }
     move() {
         this.x -= this.speed;
@@ -112,24 +116,24 @@ class Skill extends Element {
         this.score = 1;
     }
     move() {
-        if(this.collision){           
+        if (this.collision) {
             this.y -= 0.5;
-        }else{
+        } else {
             if (this.x < this.distanceFall) {
                 this.y += this.speed;
             } else {
                 this.x -= this.speed;
-            }      
+            }
         }
     }
     draw(ctx) {
         this.move();
-        if(this.collision){
+        if (this.collision) {
             ctx.fillStyle = "rgba(255, 255, 255, " + this.alpha + ")";
             ctx.font = "20pt Arial";
-            ctx.fillText("+"+this.score, this.x, this.y+(this.height/2));
+            ctx.fillText("+" + this.score, this.x, this.y + (this.height / 2));
             this.alpha -= 0.005;
-        }else{
+        } else {
             this.img.draw(ctx, this.x, this.y, this.width, this.height);
         }
     }
@@ -144,7 +148,7 @@ class Bomb extends Element {
         this.animation = getAnimationBomb(imgBomb, imgExplosion);
     }
     move() {
-        if(!this.explode){
+        if (!this.explode) {
             if (this.x < this.distanceFall) {
                 this.y += this.speed;
             } else {
@@ -158,8 +162,8 @@ class Bomb extends Element {
             if (this.explode) {
                 this.animation.explosion.explode[this.animation.explosion.frame % 12].draw(
                     ctx,
-                    this.x-(this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth/2)+(this.width/2),
-                    this.y-(this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight/2)+(this.height/2),
+                    this.x - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth / 2) + (this.width / 2),
+                    this.y - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight / 2) + (this.height / 2),
                     this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth,
                     this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight
                 );
@@ -188,10 +192,13 @@ class Bomb extends Element {
     }
 }
 
-function createSkillOrBomb(imgsSkill,imgBomb,imgExplosion,cloud,canvasWidth){
-    var objRet = {type:null,img:null};
+function createSkillOrBomb(imgsSkill, imgBomb, imgExplosion, cloud, canvasWidth) {
+    var objRet = {
+        type: null,
+        img: null
+    };
     var score = 1;
-    switch (randomNumber(0,40)) {
+    switch (randomNumber(0, 40)) {
         case 0:
         case 1:
         case 2:
@@ -237,8 +244,11 @@ function createSkillOrBomb(imgsSkill,imgBomb,imgExplosion,cloud,canvasWidth){
         );
         skill.score = score;
         skill.speed = cloud.speed;
-        return {type:"skill",obj:skill};
-    }else{
+        return {
+            type: "skill",
+            obj: skill
+        };
+    } else {
         var bomb = new Bomb(
             imgBomb,
             imgExplosion,
@@ -249,14 +259,17 @@ function createSkillOrBomb(imgsSkill,imgBomb,imgExplosion,cloud,canvasWidth){
             randomNumber(0, canvasWidth - 50)
         );
         bomb.speed = cloud.speed;
-        return {type:"bomb",obj:bomb};
+        return {
+            type: "bomb",
+            obj: bomb
+        };
     }
 
 }
 
 class Character extends Element {
     constructor(img, x, y, width, height) {
-        super(x, y, width,height);
+        super(x, y, width, height);
         this.animation = getAnimationCharacter(img);
         this.speed = 2;
         this.isCollision = false;
@@ -294,6 +307,8 @@ class Character extends Element {
         this.y = 0;
         this.speed = 2;
         this.animation.maxTime = 10;
+        this.width = 60;
+        this.height = 79;
     }
     effectCollision(collision) {
         switch (collision.type) {
@@ -303,9 +318,15 @@ class Character extends Element {
 					character to the same place */
                     case "left":
                         this.setX(this.x + this.speed);
+                        return {
+                            isOut: true
+                        };
                         break;
                     case "right":
                         this.setX(this.x - this.speed);
+                        return {
+                            isOut: true
+                        };
                         break;
                     default:
                         break;
@@ -397,18 +418,20 @@ class Character extends Element {
     }
 }
 
-class Horse extends Element{
-    constructor(img,x,y,width,height){
-        super(x,y,width,height);
+class Horse extends Element {
+    constructor(img, x, y, width, height) {
+        super(x, y, width, height);
         this.animation = getAnimationHorse(img);
-        this.speed = 4;
+        this.speed = 0.5;
+        this.distanceToGo = x;
         this.isCollision = false;
         this.isJumping = false;
-        this.limitJump = 150;
         this.baseY = y;
         this.movementJumpUp = true;
         this.velocityY = 0;
         this.gravity = 0.5;
+        this.maxJump = 2;
+        this.actualJump = 0;
         this.arrowMove = [{
                 keyCode: 37,
                 keyIsUp: false
@@ -427,27 +450,55 @@ class Horse extends Element{
             } //shift
         ];
     }
-    move(){
+    setIsCollision(bool){
+        this.isCollision = bool;
+    }
+    effectCollision(collision) {
+        switch (collision.type) {
+            case "canvas":
+                switch (collision.direction) {
+                    case "up":
+                        this.velocityY = 0;
+                        this.movementJumpUp = false;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "experience":
+                this.distanceToGo +=30;
+                break;
+            default:
+                break;
+        }
+    }
+    move() {
         if (this.isJumping) {
             this.animation.direction = "jump";
-            if(this.velocityY > 0){
+            if (this.velocityY > 0 && this.movementJumpUp) {
                 this.movementJumpUp = false;
+                this.animation.frame = 4;
             }
             this.velocityY += this.gravity;
-            if(this.movementJumpUp){
+            if (this.movementJumpUp) {
                 this.y += this.velocityY;
-            }else{
+            } else {
                 this.y += this.velocityY;
-                if(this.y >= this.baseY){
+                if (this.y >= this.baseY) {
                     this.animation.direction = "run";
                     this.animation.frame = 0;
-                    this.isJumping = false;  
+                    this.isJumping = false;
                     this.movementJumpUp = true;
+                    this.actualJump = 0;
+                    this.y = this.baseY;
                 }
             }
         }
+        if (this.x < this.distanceToGo) {
+            this.x += this.speed;
+        }
     }
-    draw(ctx){
+    draw(ctx) {
         this.move();
         switch (this.animation.direction) {
             case "stayStill":
@@ -485,7 +536,10 @@ class Horse extends Element{
                 if (this.animation.actualTime < this.animation.maxTimeJump) {
                     this.animation.actualTime++;
                 } else {
-                    this.animation.frame++;
+                    if(!(this.animation.frame == 3 || this.animation.frame  == 6)){
+                    
+                        this.animation.frame++;
+                    }
                     this.animation.actualTime = 0;
                 }
                 break;
@@ -494,4 +548,60 @@ class Horse extends Element{
         }
 
     }
+}
+class TextExperience extends Element {
+    constructor(text, x, y, width, height) {
+        super(x, y, width, height);
+        this.text = text;
+        this.speed = 5;
+        this.isCollision = false;
+        this.scaleX = 1;
+        this.alpha = 1;
+    }
+    setIsCollision(bool){
+        this.isCollision = bool;
+    }
+    effectCollision(collision) {
+        this.setIsCollision(true);
+        switch (collision.type) {
+            case "canvas":
+                break;
+            case "horse":
+                console.log("horse");
+                
+                break;
+            default:
+                break;
+        }
+    }
+    move(){
+        if(!this.isCollision){
+            this.x -= this.speed
+        }else{
+            this.scaleX += -0.01;
+            this.alpha -= 0.005;
+        }
+    }
+    draw(ctx){
+        this.move();
+        ctx.save();
+        ctx.scale(this.scaleX, 1); // needed to flip the img
+        ctx.textBaseline = "top";
+        //ctx.fillStyle = "rgba(66, 140, 244, " + this.alpha + ")";
+        ctx.fillStyle = "rgba(102, 255, 51, " + this.alpha + ")";
+        drawText(ctx,this.x * (1 / this.scaleX),this.y,this.text,"bold 20px Arial",null);
+        ctx.restore();
+    }
+}
+
+function createTextExperience(ctx,canvasWidth){
+    var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Dev Full Stack JS", "Dev Web, Institut de France", "Dev Web Le Smartsitting"];
+    var selectedIndex = randomNumber(0,tabText.length-1);
+    return new TextExperience(
+        tabText[selectedIndex], 
+        canvasWidth, 
+        randomNumber(20, 500), 
+        300, 
+        20
+    );
 }

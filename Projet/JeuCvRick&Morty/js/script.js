@@ -6,12 +6,24 @@ class CollisionDetector {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
     }
-    isCollision(xObj1, yObj1, wObj1, hObj1, xObj2, yObj2, wObj2, hObj2) {
+    isCollisionCoord(xObj1, yObj1, wObj1, hObj1, xObj2, yObj2, wObj2, hObj2) {
         if (
             xObj1 < xObj2 + wObj2 &&
             xObj1 + wObj1 > xObj2 &&
             yObj1 < yObj2 + hObj2 &&
             hObj1 + yObj1 > yObj2
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    isCollisionElem(elem1, elem2) {
+        if (
+            elem1.x < elem2.x + elem2.width &&
+            elem1.x + elem1.width > elem2.x &&
+            elem1.y < elem2.y + elem2.height &&
+            elem1.height + elem1.y > elem2.y
         ) {
             return true;
         } else {
@@ -51,33 +63,52 @@ class CollisionDetector {
         }
         if (elem.x + elem.width >= this.canvasWidth) {
             //Check right
-            elem.effectCollision({
+            return elem.effectCollision({
                 type: "canvas",
                 direction: "right"
             });
-            return {
-                isOut: false
-            };
         }
         return {
             isOut: false
         };
     }
-    passPortal(portal, character) {
-        if (character.x >= portal.x) {
-            return true;
+    passPortal(portal, character, fromLeft) {
+        if (fromLeft) {
+            if (character.x >= portal.x) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (character.x <= portal.x) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
     testCollision() {}
-    /* trucRick(elem,x){
-		if (elem.getX() < x) {
-			//Check left
-		 	elem.effectCollision({
-				type: "canvas",
-				direction: "left"
-			}); 
-		}
-	} */
+    //Out canvas compared to morty
+    isOutCanvasRickAndMorty(morty, rick) {
+        morty.setIsCollision(false);
+        if (morty.x < 0) {
+            //Check left
+            return morty.effectCollision({
+                type: "canvas",
+                direction: "left",
+                offset: morty.x + morty.width,
+                canvasWidth: this.canvasWidth
+            });
+        }
+        //add rick width because only morty can be control
+        if (morty.x + morty.width + rick.width >= this.canvasWidth) {
+            //Check right
+            return morty.effectCollision({
+                type: "canvas",
+                direction: "right"
+            });
+        }
+    }
 }
 
 class Game {
@@ -385,7 +416,7 @@ class Game {
             var objCollision = this.collisionDetector;
             //////////////////////
             //Player
-            var scorePlayer = 0;
+            var scorePlayer = 48;
             var visionPlayer = 100;
             //////////
             window.requestAnimationFrame(loopGame);
@@ -423,7 +454,7 @@ class Game {
                 });
                 skills.map(function (skill, index) {
                     if (
-                        objCollision.isCollision(
+                        objCollision.isCollisionCoord(
                             morty.x,
                             morty.y,
                             morty.width,
@@ -471,7 +502,7 @@ class Game {
 
                 bombs.map(function (bomb, index) {
                     if (
-                        objCollision.isCollision(
+                        objCollision.isCollisionCoord(
                             morty.x,
                             morty.y,
                             morty.width,
@@ -524,13 +555,13 @@ class Game {
                 //////////////
                 if (endStage) {
                     clouds.map(function (cloud) {
-                        cloud.speed = cloud.speed * 1.5;
+                        cloud.speed = cloud.speed * 2;
                     });
                     skills.map(function (skill) {
-                        skill.speed = skill.speed * 1.5;
+                        skill.speed = skill.speed * 2;
                     });
                     bombs.map(function (bomb) {
-                        bomb.speed = bomb.speed * 1.5;
+                        bomb.speed = bomb.speed * 2;
                     });
                     window.requestAnimationFrame(loopEnd);
                 } else {
@@ -551,80 +582,68 @@ class Game {
                 objCollision.isOutCanvas(morty);
                 morty.draw(ctxs.game);
                 drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
-                //console.log(clouds.length);
-                if (clouds.length == 0) {
-                    /* console.log("no more clouds"); */
+                console.log(clouds.length);
 
-                    if (objCollision.passPortal(portalMorty, morty)) {
-                        console.log("out");
-                        console.log(this);
-                        trueEndStage = true;
-                        fctStop();
 
-                    }
-                    if (portalMorty.x > rick.x) {
-                        rick.draw(ctxs.game);
-                    }
-                    if (rick.y < morty.y) {
-                        rick.y += 2.5;
-                        if (morty.x + morty.width * 2 >= portalMorty.x) {
-                            morty.x -= morty.speed * 2;
-                        }
-                    } else {
-                        if (portalMorty.scaleX < 0.4 || portalMorty.scaleY < 1) {
-                            if (portalMorty.scaleX < 0.4) {
-                                portalMorty.scaleX += 0.002;
-                            }
-                            if (portalMorty.scaleY < 1) {
-                                portalMorty.scaleY += 0.01;
-                            }
-                        } else {
-                            rick.arrowMove.map(function (elem) {
-                                if (elem.keyCode == 39 && !elem.keyIsUp) {
-                                    rick.animation.maxTime = 20;
-                                    rick.speed = 1;
-                                    elem.keyIsUp = true;
-                                }
-                            });
-                        }
-                        portalMorty.draw(ctxs.game);
-                    }
-
-                } else {
-                    //Clean Cloud
-                    var testCollisionCloud;
-                    clouds.map(function (cloud, index) {
-                        testCollisionCloud = objCollision.isOutCanvas(cloud);
-                        if (testCollisionCloud.isOut) {
-                            clouds.splice(index, 1);
-                        } else {
-                            cloud.draw(ctxs.game);
-                        }
-                    });
-                    //Clean skills
-                    skills.map(function (skill, index) {
-                        if (skill.y > canvasHeight) {
-                            setTimeout(function () {
-                                skills.splice(index, 1);
-                            }, 0);
-                        } else {
-                            skill.draw(ctxs.game);
-                        }
-                    });
-                    //Clean bombs
-                    bombs.map(function (bomb, index) {
-                        if (bomb.y > canvasHeight) {
-                            setTimeout(function () {
-                                bombs.splice(index, 1);
-                            }, 0);
-                        } else {
-                            bomb.draw(ctxs.game);
-                        }
-                    });
-
-                    rick.draw(ctxs.game);
+                if (objCollision.passPortal(portalMorty, morty, true)) {
+                    trueEndStage = true;
+                    fctStop();
 
                 }
+                // make rick disepear if he pass the portal
+                if (portalMorty.x > rick.x) {
+                    rick.draw(ctxs.game);
+                }
+                if (rick.y < morty.y) {
+                    rick.y += 1.5;
+                    if (morty.x + morty.width * 2 >= portalMorty.x) {
+                        morty.x -= morty.speed * 2;
+                    }
+                } else {
+                    if (portalMorty.scaleX < 0.4 || portalMorty.scaleY < 1) {
+                        if (portalMorty.scaleX < 0.4) {
+                            portalMorty.scaleX += 0.002;
+                        }
+                        if (portalMorty.scaleY < 1) {
+                            portalMorty.scaleY += 0.01;
+                        }
+                    } else {
+                        rick.arrowMove.map(function (elem) {
+                            if (elem.keyCode == 39 && !elem.keyIsUp) {
+                                rick.animation.maxTime = 20;
+                                rick.speed = 1;
+                                elem.keyIsUp = true;
+                            }
+                        });
+                    }
+                    portalMorty.draw(ctxs.game);
+                }
+
+                //Clean Cloud
+                clouds.map(function (cloud, index) {
+                    objCollision.isOutCanvas(cloud);                    
+                    cloud.draw(ctxs.game);
+                });
+                //Clean skills
+                skills.map(function (skill, index) {
+                    if (skill.y > canvasHeight) {
+                        setTimeout(function () {
+                            skills.splice(index, 1);
+                        }, 0);
+                    } else {
+                        skill.draw(ctxs.game);
+                    }
+                });
+                //Clean bombs
+                bombs.map(function (bomb, index) {
+                    if (bomb.y > canvasHeight) {
+                        setTimeout(function () {
+                            bombs.splice(index, 1);
+                        }, 0);
+                    } else {
+                        bomb.draw(ctxs.game);
+                    }
+                });
 
                 if (!trueEndStage) {
                     console.log("loop end")
@@ -772,29 +791,31 @@ class Game {
             if (event.defaultPrevented) {
                 return;
             }
-            if(event.keyCode == 32){
-                //if(!this.characters.horse.isJumping){
+            if (event.keyCode == 32) {
+                if (this.characters.horse.actualJump < this.characters.horse.maxJump) {
                     this.characters.horse.isJumping = true;
+                    this.characters.horse.movementJumpUp = true;
                     this.characters.horse.animation.frame = 0;
-                    this.characters.horse.velocityY =  -15
-                //}
+                    this.characters.horse.velocityY = -15;
+                    this.characters.horse.actualJump++;
+                }
             }
-            console.log(event.keyCode);
-            
             event.preventDefault();
         };
         var stage4FctUp = function (event) {
             if (event.defaultPrevented) {
                 return;
             }
-            console.log("from4");
             event.preventDefault();
         };
         var elemStage4 = {
             portal: this.objAssets.elements.portal[0],
+            cloud: this.objAssets.elements.clouds[0]
         };
-        var elemBackStage4 = this.objAssets.background.western;
-
+        var elemBackStage4 = {
+            western: this.objAssets.background.western,
+            tilesGrass: this.objAssets.tiles.grass
+        }
         var stage4 = new Stage(
             elemStage4,
             elemBackStage4,
@@ -804,52 +825,393 @@ class Game {
             stage4FctUp
         );
         //Add horse character in stage4
-        stage4.characters.horse =  new Horse(this.objAssets.characters.horse[0],350,450,156,120);
+        stage4.characters.horse = new Horse(this.objAssets.characters.horse[0], 500, 450, 156, 120);
         stage4.characters.horse.animation.direction = "run";
 
         stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
             console.log("stage4");
+            //Define objectCollision
+            var objCollision = this.collisionDetector;
             //Define speed for each background
             var tabSpeed = [0, 0, 0, 0.3, 1, 0.5, 1.5, 1.8, 3];
             var tabParralaxBack = [];
-            this.elemBack.map(function (elem, index) {
+            this.elemBack.western.map(function (elem, index) {
                 tabParralaxBack.push(new BackParallax(elem, 0, 0, elem.width, elem.height, tabSpeed[index]));
             });
+            //Create Tiles Grass
+            var tilesGrass = [
+                new Tile(this.elemBack.tilesGrass[0], 0, 530, 360, 120, 4),
+                new Tile(this.elemBack.tilesGrass[0], 360, 530, 360, 120, 4),
+                new Tile(this.elemBack.tilesGrass[0], 720, 530, 360, 120, 4),
+                new Tile(this.elemBack.tilesGrass[0], 1080, 530, 360, 120, 4),
+            ];
+            //Create Experience elements
+            var tabExperience = [];
+            var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Formation Dev JS", "Dev Web, Institut de France", "Dev Web Le Smartsitting"];
+
+            var idIntervalExp = setInterval(function () {
+                tabExperience.push(createTextExperience(ctxs.game, canvasWidth));
+            }, 3000);
+            //Access horse character////
+            var horse = this.characters.horse;
             //Set rick position////
             var rick = this.characters.rick;
-            rick.x = 415;
+            rick.x = horse.x + 65;
             rick.y = 435;
             rick.width = 50;
             rick.height = 65.5;
             rick.animation.direction = "right";
-            //Access horse character////
-            var horse = this.characters.horse;
+            //Set morty position
+            var morty = this.characters.morty;
+            morty.x = 820;
+            morty.y = 410;
+            morty.animation.direction = "left";
+            morty.animation.frame = 0;
+            // Create Cloud for Morty
+            var cloud = {
+                x: 800,
+                y: 450,
+                width: 110,
+                height: 70,
+                img: new Sprite(
+                    this.elemStage.cloud,
+                    0,
+                    0,
+                    this.elemStage.cloud.width,
+                    this.elemStage.cloud.height
+                )
+            }
+            /// Create Portal ///
+            var portalEnd = new Portal(this.elemStage.portal, 100, 420, 175, 175);
+            portalEnd.setScaleXY(0, 0);
+
+            var stopMainLoop = false;
+
+
             //Start loop
             window.requestAnimationFrame(loop);
+
             function loop() {
-                //Clear background
+                if (!stopMainLoop) {
+
+                    //Clear background ////
+                    ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+                    ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
+                    //Draw background ////
+                    tabParralaxBack.map(function (elemBack) {
+                        elemBack.draw(ctxs.back, canvasWidth, canvasHeight);
+                    });
+                    /// Draw Morty and Cloud ///
+                    cloud.img.draw(ctxs.game, cloud.x, cloud.y, cloud.width, cloud.height);
+                    morty.draw(ctxs.game);
+                    morty.animation.actualTime = 0; //to stay in the 1st frame of right animation
+                    //Draw Rick ////
+                    rick.y = horse.y - 15;
+                    rick.x = horse.x + 65;
+                    rick.draw(ctxs.game);
+                    rick.animation.actualTime = 0; //to stay in the 1st frame of right animation
+                    //Draw Tiles ////
+                    tilesGrass.map(function (tile) {
+                        tile.draw(ctxs.game);
+                        if (tile.x + tile.width < 0) {
+                            tile.x = canvasWidth;
+                        }
+                    });
+                    //Draw Text Experience ////
+                    tabExperience.map(function (exp, index) {
+                        //Detect Collision
+                        if (objCollision.isCollisionElem(horse, exp) && !exp.isCollision) {
+                            exp.effectCollision({
+                                type: "horse"
+                            })
+                            horse.effectCollision({
+                                type: "experience"
+                            })
+                        }
+                        if (exp.isCollision && exp.scaleX <= -1) {
+                            setTimeout(function () {
+                                tabExperience.splice(index, 1);
+                            }, 0);
+                        }
+                        exp.draw(ctxs.game);
+                    });
+                    /// Draw horse ////
+                    //collisionHorse
+                    objCollision.isOutCanvas(horse);
+                    horse.draw(ctxs.game);
+
+                    ///Draw this background to appear in front of the horse ///
+                    tabParralaxBack[8].draw(ctxs.game, canvasWidth, canvasHeight);
+                    //Detection collision rick & morty
+                    if (objCollision.isCollisionElem(rick, morty)) {
+                        stopMainLoop = true;
+                        clearInterval(idIntervalExp);
+                    }
+
+                    window.requestAnimationFrame(loop);
+                } else {
+                    window.requestAnimationFrame(decreaseSpeedGame);
+                }
+            }
+            var decreaseSpeedOver = false;
+
+            function decreaseSpeedGame() {
+                if (!decreaseSpeedOver) {
+
+                    /// Clear background ////
+                    ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+                    ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
+                    /// Draw background ////
+                    tabParralaxBack.map(function (elemBack) {
+                        elemBack.draw(ctxs.back, canvasWidth, canvasHeight);
+                        /// Decrease speed ///
+                        if (elemBack.speed > 0) {
+                            elemBack.speed -= 0.01;
+                            if (elemBack.speed < 0) {
+                                elemBack.speed = 0;
+                            }
+                        }
+
+                    });
+                    /// Draw Morty and Cloud ///
+                    cloud.img.draw(ctxs.game, cloud.x, cloud.y, cloud.width, cloud.height);
+                    morty.draw(ctxs.game);
+                    morty.animation.actualTime = 0; //to stay in the 1st frame of right animation
+                    //Draw Rick ////
+                    rick.y = horse.y - 15;
+                    rick.x = horse.x + 65;
+                    rick.draw(ctxs.game);
+                    rick.animation.actualTime = 0; //to stay in the 1st frame of right animation
+                    //Draw Text Experience ////
+                    tabExperience.map(function (exp, index) {
+                        //Detect Collision
+                        if (exp.isCollision && exp.scaleX <= -1) {
+                            setTimeout(function () {
+                                tabExperience.splice(index, 1);
+                            }, 0);
+                        }
+                        exp.draw(ctxs.game);
+                    });
+                    tilesGrass.map(function (tile) {
+                        tile.draw(ctxs.game);
+                        /// Decrease speed ///
+                        if (tile.speed > 0) {
+                            tile.speed -= 0.01;
+                            if (tile.speed < 0) {
+                                tile.speed = 0;
+                                horse.animation.direction = "stayStill";
+                                decreaseSpeedOver = true;
+                            }
+                        }
+                        if (tile.x + tile.width < 0) {
+                            tile.x = canvasWidth;
+                        }
+                    });
+
+                    horse.draw(ctxs.game);
+
+                    ///Draw this background to appear in front of the horse ///
+                    tabParralaxBack[8].draw(ctxs.game, canvasWidth, canvasHeight);
+                    window.requestAnimationFrame(decreaseSpeedGame);
+                } else {
+                    window.requestAnimationFrame(endLoop);
+                }
+            }
+
+            function endLoop() {
+
+                if (rick.y < 497 || morty.y < 490) {
+                    if (rick.y < 497) {
+                        rick.y += 2;
+                    }
+                    if (morty.y < 490) {
+                        morty.y += 2;
+                    }
+                } else {
+                    if (!morty.arrowMove[2].keyIsUp) {
+                        morty.arrowMove[2].keyIsUp = true;
+                    }
+                    if (!rick.arrowMove[2].keyIsUp) {
+
+                        rick.arrowMove[2].keyIsUp = true;
+                    }
+                    if (portalEnd.scaleX < 0.4 || portalEnd.scaleY < 1) {
+                        if (portalEnd.scaleX < 0.4) {
+                            portalEnd.scaleX += 0.002;
+                        }
+                        if (portalEnd.scaleY < 1) {
+                            portalEnd.scaleY += 0.01;
+                        }
+                    }
+                }
+                var rickPassPortal = objCollision.passPortal(portalEnd, rick, false);
+                var mortyPassPortal = objCollision.passPortal(portalEnd, rick, false);
+
+
+
+                /// Clear background ////
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
-                //Draw background
+                /// Draw background ////
                 tabParralaxBack.map(function (elemBack) {
                     elemBack.draw(ctxs.back, canvasWidth, canvasHeight);
                 });
-                //Draw Rick////
-                rick.draw(ctxs.game);
-                //to stay in the 1st frame of right animation
-                rick.animation.actualTime = 0;
-                //Draw horse
+                /// Draw horse && Cloud///
+                cloud.img.draw(ctxs.game, cloud.x, cloud.y, cloud.width, cloud.height);
                 horse.draw(ctxs.game);
-                rick.y = horse.y-15;
+                /// Draw Rick & Morty ///
+                if (!mortyPassPortal) {
+                    morty.draw(ctxs.game);
+
+                }
+                if (!rickPassPortal) {
+                    rick.draw(ctxs.game);
+                }
+                /// Draw Grass ///
+                tilesGrass.map(function (tile) {
+                    tile.draw(ctxs.game);
+                });
+                /// Draw Portal ///
+                portalEnd.draw(ctxs.game);
+                ///Draw this background to appear in front of the horse ///
                 tabParralaxBack[8].draw(ctxs.game, canvasWidth, canvasHeight);
+                if (rickPassPortal && mortyPassPortal) {
+                    console.log("endStage");
+                    fctStop();
+                } else {
+                    window.requestAnimationFrame(endLoop);
+                }
+            }
+
+        };
+        /////////////////////////END STAGE 4 WESTERN/////////////////////////////////
+        ///////////////////////// STAGE 5 //////////////////////////////////////////
+
+        var stage5FctDown = function (event) {
+            if (event.defaultPrevented) {
+                return;
+            }
+            //Only allow left, right and sprint moves
+            if (event.keyCode == 39 || event.keyCode == 37 || event.keyCode == 16) {
+                var fctMap = function (elem) {
+                    if (elem.keyCode == event.keyCode) {
+                        elem.keyIsUp = true;
+                    }
+                };
+                this.characters.rick.arrowMove.map(fctMap);
+                this.characters.morty.arrowMove.map(fctMap);
+            }
+
+            event.preventDefault();
+        };
+        var stage5FctUp = function (event) {
+            if (event.defaultPrevented) {
+                return;
+            }
+            var fctMap = function (elem, character) {
+                if (elem.keyCode == event.keyCode) {
+                    character.animation.frame = 0;
+                    character.animation.direction = "stayStill";
+                    elem.keyIsUp = false;
+                    if (event.keyCode == 16) {
+                        character.animation.maxTime = 10;
+                        character.speed = 2;
+                    }
+                }
+            };
+            this.characters.rick.arrowMove.map(elem => {
+                if (elem.keyCode == event.keyCode) {
+                    this.characters.rick.animation.frame = 0;
+                    this.characters.rick.animation.direction = "stayStill";
+                    elem.keyIsUp = false;
+                    if (event.keyCode == 16) {
+                        this.characters.rick.animation.maxTime = 10;
+                        this.characters.rick.speed = 2;
+                    }
+                }
+            });
+            this.characters.morty.arrowMove.map(elem => {
+                if (elem.keyCode == event.keyCode) {
+                    this.characters.morty.animation.frame = 0;
+                    this.characters.morty.animation.direction = "stayStill";
+                    elem.keyIsUp = false;
+                    if (event.keyCode == 16) {
+                        this.characters.morty.animation.maxTime = 10;
+                        this.characters.morty.speed = 2;
+                    }
+                }
+            });
+
+            event.preventDefault();
+        };
+        var elemStage5 = {
+            portal: this.objAssets.elements.portal[0]
+        };
+
+        var stage5 = new Stage(
+            elemStage5, [],
+            this.characters,
+            this.collisionDetector,
+            stage5FctDown,
+            stage5FctUp
+        );
+
+        stage5.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+            console.log("stage5");
+            ctxs.back.fillStyle = "white";
+            ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            var rick = this.characters.rick;
+            var morty = this.characters.morty;
+            rick.x = 460;
+            rick.y = canvasHeight / 3 * 2 - 80;
+            morty.x = 400;
+            morty.y = canvasHeight / 3 * 2 - 79;
+
+            var objCollision = this.collisionDetector;
+
+            var gradient = ctxs.game.createLinearGradient(0, 0, canvasWidth, 0);
+            gradient.addColorStop("0", "black");
+            gradient.addColorStop("0.5", "black");
+            gradient.addColorStop("0.60", "yellow");
+            gradient.addColorStop("1.0", "green");
+            var tabElemnentCV = getCvPart1(canvasWidth, canvasHeight).concat(
+                getSkillsCv(canvasWidth, canvasHeight).concat(
+                    getEndCV(canvasWidth, canvasHeight)
+                )
+            );
+            /*  drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
+            drawSkillsCv(ctxs.back, canvasWidth, canvasHeight); */
+            window.requestAnimationFrame(loop);
+
+            function loop() {
+                objCollision.isOutCanvasRickAndMorty(morty, rick);
+
+                //gameDraw
+                ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
+                ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                drawMovingCV(ctxs.back, tabElemnentCV, canvasWidth, canvasHeight);
+                /*   drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
+                  drawSkillsCv(ctxs.back, canvasWidth, canvasHeight); */
+                ctxs.back.fillStyle = gradient;
+                ctxs.back.fillRect(0, canvasHeight / 3 * 2, canvasWidth, 1);
+                /// Draw rick and morty ///
+                // fix x of rick to follow morty
+                rick.x = morty.x + 60;
+                rick.draw(ctxs.game);
+                morty.draw(ctxs.game);
+
+
                 window.requestAnimationFrame(loop);
             }
         };
-        /////////////////////////END STAGE 4 WESTERN/////////////////////////////////
+        /////////////////////////////////End Stage 5///////////////////////////////////////////////
         //stages.push(stage1);
-        // stages.push(stage2);
-        //stages.push(stage3);
+        stages.push(stage2);
+        stages.push(stage3);
         stages.push(stage4);
+        stages.push(stage5);
         console.log(stages);
 
         return stages;

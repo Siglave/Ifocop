@@ -20,3 +20,18 @@ class BackParallax extends Element{
         }
     }
 }
+
+class Tile extends Element{
+    constructor(img,x,y,width,height,speed){
+        super(x,y,width,height);
+        this.img = new Sprite(img, 0, 0, img.width, img.height);
+        this.speed = speed;
+    }
+    move(){
+        this.x -= this.speed;
+    }
+    draw(ctx){
+        this.move();
+        this.img.draw(ctx,this.x,this.y,this.width,this.height);
+    }
+}
