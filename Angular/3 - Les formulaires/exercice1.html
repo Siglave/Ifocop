@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <script src="../lib/angular-1.6.6.min.js"></script>
-
     <title>AngularJS : Les Formulaires : Exercice 1</title>
     <script>
       // Énoncé
@@ -34,18 +33,25 @@
   </head>
   <body>
     <div ng-controller="handleForm as hf">
-      <form>
-        <p>Mon message : <input type="text"/></p>
-        <p><input type="submit" value="Enregistrer"/></p>
+      <form ng-submit="hf.addIfNotEmpty(monmsg)">
+        <p>Mon message : <input type="text" ng-model="monmsg"/></p>
+        <p><input type="submit" value="Enregistrer" /></p>
       </form>
       <h4>Mes messages</h4>
-      <div></div>
+      <div ng-repeat="elem in hf.messages track by $index"><p>{{elem}}</p></div>
     </div>
   </body>
   <script>
     var app = angular.module("exo1",[]);
     
     app.controller("handleForm",function(){
+      this.message = "";
+      this.messages = [];
+      this.addIfNotEmpty = function(msg){        
+        if(msg.length>0){
+          this.messages.push(msg);
+        }
+      }
 
     });
     angular.bootstrap(window.document,["exo1"],{strictDi :true});

@@ -1207,7 +1207,7 @@ class Game {
             }
         };
         /////////////////////////////////End Stage 5///////////////////////////////////////////////
-        //stages.push(stage1);
+        stages.push(stage1);
         stages.push(stage2);
         stages.push(stage3);
         stages.push(stage4);

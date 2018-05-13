@@ -2,7 +2,18 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
+    <script src="../lib/angular-1.6.6.min.js"></script>
+
     <title>AngularJS : Les Formulaires : Exercice 2</title>
+    <style type="text/css">
+      .css-form input.ng-invalid.ng-touched {
+        background-color: #FA787E;
+      }
+    
+      .css-form input.ng-valid.ng-touched {
+        background-color: #78FA89;
+      }
+    </style>
     <script>
       // Énoncé
       /* Les directives ng-controller et ng-model*/
@@ -65,10 +76,45 @@
     </script>
   </head>
   <body>
-    <div>
-      <form>
-        <input type="submit" value="Enregistrer"/>
+    <div ng-controller="ctrlExo2 as ctrl">
+      <form novalidate name="myform" ng-submit="ctrl.addUser(myform.$valid)" class="css-form">
+        <input type="text" name="nom" ng-minlength="2" ng-maxlength="128" required ng-model="ctrl.user.nom">
+        <input type="text" name="prenom" ng-minlength="2" ng-maxlength="128" required ng-model="ctrl.user.prenom">
+        <input type="date" name="daten" required ng-model="ctrl.user.date">
+        <input type="email" name="emailme" required ng-model="ctrl.user.email">
+        <input type="submit" value="Enregistrer" required/>
       </form>
+      <div>{{myform}}</div>
+      <ul>
+        <li ng-bind="ctrl.user.nom"></li>
+        <li ng-bind="ctrl.user.prenom"></li>
+        <li ng-bind="ctrl.user.date"></li>
+        <li ng-bind="ctrl.user.email"></li>
+      </ul>
+      <div ng-repeat="user in ctrl.users track by $index">
+        <ul>
+          <li>{{user.nom}}</li>
+          <li>{{user.prenom}}</li>
+          <li>{{user.date}}</li>
+          <li>{{user.email}}</li>
+        </ul>
+      </div>
     </div>
   </body>
+  <script>
+    var app = angular.module("exo2",[]);
+
+    app.controller("ctrlExo2", function(){
+      this.user = {};
+      this.users = [];
+      this.addUser = function(isValid){
+        console.log("salut");
+        
+        if (isValid) {
+          this.users.push(this.user);
+        }
+      }
+    });
+    angular.bootstrap(window.document,["exo2"],{strictDi:true});
+  </script>
 </html>
