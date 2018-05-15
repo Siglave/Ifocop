@@ -261,43 +261,4 @@ function loadAssets(callback) {
             }
         }
     }
-
-    /// Ugly but work ///
-    /*   loadImgs(assetsSrc.background.forest, function (tabImg) {
-        assets.background.forest = tabImg;
-        loadImgs(assetsSrc.characters.rick, function (tabImg) {
-            assets.characters.rick = tabImg;
-            loadImgs(assetsSrc.characters.morty, function (tabImg) {
-                assets.characters.morty = tabImg;
-                loadImgs(assetsSrc.effects.explosion, function (tabImg) {
-                    assets.effects.explosion = tabImg;
-                    loadImgs(assetsSrc.elements.bomb, function (tabImg) {
-                        assets.elements.bomb = tabImg;
-                        loadImgs(assetsSrc.elements.clouds, function (tabImg) {
-                            assets.elements.clouds = tabImg;
-                            loadImgs(assetsSrc.elements.portal, function (tabImg) {
-                                assets.elements.portal = tabImg;
-                                loadImgs(assetsSrc.elements.skills, function (tabImg) {
-                                    assets.elements.skills = tabImg;
-                                    loadImgs(assetsSrc.background.western, function (tabImg) {
-                                        assets.background.western = tabImg;
-                                        loadImgs(assetsSrc.characters.horse, function (tabImg) {
-                                            assets.characters.horse = tabImg;
-                                            loadImgs(assetsSrc.tiles.grass, function (tabImg) {
-                                                assets.tiles.grass = tabImg;
-
-                                                callback(assets);
-                                            });
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            });
-        });
-    });
- */
-
 }

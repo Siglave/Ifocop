@@ -129,8 +129,8 @@ class Skill extends Element {
     draw(ctx) {
         this.move();
         if (this.collision) {
-            ctx.fillStyle = "rgba(255, 255, 255, " + this.alpha + ")";
-            ctx.font = "20pt Arial";
+            ctx.fillStyle = "rgba(5, 111, 173, " + this.alpha + ")";
+            ctx.font = "24pt Arial";
             ctx.fillText("+" + this.score, this.x, this.y + (this.height / 2));
             this.alpha -= 0.005;
         } else {
