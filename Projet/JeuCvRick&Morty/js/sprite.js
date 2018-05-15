@@ -119,21 +119,18 @@ function loadImgs(tabSrc,keylevel0,keylevel1, callback) {
 
 }
 
-function getStructAssets(assets) {
-    var numberAttrInAttrAssets = [];
+function getNumberTabAssets(assets) {
     var numberAttr = 0;
     for (var keylevel0 in assets) {
         if (assets.hasOwnProperty(keylevel0)) {
-            numberAttr = 0;
             for (var keylevel1 in assets[keylevel0]) {
                 if (assets[keylevel0].hasOwnProperty(keylevel1)) {
                     numberAttr++;
                 }
             }
-            numberAttrInAttrAssets.push(numberAttr);
         }
     }
-    return numberAttrInAttrAssets;
+    return numberAttr;
 }
 
 function loadAssets(callback) {
@@ -238,8 +235,7 @@ function loadAssets(callback) {
             grass: null
         }
     }
-    //console.log(getStructAssets(assets));
-    var structTabAssets = getStructAssets(assetsSrc)
+    var numTab = getNumberTabAssets(assetsSrc);   
     var numberAttr = 0;
     var numberObj = 0;
     var numTotalAttr = 0;
@@ -252,8 +248,8 @@ function loadAssets(callback) {
                     numberAttr++;
                     loadImgs(assetsSrc[keylevel0][keylevel1],keylevel0,keylevel1, function (tabImg,keylevel0,keylevel1) {                
                         assets[keylevel0][keylevel1] = tabImg;
-                        numTotalAttr++;
-                        if (numTotalAttr == 11) {
+                        numTotalAttr++;                        
+                        if (numTotalAttr == numTab) {
                             callback(assets);
                         }
                     });

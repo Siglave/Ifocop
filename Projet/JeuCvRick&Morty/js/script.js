@@ -179,6 +179,27 @@ class Game {
             this.canvasHeight,
             this.switchStage
         );
+        var functAnim = animTransitionStage.bind(this);
+        var valuexL = 0;
+        var valuexR = this.canvasWidth/2;
+        window.requestAnimationFrame(functAnim);
+
+        function animTransitionStage(){
+            this.ctxs.ui.fillStyle = "black";
+            //left
+            this.ctxs.ui.clearRect(valuexL, 0, this.canvasWidth/2, this.canvasHeight);
+            this.ctxs.ui.fillRect(valuexL, 0, this.canvasWidth/2, this.canvasHeight);
+            //right
+            this.ctxs.ui.clearRect(valuexR, 0, this.canvasWidth/2, this.canvasHeight);
+            this.ctxs.ui.fillRect(valuexR, 0, this.canvasWidth/2, this.canvasHeight);
+            valuexL-=5;
+            valuexR+=5;
+            if(valuexL*-1 < this.canvasWidth/2){
+                window.requestAnimationFrame(functAnim);
+
+            }
+            
+        };
     }
     createStages() {
         var stages = [];
@@ -400,7 +421,7 @@ class Game {
             this.characters.rick.x = 800;
             this.characters.rick.y = 50;
             var rick = this.characters.rick;
-            this.characters.morty.x = canvasWidth / 2;
+            this.characters.morty.x = (canvasWidth / 2)-this.characters.morty.width/2;
             this.characters.morty.y = 465;
             this.characters.morty.changeImg(this.elemStage.morty[0]);
             var morty = this.characters.morty;
@@ -462,7 +483,6 @@ class Game {
                             scorePlayer += skill.score;
                             visionPlayer += 10 * skill.score;
                             skill.collision = true;
-                            //skills.splice(index, 1);
                             if (visionPlayer >= 200) {
                                 if (visionPlayer >= 350) {
                                     if (visionPlayer >= 500) {
@@ -575,8 +595,6 @@ class Game {
                 objCollision.isOutCanvas(morty);
                 morty.draw(ctxs.game);
                 drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
-                console.log(clouds.length);
-
 
                 if (objCollision.passPortal(portalMorty, morty, true)) {
                     trueEndStage = true;
@@ -639,7 +657,6 @@ class Game {
                 });
 
                 if (!trueEndStage) {
-                    console.log("loop end")
                     window.requestAnimationFrame(loopEnd);
                 }
             }
@@ -753,9 +770,13 @@ class Game {
                 //gameDraw
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+                ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
 
                 drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
                 drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
+                ctxs.ui.fillStyle = "black";
+                drawText(ctxs.ui,810,260,"Expérience/Diplômes","bold 18px Arial", "start");
+
                 ctxs.back.fillStyle = gradient;
                 ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1);
 
@@ -896,6 +917,8 @@ class Game {
                     //Clear background ////
                     ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
                     ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
+                    ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
+
                     //Draw background ////
                     tabParralaxBack.map(function (elemBack) {
                         elemBack.draw(ctxs.back, canvasWidth, canvasHeight);
@@ -1189,6 +1212,8 @@ class Game {
                 //gameDraw
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+                ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
+
 
                 drawMovingCV(ctxs.back, tabElemnentCV, canvasWidth, canvasHeight);
                 /*   drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
