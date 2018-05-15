@@ -85,7 +85,7 @@ function getAnimationHorse(img) {
         jumpSprites.push(new Sprite(img, pointerImgX, 0, 192, 144));
         pointerImgX += 192;
     }
-    pointerImgX = 2304 ;
+    pointerImgX = 2304;
     for (var j = 0; j < 7; j++) {
         runSprites.push(new Sprite(img, pointerImgX, 0, 192, 144));
         pointerImgX += 192;
@@ -103,19 +103,37 @@ function getAnimationHorse(img) {
     }
 }
 
-function loadImgs(tabSrc, callback) {
+function loadImgs(tabSrc,keylevel0,keylevel1, callback) {
     var tabRetImg = [];
     tabSrc.map(function (src, index) {
         var oneImg = new Image();
         oneImg.src = src;
+        /// When end loadimg if the element is the last of the array execute callback 
         oneImg.onload = function () {
             if (tabSrc.length - (index + 1) == 0) {
-                callback(tabRetImg);
+                callback(tabRetImg,keylevel0,keylevel1);
             }
         }
         tabRetImg.push(oneImg);
     });
 
+}
+
+function getStructAssets(assets) {
+    var numberAttrInAttrAssets = [];
+    var numberAttr = 0;
+    for (var keylevel0 in assets) {
+        if (assets.hasOwnProperty(keylevel0)) {
+            numberAttr = 0;
+            for (var keylevel1 in assets[keylevel0]) {
+                if (assets[keylevel0].hasOwnProperty(keylevel1)) {
+                    numberAttr++;
+                }
+            }
+            numberAttrInAttrAssets.push(numberAttr);
+        }
+    }
+    return numberAttrInAttrAssets;
 }
 
 function loadAssets(callback) {
@@ -144,13 +162,16 @@ function loadAssets(callback) {
         },
         characters: {
             rick: [
-                "assets/character/rick.png"
+                "assets/character/rick.png",
+                "assets/character/rickCowboy.png",
+
             ],
             morty: [
                 "assets/character/mortyNoEye.png",
                 "assets/character/mortyOneEye.png",
                 "assets/character/morty.png",
                 "assets/character/mortyThreeEye.png",
+                "assets/character/mortyCowboy.png",
             ],
             horse: [
                 "assets/character/horseSprite.png",
@@ -188,7 +209,7 @@ function loadAssets(callback) {
                 "assets/skills/mysql.png",
             ]
         },
-        tiles :{
+        tiles: {
             grass: [
                 "assets/tiles/grass/tile_grass_02.png"
             ]
@@ -214,10 +235,35 @@ function loadAssets(callback) {
             skills: null
         },
         tiles: {
-            grass : null
+            grass: null
         }
     }
-    loadImgs(assetsSrc.background.forest, function (tabImg) {
+    //console.log(getStructAssets(assets));
+    var structTabAssets = getStructAssets(assetsSrc)
+    var numberAttr = 0;
+    var numberObj = 0;
+    var numTotalAttr = 0;
+    for (var keylevel0 in assetsSrc) {
+        if (assetsSrc.hasOwnProperty(keylevel0)) {
+            numberObj++;
+            numberAttr = 0;
+            for (var keylevel1 in assetsSrc[keylevel0]) {
+                if (assetsSrc[keylevel0].hasOwnProperty(keylevel1)) {
+                    numberAttr++;
+                    loadImgs(assetsSrc[keylevel0][keylevel1],keylevel0,keylevel1, function (tabImg,keylevel0,keylevel1) {                
+                        assets[keylevel0][keylevel1] = tabImg;
+                        numTotalAttr++;
+                        if (numTotalAttr == 11) {
+                            callback(assets);
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    /// Ugly but work ///
+    /*   loadImgs(assetsSrc.background.forest, function (tabImg) {
         assets.background.forest = tabImg;
         loadImgs(assetsSrc.characters.rick, function (tabImg) {
             assets.characters.rick = tabImg;
@@ -237,9 +283,9 @@ function loadAssets(callback) {
                                         assets.background.western = tabImg;
                                         loadImgs(assetsSrc.characters.horse, function (tabImg) {
                                             assets.characters.horse = tabImg;
-                                            loadImgs(assetsSrc.tiles.grass, function(tabImg){
+                                            loadImgs(assetsSrc.tiles.grass, function (tabImg) {
                                                 assets.tiles.grass = tabImg;
-                                                
+
                                                 callback(assets);
                                             });
                                         });
@@ -252,6 +298,6 @@ function loadAssets(callback) {
             });
         });
     });
-
+ */
 
 }

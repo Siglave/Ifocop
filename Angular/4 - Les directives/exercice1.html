@@ -37,6 +37,7 @@
     <h3>Mes directives personnalisées !</h3>
     <my-customer></my-customer>
     <my-liste></my-liste>
+    <aut-fichier></aut-fichier>
   </div>
 </body>
 <script>
@@ -59,12 +60,12 @@
       template: '<h4>Salut</h4>'
     };
   });
-  /* app.directive("autFichier", function () {
+  app.directive("autFichier", function () {
     return {
       restrict: 'E',
       templateUrl: 'aut-fichier.html'
     };
-  }); */
+  });
   angular.bootstrap(window.document, ["exo1"], {
     strictDi: true
   });

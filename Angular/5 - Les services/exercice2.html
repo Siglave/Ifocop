@@ -2,6 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
+    <script src="../lib/angular-1.6.6.min.js"></script>
     <title>AngularJS : Les Services : Exercice 2</title>
     <script>
       // Énoncé
@@ -49,16 +50,48 @@
   </head>
   <body>
     <h3>Les services</h3>
-    <div>
+    <div ng-controller="ctrlClone as ctrl">
       <h4>Formulaire de sauvegarde de commentaires</h4>
       <form >
         <p>Titre : <input type="text"/></p>
         <p>Corps : <textarea></textarea></p>
         <input type="submit" value="Envoyer"/>
       </form>
+      <p>{{ctrl.clone.weapon}}</p>
     </div>
     <div>
       <h4>Les Derniers Commentaires</h4>
     </div>
   </body>
+  <script>
+    angular.module("exo2",[])
+    .factory("cloneFactory", [function(){
+      var msgs = [
+        {
+          titre: "untitre",
+          corps: "corps",
+          date: "date",
+        },
+        {
+          titre: "untitre",
+          corps: "corps",
+          date: "date",
+        },
+        {
+          titre: "untitre",
+          corps: "corps",
+          date: "date",
+        },
+      ]
+      return msgs;
+    }])
+    //Pour utiliser la facto  on doit l'injecter dans le controller
+    .controller("ctrlClone", ["cloneFactory",function(msgsyClone){
+      this.listeMsg = msgs;
+    }])
+    
+    angular.bootstrap(window.document, ["exo2"], {
+    strictDi: false
+  });
+  </script>
 </html>

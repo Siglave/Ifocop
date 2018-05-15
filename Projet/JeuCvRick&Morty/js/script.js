@@ -170,15 +170,8 @@ class Game {
         this.stages[this.actualStage].removeListener();
         //Change stage
         this.actualStage += 1;
-        console.log("prochainStage");
-        console.log(this.actualStage);
-        // console.log(this.stages[this.actualStage]);
-        //Load event for the next stage and start it
-        console.log("morty x");
-        console.log(this.characters.morty.x);
-        //this.characters.morty.x = 0;
-        console.log(this.stages[this.actualStage].characters.morty.x);
 
+        //Load event for the next stage and start it
         this.stages[this.actualStage].loadListeners();
         this.stages[this.actualStage].start(
             this.ctxs,
@@ -416,7 +409,7 @@ class Game {
             var objCollision = this.collisionDetector;
             //////////////////////
             //Player
-            var scorePlayer = 48;
+            var scorePlayer = 0;
             var visionPlayer = 100;
             //////////
             window.requestAnimationFrame(loopGame);
@@ -749,6 +742,8 @@ class Game {
 
             drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
             drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
+            ctxs.ui.fillStyle = "black";
+            drawText(ctxs.ui,810,260,"Expérience/Diplômes","bold 18px Arial", "start");
             window.requestAnimationFrame(loop);
 
             function loop() {
@@ -810,7 +805,9 @@ class Game {
         };
         var elemStage4 = {
             portal: this.objAssets.elements.portal[0],
-            cloud: this.objAssets.elements.clouds[0]
+            cloud: this.objAssets.elements.clouds[0],
+            mortyCowboy: this.objAssets.characters.morty[4],
+            rickCowboy: this.objAssets.characters.rick[1],
         };
         var elemBackStage4 = {
             western: this.objAssets.background.western,
@@ -825,7 +822,7 @@ class Game {
             stage4FctUp
         );
         //Add horse character in stage4
-        stage4.characters.horse = new Horse(this.objAssets.characters.horse[0], 500, 450, 156, 120);
+        stage4.characters.horse = new Horse(this.objAssets.characters.horse[0], 0, 450, 156, 120);
         stage4.characters.horse.animation.direction = "run";
 
         stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
@@ -856,6 +853,7 @@ class Game {
             var horse = this.characters.horse;
             //Set rick position////
             var rick = this.characters.rick;
+            rick.changeImg(this.elemStage.rickCowboy);
             rick.x = horse.x + 65;
             rick.y = 435;
             rick.width = 50;
@@ -863,6 +861,7 @@ class Game {
             rick.animation.direction = "right";
             //Set morty position
             var morty = this.characters.morty;
+            morty.changeImg(this.elemStage.mortyCowboy);
             morty.x = 820;
             morty.y = 410;
             morty.animation.direction = "left";
@@ -1164,7 +1163,7 @@ class Game {
             var rick = this.characters.rick;
             var morty = this.characters.morty;
             rick.x = 460;
-            rick.y = canvasHeight / 3 * 2 - 80;
+            rick.y = canvasHeight / 3 * 2 - 79;
             morty.x = 400;
             morty.y = canvasHeight / 3 * 2 - 79;
 
@@ -1207,12 +1206,12 @@ class Game {
             }
         };
         /////////////////////////////////End Stage 5///////////////////////////////////////////////
+        /// Add all stages in object game 
         stages.push(stage1);
         stages.push(stage2);
         stages.push(stage3);
         stages.push(stage4);
         stages.push(stage5);
-        console.log(stages);
 
         return stages;
     }
